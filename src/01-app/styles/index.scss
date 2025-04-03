@@ -1,0 +1,18 @@
+:root {
+  --font-family: "Inter", sans-serif;
+  --second-family: "Roboto", sans-serif;
+}
+
+#root {
+  width: 100%;
+  min-width: 360px;
+  max-width: 1920px;
+  min-height: 100vh;
+  background-color: #fff;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
