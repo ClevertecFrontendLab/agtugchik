@@ -1,3 +1,3 @@
-export { HomePage } from './home/HomePage';
-export { JuicyPage } from './juicy/JuicyPage';
-export { VeganPage } from './vegan/VeganPage';
+export { HomePage } from './HomePage';
+export { JuicyPage } from './JuicyPage';
+export { VeganPage } from './VeganPage';

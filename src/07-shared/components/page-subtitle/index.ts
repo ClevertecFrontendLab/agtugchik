@@ -1,1 +1,0 @@
-export { PageSubtitle } from './PageSubtitle';

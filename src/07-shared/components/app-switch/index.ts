@@ -1,1 +1,0 @@
-export { AppSwitch } from './AppSwitch';

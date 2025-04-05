@@ -1,8 +1,8 @@
 import './styles/index.scss';
 
-import { AppGrid } from '~/04-widgets/app-grid';
-import { Header } from '~/04-widgets/header';
-import { Navigation } from '~/04-widgets/navigation';
+import { AppGrid } from '~/04-widgets';
+import { Header } from '~/04-widgets';
+import { Navigation } from '~/04-widgets';
 
 import { Router } from './router';
 
