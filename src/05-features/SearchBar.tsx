@@ -1,5 +1,15 @@
 import { ChevronDownIcon } from '@chakra-ui/icons';
-import { Button, Flex, Image, Menu, MenuButton, MenuItem, MenuList, Text } from '@chakra-ui/react';
+import {
+    Button,
+    HStack,
+    Image,
+    Menu,
+    MenuButton,
+    MenuItem,
+    MenuList,
+    Text,
+    VStack,
+} from '@chakra-ui/react';
 import { memo } from 'react';
 
 import sbi from '~/07-shared/assets/svg/search-button-icon.svg';
@@ -8,21 +18,16 @@ import { AppSwitch } from '~/07-shared/components';
 import { SearchInput } from '~/07-shared/components';
 
 export const SearchBar = memo(() => (
-    <Flex flexDirection='column' rowGap='16px'>
-        <Flex columnGap='12px' width='518px' align='center'>
+    <VStack spacing='16px' align='flex-start'>
+        <HStack spacing='12px' width='518px'>
             <AppButton h='48px'>
                 <Image p='0 12px' src={sbi} />
             </AppButton>
             <SearchInput />
-        </Flex>
-        <Flex columnGap='16px'>
-            <Flex
-                padding='6px 0px 6px 8px'
-                width='268px'
-                height='36px'
-                justifyContent='space-between'
-                alignItems='center'
-            >
+        </HStack>
+
+        <HStack spacing='16px'>
+            <HStack px='8px' height='36px' width='268px' justify='space-between' flex='1'>
                 <Text
                     fontFamily='var(--font-family)'
                     fontWeight={500}
@@ -33,7 +38,8 @@ export const SearchBar = memo(() => (
                     Исключить мои аллергены
                 </Text>
                 <AppSwitch />
-            </Flex>
+            </HStack>
+
             <Menu>
                 <MenuButton
                     as={Button}
@@ -65,6 +71,6 @@ export const SearchBar = memo(() => (
                     <MenuItem>Attend a Workshop</MenuItem>
                 </MenuList>
             </Menu>
-        </Flex>
-    </Flex>
+        </HStack>
+    </VStack>
 ));
