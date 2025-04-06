@@ -1,4 +1,5 @@
-import { Box, Flex } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
+import { memo } from 'react';
 
 import { SearchBar } from '~/05-features';
 import { PageSubtitle } from '~/07-shared/components';
@@ -9,12 +10,10 @@ interface Props {
     subtitle?: string;
 }
 
-export const PageHeader = ({ title, subtitle }: Props) => (
-    <Box width='100%' maxWidth='898px'>
-        <Flex direction='column' align='center' rowGap='32px'>
-            <PageTitle title={title} />
-            {subtitle && <PageSubtitle subtitle={subtitle} />}
-            <SearchBar />
-        </Flex>
-    </Box>
-);
+export const PageHeader = memo(({ title, subtitle }: Props) => (
+    <Flex w='100%' direction='column' align='center' rowGap='32px'>
+        <PageTitle title={title} />
+        {subtitle && <PageSubtitle subtitle={subtitle} />}
+        <SearchBar />
+    </Flex>
+));

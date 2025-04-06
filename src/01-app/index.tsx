@@ -1,6 +1,6 @@
 import './styles/index.scss';
 
-import { AppGrid } from '~/04-widgets';
+import { AppGrid, Sider } from '~/04-widgets';
 import { Header } from '~/04-widgets';
 import { Navigation } from '~/04-widgets';
 
@@ -13,6 +13,7 @@ const App = () => (
         <Header />
         <Navigation />
         <Router />
+        <Sider />
     </AppGrid>
 );
 

@@ -37,6 +37,19 @@ export const NavigationAccordion = memo(() => {
             overflow='auto'
             pr={hasScrollbar ? 1 : 0}
             mr={hasScrollbar ? 1 : 4}
+            sx={{
+                '&::-webkit-scrollbar': {
+                    width: '8px',
+                },
+                '&::-webkit-scrollbar-track': {
+                    background: 'transparent',
+                    borderRadius: '8px',
+                },
+                '&::-webkit-scrollbar-thumb': {
+                    background: 'rgba(0, 0, 0, 0.16)',
+                    borderRadius: '8px',
+                },
+            }}
         >
             {props.map((itemProps, index) => (
                 <AppAccordionItem key={index} props={itemProps} />
