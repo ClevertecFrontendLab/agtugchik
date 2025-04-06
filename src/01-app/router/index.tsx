@@ -7,7 +7,7 @@ export const Router = () => {
     const appRoutes = useRoutes(routes);
 
     return (
-        <GridItem as='main' area='main'>
+        <GridItem as='main' area='main' maxW='calc(100vw - 256px - 280px)'>
             {appRoutes}
         </GridItem>
     );
