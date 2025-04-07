@@ -6,7 +6,18 @@ interface Props extends StackProps {
 }
 
 export const PageSection = memo(({ children, ...rest }: Props) => (
-    <VStack as='section' maxWidth='100%' width='100%' rowGap='24px' {...rest}>
+    <VStack
+        as='section'
+        maxWidth='100%'
+        width='100%'
+        rowGap='24px'
+        {...rest}
+        display='grid'
+        gridTemplateAreas={`"hor-nav hor-nav"
+                            "title nav-button"
+                            "content content"
+                            "more-button more-button"`}
+    >
         {children}
     </VStack>
 ));

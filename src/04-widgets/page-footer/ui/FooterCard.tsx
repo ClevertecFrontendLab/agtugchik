@@ -21,7 +21,7 @@ const FooterCard = ({ title, text, type, bookmarks, likes }: Props) => (
         <CardFooter padding='0px 24px 20px 24px' justify='space-between'>
             <AppBadge
                 label={type}
-                icon={accordionItems.find((item) => item.title === type)?.icon as string}
+                icon={accordionItems.find((item) => item.label === type)?.icon as string}
                 bgColor='var(--lime50)'
             />
             <RecipeStatIcons bookmarks={bookmarks} likes={likes} />

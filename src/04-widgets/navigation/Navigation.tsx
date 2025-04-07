@@ -1,8 +1,8 @@
 import { GridItem } from '@chakra-ui/react';
 import { memo } from 'react';
 
-import { NavigationFooter } from './UI';
-import { NavigationAccordion } from './UI';
+import { NavigationFooter } from './ui';
+import { NavigationAccordion } from './ui';
 
 export const Navigation = memo(() => (
     <GridItem

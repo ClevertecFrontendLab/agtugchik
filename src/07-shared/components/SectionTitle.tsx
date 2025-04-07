@@ -7,6 +7,7 @@ interface Props extends HeadingProps {
 
 export const SectionTitle = memo(({ title, ...rest }: Props) => (
     <Heading
+        gridArea='title'
         w='100%'
         fontFamily='var(--font-family)'
         fontWeight={500}

@@ -23,7 +23,7 @@ export const FastRecipe = ({ title, type }: Props) => (
             <Image
                 w='24px'
                 h='24px'
-                src={accordionItems.find((item) => item.title === type)?.icon as string}
+                src={accordionItems.find((item) => item.label === type)?.icon as string}
             />
             <Text
                 fontFamily='var(--font-family)'

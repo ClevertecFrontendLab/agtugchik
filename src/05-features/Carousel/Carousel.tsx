@@ -7,6 +7,7 @@ import newRecipies from './consts/new-recipies';
 
 export const Carousel = memo(() => (
     <HStack
+        gridArea='content'
         width='100%'
         spacing='24px'
         overflowX='hidden'

@@ -1,13 +1,16 @@
 import { Accordion } from '@chakra-ui/react';
 import { memo, useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router';
 
-import { AppAccordionItem } from '~/04-widgets/navigation/UI';
+import { AppAccordionItem } from '~/04-widgets/navigation/ui';
 
-import props from '../consts/accordion-item-props';
+import accordionItemProps from '../consts/accordion-item-props';
 
 export const NavigationAccordion = memo(() => {
     const accordionRef = useRef<HTMLDivElement | null>(null);
     const [hasScrollbar, setHasScrollbar] = useState(false);
+    const [activeIndex, setActiveIndex] = useState(-1);
+    const location = useLocation();
 
     useEffect(() => {
         const checkScrollbar = () => {
@@ -16,23 +19,28 @@ export const NavigationAccordion = memo(() => {
                 setHasScrollbar(scrollHeight > clientHeight);
             }
         };
-
         checkScrollbar();
-
         const resizeObserver = new ResizeObserver(checkScrollbar);
-
         if (accordionRef.current) {
             resizeObserver.observe(accordionRef.current);
         }
-
         return () => {
             resizeObserver.disconnect();
         };
     }, []);
 
+    useEffect(() => {
+        const activePath = location.pathname.split('/')[1];
+        const newActiveIndex = accordionItemProps.findIndex(
+            (item) => item.path === `/${activePath}`,
+        );
+        setActiveIndex(newActiveIndex);
+    }, [location]);
+
     return (
         <Accordion
             ref={accordionRef}
+            index={activeIndex}
             allowToggle
             overflow='auto'
             pr={hasScrollbar ? 1 : 0}
@@ -51,8 +59,8 @@ export const NavigationAccordion = memo(() => {
                 },
             }}
         >
-            {props.map((itemProps, index) => (
-                <AppAccordionItem key={index} props={itemProps} />
+            {accordionItemProps.map((itemProps, index) => (
+                <AppAccordionItem key={index} {...itemProps} />
             ))}
         </Accordion>
     );

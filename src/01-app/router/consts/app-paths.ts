@@ -1,5 +1,26 @@
-export const enum AppPaths {
-    HOME = '/',
-    VEGAN = '/vegan',
-    JUICY = '/juicy',
-}
+export const AppPaths = {
+    HOME: '/',
+    SALADS: '/salads',
+    SNACKS: '/snacks',
+    FIRST_COURSES: '/first-courses',
+    MAIN_COURSES: '/main-courses',
+    DESSERTS: '/desserts',
+    GRILL: '/grill',
+    VEGAN: '/vegan',
+    KIDS: '/kids',
+    MEDICAL: '/medical',
+    NATIONAL: '/national',
+    SAUCES: '/sauces',
+    DRINKS: '/drinks',
+    PRESERVES: '/preserves',
+    JUICY: '/juicy',
+
+    VEGAN_APPETIZERS: '/vegan/appetizers',
+    VEGAN_FIRST_COURSES: '/vegan/first-courses',
+    VEGAN_MAIN_COURSES: '/vegan/main-courses',
+    VEGAN_SIDES: '/vegan/sides',
+    VEGAN_DESSERTS: '/vegan/desserts',
+    VEGAN_BAKING: '/vegan/baking',
+    VEGAN_RAW: '/vegan/raw',
+    VEGAN_DRINKS: '/vegan/drinks',
+} as const;

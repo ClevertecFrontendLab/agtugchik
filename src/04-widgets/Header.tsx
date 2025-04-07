@@ -1,6 +1,7 @@
 import { GridItem } from '@chakra-ui/react';
 import { memo } from 'react';
 
+import { AppBreadcrumbs } from '~/05-features';
 import { User } from '~/06-entites';
 import { Logo } from '~/07-shared/components';
 
@@ -18,6 +19,7 @@ export const Header = memo(() => (
         justifyContent='space-between'
     >
         <Logo />
+        <AppBreadcrumbs />
         <User />
     </GridItem>
 ));

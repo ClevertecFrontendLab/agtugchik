@@ -7,6 +7,7 @@ interface Props extends TextProps {
 
 export const PageSubtitle = memo(({ subtitle, ...rest }: Props) => (
     <Text
+        maxW='696px'
         fontFamily='var(--font-family)'
         fontWeight={500}
         fontSize='16px'

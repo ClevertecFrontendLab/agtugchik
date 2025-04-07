@@ -6,7 +6,7 @@ import { BlogerCard } from '~/05-features/BlogerCard';
 import blogersInfo from './consts/blogers-info';
 
 const Blogers = memo(() => (
-    <HStack>
+    <HStack gridArea='content'>
         {blogersInfo.map((bloger) => (
             <BlogerCard
                 key={bloger.nickname}

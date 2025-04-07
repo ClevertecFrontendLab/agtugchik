@@ -6,19 +6,34 @@ import {
     Image,
 } from '@chakra-ui/react';
 import { memo } from 'react';
+import { useNavigate } from 'react-router';
+
+import { VerticalSubmenu } from './VerticalSabmenu';
 
 export interface Props {
-    title: string;
+    label: string;
     icon: string;
+    path: string;
+    subroutes: readonly { label: string; path: string }[];
 }
 
-export const AppAccordionItem = memo(({ props }: { props: Props }) => {
-    const { title, icon } = props;
+export const AppAccordionItem = memo((props: Props) => {
+    const { label, icon, path, subroutes } = props;
+    const navigate = useNavigate();
+
+    const onCLickHandler = () => {
+        navigate(path);
+    };
+
     return (
-        <AccordionItem key={title} border='none'>
+        <AccordionItem onClick={onCLickHandler} key={label} border='none'>
             <AccordionButton
                 _focus={{ outline: 'none' }}
-                _expanded={{ bg: 'var(--lime100)', fontWeight: 700, borderRadius: 0 }}
+                _expanded={{
+                    bg: 'var(--lime100)',
+                    fontWeight: 700,
+                    borderRadius: 0,
+                }}
                 w='100%'
                 h='48px'
                 bg='inherit'
@@ -28,14 +43,13 @@ export const AppAccordionItem = memo(({ props }: { props: Props }) => {
                 gap='12px'
                 whiteSpace='nowrap'
             >
-                <Image color='black' src={icon} boxSize='24px' mr='2pxs' />
-                {title}
+                <Image color='black' src={icon} boxSize='24px' mr='2px' />
+                {label}
                 <AccordionIcon ml='auto' />
             </AccordionButton>
-            <AccordionPanel pb={4} color='black'>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-                exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+
+            <AccordionPanel padding='0' color='black'>
+                {subroutes && subroutes.length > 0 && <VerticalSubmenu items={subroutes} />}
             </AccordionPanel>
         </AccordionItem>
     );

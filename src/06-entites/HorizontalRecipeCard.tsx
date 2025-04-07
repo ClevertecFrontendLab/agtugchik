@@ -1,7 +1,7 @@
 import { CardBody, CardFooter, CardHeader, Flex, Image } from '@chakra-ui/react';
 import { memo } from 'react';
 
-import accordionItems from '~/04-widgets/navigation/consts/accordion-item-props';
+import accordionItemProps from '~/04-widgets/navigation/consts/accordion-item-props';
 import bookmark from '~/07-shared/assets/svg/bookmark.svg';
 import { AppBadge, AppButton, AppCard, AppCardText, AppCardTitle } from '~/07-shared/components';
 
@@ -44,7 +44,9 @@ export const HorizontalRecipeCard = memo((props: Props) => {
                 >
                     <AppBadge
                         label={type}
-                        icon={accordionItems.find((item) => item.title === type)?.icon as string}
+                        icon={
+                            accordionItemProps.find((item) => item.label === type)?.icon as string
+                        }
                         bgColor='var(--lime50)'
                     />
                     <RecipeStatIcons bookmarks={bookmarks} likes={likes} />
