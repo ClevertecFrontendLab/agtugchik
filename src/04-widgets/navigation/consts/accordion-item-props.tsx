@@ -23,7 +23,7 @@ const props: AppAccordionItemProps[] = [
     { title: 'Веганские блюда', icon: icon7 },
     { title: 'Детская кухня', icon: icon8 },
     { title: 'Лечебное питание', icon: icon9 },
-    { title: 'Национальыне', icon: icon10 },
+    { title: 'Национальные', icon: icon10 },
     { title: 'Соусы', icon: icon11 },
     { title: 'Напитки', icon: icon12 },
     { title: 'Загатовки', icon: icon13 },

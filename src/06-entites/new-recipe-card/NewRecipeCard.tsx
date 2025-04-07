@@ -1,0 +1,37 @@
+import { CardBody, CardFooter, Image } from '@chakra-ui/react';
+import { memo } from 'react';
+
+import accordionItems from '~/04-widgets/navigation/consts/accordion-item-props';
+import { AppBadge, AppCard, AppCardText, AppCardTitle } from '~/07-shared/components';
+
+import { RecipeStatIcons } from './ui/RecipeStatIcons';
+
+interface Props {
+    title: string;
+    text: string;
+    image: string;
+    type: string;
+    bookmarks: number;
+    likes: number;
+}
+
+export const NewRecipeCard = memo((props: Props) => {
+    const { title, image, text, type, bookmarks, likes } = props;
+
+    return (
+        <AppCard width='322px' minWidth='322px' height='414px'>
+            <Image src={image} width='100%' height='auto' objectFit='cover' alt='Card image' />
+            <CardBody padding='24px'>
+                <AppCardTitle>{title}</AppCardTitle>
+                <AppCardText>{text}</AppCardText>
+            </CardBody>
+            <CardFooter paddingTop='0' justifyContent='space-between'>
+                <AppBadge
+                    icon={accordionItems.find((item) => item.title === type)?.icon as string}
+                    label={type}
+                />
+                <RecipeStatIcons bookmarks={bookmarks} likes={likes} />
+            </CardFooter>
+        </AppCard>
+    );
+});

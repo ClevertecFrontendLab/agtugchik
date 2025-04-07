@@ -12,7 +12,7 @@ export const StatIcon = ({ icon, count, type = 'default' }: StatIconProps) => {
     return (
         <HStack
             spacing='8px'
-            width={isCard ? '32px' : '87px'}
+            width={isCard ? 'max-content' : '87px'}
             height={isCard ? '24px' : '40px'}
             align='center'
             justify='center'

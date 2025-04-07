@@ -8,7 +8,7 @@ export const CreateRecipeButton = () => (
         justify='center'
         align='center'
         borderRadius='50%'
-        bg='radial-gradient(circle 100px at center, #eaffc7 0%, white 100%)'
+        bg='radial-gradient(circle 100px at center, var(--lime100) 0%, white 100%)'
     >
         <Button
             w='48px'
@@ -18,7 +18,7 @@ export const CreateRecipeButton = () => (
             bg='black'
             _hover={{ bg: 'blackAlpha.800' }}
         >
-            <Icon as={EditIcon} boxSize={5} color='#ffffd3' />
+            <Icon as={EditIcon} boxSize={5} color='var(--lime50)' />
         </Button>
         <Text
             fontFamily='var(--font-family)'

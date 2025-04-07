@@ -7,6 +7,7 @@ interface Props {
 
 export const AppGrid = memo(({ children }: Props) => (
     <Grid
+        height='100vh'
         overflow='hidden'
         templateAreas={`"header header header"
                             "nav main sider"`}

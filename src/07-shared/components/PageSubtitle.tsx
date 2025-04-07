@@ -1,11 +1,11 @@
-import { Text } from '@chakra-ui/react';
+import { Text, TextProps } from '@chakra-ui/react';
 import { memo } from 'react';
 
-interface Props {
+interface Props extends TextProps {
     subtitle: string;
 }
 
-export const PageSubtitle = memo(({ subtitle }: Props) => (
+export const PageSubtitle = memo(({ subtitle, ...rest }: Props) => (
     <Text
         fontFamily='var(--font-family)'
         fontWeight={500}
@@ -13,6 +13,7 @@ export const PageSubtitle = memo(({ subtitle }: Props) => (
         lineHeight='150%'
         textAlign='center'
         color='rgba(0, 0, 0, 0.48)'
+        {...rest}
     >
         {subtitle}
     </Text>

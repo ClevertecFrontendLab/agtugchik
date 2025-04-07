@@ -18,7 +18,7 @@ export const AppAccordionItem = memo(({ props }: { props: Props }) => {
         <AccordionItem key={title} border='none'>
             <AccordionButton
                 _focus={{ outline: 'none' }}
-                _expanded={{ bg: 'var(--main-green300)', fontWeight: 700, borderRadius: 0 }}
+                _expanded={{ bg: 'var(--lime100)', fontWeight: 700, borderRadius: 0 }}
                 w='100%'
                 h='48px'
                 bg='inherit'

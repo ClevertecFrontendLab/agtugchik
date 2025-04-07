@@ -13,7 +13,7 @@ export const Header = memo(() => (
         py='16px'
         w='100%'
         h='80px'
-        bg='#ffffd3'
+        bg='var(--lime50)'
         alignItems='center'
         justifyContent='space-between'
     >
