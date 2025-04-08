@@ -9,7 +9,7 @@ export const Carousel = memo(() => (
     <HStack
         gridArea='content'
         width='100%'
-        spacing='24px'
+        spacing={{ xl: '24px', lg: '12px' }}
         overflowX='hidden'
         css={{
             '&::-webkit-scrollbar': {

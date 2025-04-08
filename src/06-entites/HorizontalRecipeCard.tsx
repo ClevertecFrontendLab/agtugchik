@@ -20,7 +20,12 @@ export const HorizontalRecipeCard = memo((props: Props) => {
     const { title, image, text, type, bookmarks, likes } = props;
 
     return (
-        <AppCard width='668px' height='244px' display='flex' flexDirection='row'>
+        <AppCard
+            width={{ xl: '668px', lg: '100%' }}
+            height='244px'
+            display='flex'
+            flexDirection='row'
+        >
             <Image
                 src={image}
                 width='346px'
@@ -33,7 +38,8 @@ export const HorizontalRecipeCard = memo((props: Props) => {
                 direction='column'
                 justify='space-between'
                 p='20px 24px'
-                maxWidth='322px'
+                maxWidth={{ xl: '322px', base: 'calc(100% - 346px)' }}
+                width='100%'
                 rowGap='24px'
             >
                 <CardHeader

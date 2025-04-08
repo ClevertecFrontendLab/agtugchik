@@ -19,15 +19,18 @@ export const NewRecipeCard = memo((props: Props) => {
     const { title, image, text, type, bookmarks, likes } = props;
 
     return (
-        <AppCard width='322px' minWidth='322px' height='414px'>
+        <AppCard minWidth={{ xl: '322px', lg: '279px' }}>
             <Image src={image} width='100%' height='auto' objectFit='cover' alt='Card image' />
-            <CardBody padding='24px'>
+            <CardBody padding={{ xl: '24px', lg: '12px 12px 24px 12px' }}>
                 <AppCardTitle>{title}</AppCardTitle>
                 <AppCardText>{text}</AppCardText>
             </CardBody>
-            <CardFooter paddingTop='0' justifyContent='space-between'>
+            <CardFooter
+                padding={{ xl: '0 24px 20px 24px', lg: '0 12px 12px 12px' }}
+                justifyContent='space-between'
+            >
                 <AppBadge
-                    icon={accordionItems.find((item) => item.title === type)?.icon as string}
+                    icon={accordionItems.find((item) => item.label === type)?.icon as string}
                     label={type}
                 />
                 <RecipeStatIcons bookmarks={bookmarks} likes={likes} />

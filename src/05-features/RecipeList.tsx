@@ -9,7 +9,7 @@ interface Props extends FlexProps {
 }
 
 export const RecipeList = memo(({ recipes, ...props }: Props) => (
-    <Flex flexWrap='wrap' gap='24px' gridArea='content' {...props}>
+    <Flex flexWrap='wrap' gap={{ xl: '24px', lg: '16px' }} gridArea='content' {...props}>
         {recipes.map((recipe) => (
             <HorizontalRecipeCard key={recipe.title} {...recipe} />
         ))}

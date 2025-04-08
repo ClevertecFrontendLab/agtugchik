@@ -36,7 +36,7 @@ export const HorizontalNav = () => {
                         lineHeight='150%'
                         textAlign='center'
                         color='#134b00'
-                        padding='8px 16px'
+                        padding={{ xl: '8px 16px', lg: '8px' }}
                     >
                         {item.label}
                     </Tab>

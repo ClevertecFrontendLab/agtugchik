@@ -1,10 +1,10 @@
-import { CardBody, CardFooter } from '@chakra-ui/react';
+import { CardBody, CardFooter, CardProps } from '@chakra-ui/react';
 
 import accordionItems from '~/04-widgets/navigation/consts/accordion-item-props';
 import { RecipeStatIcons } from '~/06-entites';
 import { AppBadge, AppCard, AppCardText, AppCardTitle } from '~/07-shared/components';
 
-interface Props {
+interface Props extends CardProps {
     title: string;
     text: string;
     type: string;
@@ -13,12 +13,15 @@ interface Props {
 }
 
 const FooterCard = ({ title, text, type, bookmarks, likes }: Props) => (
-    <AppCard maxW='322px' h='100%'>
-        <CardBody padding='24px'>
+    <AppCard w='100%' h='100%' minW='0'>
+        <CardBody padding={{ xl: '24px', lg: '16px 16px 24px 16px' }}>
             <AppCardTitle>{title}</AppCardTitle>
             <AppCardText>{text}</AppCardText>
         </CardBody>
-        <CardFooter padding='0px 24px 20px 24px' justify='space-between'>
+        <CardFooter
+            padding={{ xl: '0px 24px 20px 24px', lg: '0px 16px 16px 16px' }}
+            justify='space-between'
+        >
             <AppBadge
                 label={type}
                 icon={accordionItems.find((item) => item.label === type)?.icon as string}

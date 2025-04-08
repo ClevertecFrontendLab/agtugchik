@@ -11,8 +11,8 @@ export const SectionTitle = memo(({ title, ...rest }: Props) => (
         w='100%'
         fontFamily='var(--font-family)'
         fontWeight={500}
-        fontSize='48px'
-        lineHeight='100%'
+        fontSize={{ xl: '48px', lg: '36px' }}
+        lineHeight={{ xl: '100%', lg: '111%' }}
         textAlign='left'
         color='#000'
         {...rest}

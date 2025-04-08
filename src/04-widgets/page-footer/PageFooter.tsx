@@ -1,4 +1,4 @@
-import { Grid, GridProps, HStack, VStack } from '@chakra-ui/react';
+import { Grid, GridProps, VStack } from '@chakra-ui/react';
 import { memo } from 'react';
 
 import fastRecipeCards from './consts/fast-recipe-cards';
@@ -11,23 +11,28 @@ interface Props extends GridProps {}
 export const PageFooter = memo(({ children, ...props }: Props) => (
     <Grid
         as='section'
+        maxW='100%'
         width='100%'
-        gap='24px'
+        gap={{ xl: '24px', lg: '24px 16px' }}
         paddingTop='24px'
         borderTop='1px solid rgba(0, 0, 0, 0.08)'
-        templateAreas={`"title subtitle"
-                        "cards fast"`}
-        templateColumns='1fr 1fr'
+        templateAreas={{
+            xl: `"title subtitle"
+                "cards fast"`,
+            lg: `"title subtitle subtitle"
+                "cards cards fast"`,
+        }}
+        templateColumns={{ xl: '1fr 1fr', lg: '1fr 1fr 1fr' }}
         templateRows='min-content 1fr'
         {...props}
     >
         {children}
-        <HStack gridArea='cards' columnGap='24px'>
+        <Grid gridArea='cards' columnGap={{ xl: '24px', lg: '16px' }} gridTemplateColumns='1fr 1fr'>
             {footerCardItems.map((item) => (
                 <FooterCard key={item.title} {...item} />
             ))}
-        </HStack>
-        <VStack gridArea='fast' rowGap='12px'>
+        </Grid>
+        <VStack gridArea='fast' rowGap='12px' w='100%'>
             {fastRecipeCards.map((item) => (
                 <FastRecipe key={item.title} {...item} />
             ))}

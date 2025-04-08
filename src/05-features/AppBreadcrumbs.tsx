@@ -1,10 +1,10 @@
 import { ChevronRightIcon } from '@chakra-ui/icons';
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink } from '@chakra-ui/react';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbProps } from '@chakra-ui/react';
 import { Link, useLocation } from 'react-router';
 
 import accordionItemProps from '~/04-widgets/navigation/consts/accordion-item-props';
 
-export const AppBreadcrumbs = () => {
+export const AppBreadcrumbs = (props: BreadcrumbProps) => {
     const location = useLocation();
     const segments = location.pathname.split('/').filter(Boolean);
 
@@ -33,6 +33,7 @@ export const AppBreadcrumbs = () => {
             spacing='8px'
             separator={<ChevronRightIcon color='black' />}
             padding='12px 24px'
+            {...props}
         >
             {crumbs.map((crumb, index) => {
                 const isLast = index === crumbs.length - 1;

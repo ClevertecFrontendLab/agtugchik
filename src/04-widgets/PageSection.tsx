@@ -10,13 +10,14 @@ export const PageSection = memo(({ children, ...rest }: Props) => (
         as='section'
         maxWidth='100%'
         width='100%'
-        rowGap='24px'
+        rowGap={{ xl: '24px', lg: '16px' }}
         {...rest}
         display='grid'
         gridTemplateAreas={`"hor-nav hor-nav"
                             "title nav-button"
                             "content content"
                             "more-button more-button"`}
+        gridTemplateColumns='1fr 1fr'
     >
         {children}
     </VStack>
