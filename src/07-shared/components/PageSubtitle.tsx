@@ -7,11 +7,12 @@ interface Props extends TextProps {
 
 export const PageSubtitle = memo(({ subtitle, ...rest }: Props) => (
     <Text
-        maxW='696px'
+        maxW={{ lg: '696px', base: '100%' }}
+        w='100%'
         fontFamily='var(--font-family)'
         fontWeight={500}
-        fontSize='16px'
-        lineHeight='150%'
+        fontSize={{ lg: '16px', base: '14px' }}
+        lineHeight={{ lg: '150%', base: '143%' }}
         textAlign='center'
         color='rgba(0, 0, 0, 0.48)'
         {...rest}

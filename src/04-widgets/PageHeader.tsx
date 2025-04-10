@@ -10,7 +10,13 @@ interface Props {
 }
 
 export const PageHeader = memo(({ title, subtitle }: Props) => (
-    <VStack as='section' w='100%' align='center' spacing='32px' mt='32px'>
+    <VStack
+        as='section'
+        w='100%'
+        align='center'
+        spacing={{ lg: '32px', base: '16px' }}
+        mt={{ lg: '32px', base: '0' }}
+    >
         <VStack>
             <PageTitle title={title} />
             {subtitle && <PageSubtitle subtitle={subtitle} />}

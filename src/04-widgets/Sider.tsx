@@ -9,7 +9,7 @@ export const Sider = () => (
         area='sider'
         w='280px'
         h='calc(100vh - 80px)'
-        display='flex'
+        display={{ lg: 'flex', base: 'none' }}
         flexDir='column'
         justifyContent='space-between'
         alignItems='end'

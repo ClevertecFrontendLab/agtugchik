@@ -30,6 +30,7 @@ export const AppBreadcrumbs = (props: BreadcrumbProps) => {
 
     return (
         <Breadcrumb
+            display={{ lg: 'block', base: 'none' }}
             spacing='8px'
             separator={<ChevronRightIcon color='black' />}
             padding='12px 24px'

@@ -1,4 +1,4 @@
-import { CardBody, CardFooter, CardHeader, Flex, Image } from '@chakra-ui/react';
+import { Box, CardBody, CardFooter, CardHeader, Flex, Image, Show, Text } from '@chakra-ui/react';
 import { memo } from 'react';
 
 import accordionItemProps from '~/04-widgets/navigation/consts/accordion-item-props';
@@ -19,28 +19,49 @@ interface Props {
 export const HorizontalRecipeCard = memo((props: Props) => {
     const { title, image, text, type, bookmarks, likes } = props;
 
+    const badge = (
+        <AppBadge
+            label={type}
+            icon={accordionItemProps.find((item) => item.label === type)?.icon as string}
+            bgColor='var(--lime50)'
+        />
+    );
+
     return (
         <AppCard
-            width={{ xl: '668px', lg: '100%' }}
-            height='244px'
+            width={{ xl: '668px', lg: '100%', md: '356px', base: '100%' }}
+            height={{ lg: '244px', base: '128px' }}
             display='flex'
             flexDirection='row'
         >
-            <Image
-                src={image}
-                width='346px'
-                height='244px'
-                objectFit='cover'
-                alt='Card image'
-                borderRadius='8px 0 0 8px'
-            />
+            <Box position='relative' height='100%'>
+                <Image
+                    src={image}
+                    minW={{ lg: '346px', base: '158px' }}
+                    height='100%'
+                    objectFit='cover'
+                    alt='Card image'
+                    borderRadius='8px 0 0 8px'
+                />
+
+                <Show below='lg'>
+                    <Box position='absolute' top='8px' left='8px' zIndex='1'>
+                        {badge}
+                    </Box>
+                </Show>
+            </Box>
+
             <Flex
                 direction='column'
                 justify='space-between'
-                p='20px 24px'
-                maxWidth={{ xl: '322px', base: 'calc(100% - 346px)' }}
+                p={{ lg: '20px 24px', base: '8px' }}
+                maxWidth={{
+                    xl: '322px',
+                    lg: 'calc(100% - 346px)',
+                    sm: 'calc(100% - 128px)',
+                    base: '100%',
+                }}
                 width='100%'
-                rowGap='24px'
             >
                 <CardHeader
                     padding='0'
@@ -48,13 +69,7 @@ export const HorizontalRecipeCard = memo((props: Props) => {
                     alignItems='center'
                     display='flex'
                 >
-                    <AppBadge
-                        label={type}
-                        icon={
-                            accordionItemProps.find((item) => item.label === type)?.icon as string
-                        }
-                        bgColor='var(--lime50)'
-                    />
+                    <Box display={{ base: 'none', lg: 'block' }}>{badge}</Box>
                     <RecipeStatIcons bookmarks={bookmarks} likes={likes} />
                 </CardHeader>
 
@@ -64,11 +79,24 @@ export const HorizontalRecipeCard = memo((props: Props) => {
                 </CardBody>
 
                 <CardFooter padding='0' justifyContent='end' alignItems='center' columnGap='8px'>
-                    <AppButton h='32px' w='122px' columnGap='8px'>
-                        <Image src={bookmark} />
-                        Сохрнаить
+                    <AppButton
+                        h={{ lg: '32px', base: '24px' }}
+                        w={{ lg: '122px', base: '24px' }}
+                        columnGap='8px'
+                    >
+                        <Image
+                            src={bookmark}
+                            w={{ lg: '14px', base: '12px' }}
+                            h={{ lg: '14px', base: '12px' }}
+                        />
+                        <Text display={{ lg: 'block', base: 'none' }}>Сохрнаить</Text>
                     </AppButton>
-                    <AppButton w='87px' h='32px' backgroundColor='black' color='white'>
+                    <AppButton
+                        w={{ lg: '87px', base: '70px' }}
+                        h={{ lg: '32px', base: '24px' }}
+                        backgroundColor='black'
+                        color='white'
+                    >
                         Готовить
                     </AppButton>
                 </CardFooter>

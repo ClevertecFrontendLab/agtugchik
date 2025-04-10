@@ -4,6 +4,7 @@ export { AppCard } from './AppCard';
 export { AppCardText } from './AppCardText';
 export { AppCardTitle } from './AppCardTitle';
 export { AppSwitch } from './AppSwitch';
+export { BurgerButton } from './BurgerButton';
 export { Logo } from './Logo';
 export { PageSubtitle } from './PageSubtitle';
 export { PageTitle } from './PageTitle';

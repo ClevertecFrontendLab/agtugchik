@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const RecipeStatIcons = memo(({ bookmarks, likes }: Props) => (
-    <HStack>
+    <HStack h='24px'>
         {!!bookmarks && <StatIcon icon={bookmark} count={bookmarks} type='card' />}
         {!!likes && <StatIcon icon={heartEyes} count={likes} type='card' />}
     </HStack>

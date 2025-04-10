@@ -19,7 +19,6 @@ export const VerticalSubmenu = ({ items }: Props) => {
                 const isActive = item.path === location.pathname;
                 const markerWidth = isActive ? 8 : 1;
                 const markerMarginLeft = isActive ? '-7px' : '0';
-                console.log(item.path);
                 return (
                     <NavLink
                         onClick={(e) => {

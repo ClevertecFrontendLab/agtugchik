@@ -1,15 +1,14 @@
-import { HStack } from '@chakra-ui/react';
+import { HStack, StackProps } from '@chakra-ui/react';
 import { memo } from 'react';
 
 import { NewRecipeCard } from '~/06-entites';
 
 import newRecipies from './consts/new-recipies';
 
-export const Carousel = memo(() => (
+export const Carousel = memo((props: StackProps) => (
     <HStack
-        gridArea='content'
         width='100%'
-        spacing={{ xl: '24px', lg: '12px' }}
+        spacing={{ xl: '24px', base: '12px' }}
         overflowX='hidden'
         css={{
             '&::-webkit-scrollbar': {
@@ -17,8 +16,9 @@ export const Carousel = memo(() => (
             },
             scrollbarWidth: 'none',
         }}
+        {...props}
     >
-        {newRecipies.map((recipe, index) => (
+        {newRecipies.concat(newRecipies).map((recipe, index) => (
             <NewRecipeCard key={index} {...recipe} />
         ))}
     </HStack>

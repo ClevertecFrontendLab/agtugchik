@@ -16,14 +16,14 @@ const SectionNavigationButton = memo(({ navigateTo, children, ...props }: Props)
     };
     return (
         <AppButton
-            justifySelf='end'
+            justifySelf={{ lg: 'end', base: 'center' }}
             width='min-content'
-            gridArea='nav-button'
             onClick={onCLickHandler}
-            height='48px'
-            padding='0 24px'
+            height={{ xl: '48px', base: '40px' }}
+            padding={{ xl: '0 24px', base: '0 16px' }}
             buttonType='green'
             gap='8px'
+            fontSize={{ xl: '18px', base: '16px' }}
             {...props}
         >
             {children}

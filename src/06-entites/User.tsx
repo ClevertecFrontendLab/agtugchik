@@ -16,7 +16,14 @@ export const User = memo(
         image = avatar,
         ...rest
     }: Props) => (
-        <HStack height='100%' columnGap='12px' align='center' justifySelf='end' {...rest}>
+        <HStack
+            display={{ lg: 'flex', base: 'none' }}
+            height='100%'
+            columnGap='12px'
+            align='center'
+            justifySelf='end'
+            {...rest}
+        >
             <Avatar size='md' name={name} src={image} />
             <Box display='flex' flexDirection='column' w='100%' overflow='hidden'>
                 <Text

@@ -13,7 +13,7 @@ export const PageFooter = memo(({ children, ...props }: Props) => (
         as='section'
         maxW='100%'
         width='100%'
-        gap={{ xl: '24px', lg: '24px 16px' }}
+        gap={{ xl: '24px', lg: '24px 16px', base: '16px' }}
         paddingTop='24px'
         borderTop='1px solid rgba(0, 0, 0, 0.08)'
         templateAreas={{
@@ -21,13 +21,24 @@ export const PageFooter = memo(({ children, ...props }: Props) => (
                 "cards fast"`,
             lg: `"title subtitle subtitle"
                 "cards cards fast"`,
+            md: `"title title title"
+                "subtitle subtitle subtitle"
+                "cards cards fast"`,
+            base: `"title"
+                "subtitle"
+                "cards"
+                "fast"`,
         }}
-        templateColumns={{ xl: '1fr 1fr', lg: '1fr 1fr 1fr' }}
-        templateRows='min-content 1fr'
+        templateColumns={{ xl: '1fr 1fr', md: '1fr 1fr 1fr', base: '1fr' }}
+        templateRows={{ xl: 'min-content 1fr', md: 'min-content min-content 1fr' }}
         {...props}
     >
         {children}
-        <Grid gridArea='cards' columnGap={{ xl: '24px', lg: '16px' }} gridTemplateColumns='1fr 1fr'>
+        <Grid
+            gridArea='cards'
+            gap={{ xl: '24px', base: '16px' }}
+            gridTemplateColumns={{ md: '1fr 1fr', base: '1fr' }}
+        >
             {footerCardItems.map((item) => (
                 <FooterCard key={item.title} {...item} />
             ))}

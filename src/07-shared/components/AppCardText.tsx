@@ -8,7 +8,12 @@ export const AppCardText = memo((props: TextProps) => (
         fontSize='14px'
         lineHeight='143%'
         color='#000'
-        noOfLines={3}
+        sx={{
+            display: ['none', 'none', 'none', 'none', '-webkit-box'],
+            WebkitLineClamp: '3',
+            WebkitBoxOrient: 'vertical',
+            overflow: 'hidden',
+        }}
         {...props}
     />
 ));

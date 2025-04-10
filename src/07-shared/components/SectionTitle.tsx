@@ -7,12 +7,11 @@ interface Props extends HeadingProps {
 
 export const SectionTitle = memo(({ title, ...rest }: Props) => (
     <Heading
-        gridArea='title'
         w='100%'
         fontFamily='var(--font-family)'
         fontWeight={500}
-        fontSize={{ xl: '48px', lg: '36px' }}
-        lineHeight={{ xl: '100%', lg: '111%' }}
+        fontSize={{ xl: '48px', lg: '36px', base: '24px' }}
+        lineHeight={{ xl: '100%', lg: '111%', base: '133%' }}
         textAlign='left'
         color='#000'
         {...rest}

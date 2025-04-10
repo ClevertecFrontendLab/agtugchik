@@ -1,5 +1,4 @@
 import { Button, ButtonProps } from '@chakra-ui/react';
-import { memo } from 'react';
 
 type AppButtonType = 'default' | 'green';
 
@@ -7,11 +6,16 @@ interface AppButtonProps extends ButtonProps {
     buttonType?: AppButtonType;
 }
 
-export const AppButton = memo(({ buttonType = 'default', ...props }: AppButtonProps) => {
+export const AppButton = ({ buttonType = 'default', ...props }: AppButtonProps) => {
     const isGreen = buttonType === 'green';
 
     return (
         <Button
+            minW='0px'
+            fontFamily='var(--font-family)'
+            fontWeight={600}
+            fontSize={{ base: '12px', lg: '14px' }}
+            lineHeight={{ base: '133%', lg: '143%' }}
             _focus={{ outline: 'none' }}
             _hover={{
                 borderColor: isGreen ? 'var(--lime600)' : 'rgba(0, 0, 0, 0.48)',
@@ -26,4 +30,4 @@ export const AppButton = memo(({ buttonType = 'default', ...props }: AppButtonPr
             {...props}
         />
     );
-});
+};

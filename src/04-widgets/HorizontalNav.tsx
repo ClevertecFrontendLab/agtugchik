@@ -35,7 +35,7 @@ export const HorizontalNav = () => {
                         fontSize='16px'
                         lineHeight='150%'
                         textAlign='center'
-                        color='#134b00'
+                        color='var(--lime800)'
                         padding={{ xl: '8px 16px', lg: '8px' }}
                     >
                         {item.label}

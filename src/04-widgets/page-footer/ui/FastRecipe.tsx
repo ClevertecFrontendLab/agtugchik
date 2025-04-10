@@ -14,8 +14,8 @@ export const FastRecipe = ({ title, type }: Props) => (
         flexDirection='row'
         width='100%'
         height='100%'
-        h={{ xl: '56px', lg: '52px' }}
-        padding={{ xl: '0 24px', lg: '0 12px' }}
+        h={{ xl: '56px', lg: '52px', base: '48px' }}
+        padding={{ xl: '0 24px', base: '0 12px' }}
         align='center'
     >
         <Box
@@ -42,11 +42,11 @@ export const FastRecipe = ({ title, type }: Props) => (
             </Text>
         </Box>
         <AppButton
-            minW={{ xl: '87px', lg: '70px' }}
-            h='32px'
+            minW={{ xl: '87px', base: '70px' }}
+            h={{ lg: '32px', base: '24px' }}
             padding={{ xl: '0 12px', lg: '0 8px' }}
             fontFamily='var(--font-family)'
-            fontSize={{ xl: '14px', lg: '12px' }}
+            fontSize={{ xl: '14px', base: '12px' }}
             borderColor='var(--lime600)'
             color='var(--lime600)'
         >

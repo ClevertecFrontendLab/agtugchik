@@ -16,7 +16,7 @@ export const Logo = memo((props: StackProps) => {
     return (
         <HStack onClick={onClickHandler} columnGap='7px' alignItems='end' {...props}>
             <Image src={logo1} alt='Logo 1' />
-            <Image src={logo2} alt='Logo 2' />
+            <Image display={{ md: 'block', base: 'none' }} src={logo2} alt='Logo 2' />
         </HStack>
     );
 });

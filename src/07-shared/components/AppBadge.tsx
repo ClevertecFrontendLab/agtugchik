@@ -9,11 +9,11 @@ interface Props {
 export const AppBadge = ({ icon, label, bgColor = 'var(--lime150)' }: Props) => (
     <HStack
         borderRadius='4px'
-        padding='2px 8px'
+        padding={{ lg: '2px 8px', base: '2px 4px' }}
         height='24px'
         width='max-content'
         background={bgColor}
-        spacing='4px'
+        spacing={{ lg: '4px', base: '2px' }}
     >
         <Image w='14px' h='14px' src={icon} alt={label} />
         <Text
