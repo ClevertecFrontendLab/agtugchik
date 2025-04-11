@@ -2,7 +2,7 @@ import { Accordion } from '@chakra-ui/react';
 import { memo, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router';
 
-import { AppAccordionItem } from '~/04-widgets/navigation/ui';
+import { AppAccordionItem } from '~/04-widgets/navigation/ui1';
 
 import accordionItemProps from '../consts/accordion-item-props';
 
