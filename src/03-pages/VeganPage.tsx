@@ -16,10 +16,15 @@ const page = {
 export const VeganPage = () => (
     <PageLayout>
         <PageHeader title={page.title} subtitle={page.subtitle} />
-        <PageSection>
-            <HorizontalNav />
+        <PageSection
+            gridTemplateAreas={`"tabs"
+                                "content"
+                                "more-button"`}
+            gridTemplateColumns='1fr'
+        >
+            <HorizontalNav gridArea='tabs' />
             <Outlet />
-            <MoreButton />
+            <MoreButton gridArea='more-button' />
         </PageSection>
         <PageFooter>
             <SectionTitle title='Веганская кухня' gridArea='title' />

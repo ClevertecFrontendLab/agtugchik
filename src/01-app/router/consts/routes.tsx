@@ -16,7 +16,7 @@ export const routes = [
         element: <VeganPage />,
         children: [
             { path: AppPaths.VEGAN, element: <Navigate to={AppPaths.VEGAN_MAIN_COURSES} /> },
-            { path: '*', element: <RecipeList recipes={veganItems} /> },
+            { path: '*', element: <RecipeList gridArea='content' recipes={veganItems} /> },
         ],
     },
     {

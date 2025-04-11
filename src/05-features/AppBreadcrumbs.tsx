@@ -2,7 +2,19 @@ import { ChevronRightIcon } from '@chakra-ui/icons';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbProps } from '@chakra-ui/react';
 import { Link, useLocation } from 'react-router';
 
+import { AppPaths } from '~/01-app';
 import accordionItemProps from '~/04-widgets/navigation/consts/accordion-item-props';
+
+const additionalRoute = [
+    {
+        path: AppPaths.JUICY,
+        label: 'Самое сочное',
+        icon: '',
+        subroutes: [],
+    },
+];
+
+const itemProps = [...accordionItemProps, ...additionalRoute];
 
 export const AppBreadcrumbs = (props: BreadcrumbProps) => {
     const location = useLocation();
@@ -10,7 +22,7 @@ export const AppBreadcrumbs = (props: BreadcrumbProps) => {
 
     const [parentSegment, subSegment] = segments;
 
-    const parentItem = accordionItemProps.find((item) => item.path.split('/')[1] === parentSegment);
+    const parentItem = itemProps.find((item) => item.path.split('/')[1] === parentSegment);
     const subItem = parentItem?.subroutes?.find((sub) => sub.path.split('/')[2] === subSegment);
 
     const crumbs = [

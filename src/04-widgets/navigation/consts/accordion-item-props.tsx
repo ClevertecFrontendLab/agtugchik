@@ -21,7 +21,7 @@ const accordionItemProps = [
     { label: 'Десерты, выпечка', icon: icon5, path: AppPaths.DESSERTS, subroutes: [] },
     { label: 'Блюда на гриле', icon: icon6, path: AppPaths.GRILL, subroutes: [] },
     {
-        label: 'Веганские блюда',
+        label: 'Веганская кухня',
         icon: icon7,
         path: AppPaths.VEGAN,
         subroutes: [
@@ -34,6 +34,7 @@ const accordionItemProps = [
             { label: 'Сыроедческие блюда', path: AppPaths.VEGAN_RAW },
             { label: 'Напитки', path: AppPaths.VEGAN_DRINKS },
         ],
+        'data-test-id': 'vegan-cuisine',
     },
     { label: 'Детская кухня', icon: icon8, path: AppPaths.KIDS, subroutes: [] },
     { label: 'Лечебное питание', icon: icon9, path: AppPaths.MEDICAL, subroutes: [] },

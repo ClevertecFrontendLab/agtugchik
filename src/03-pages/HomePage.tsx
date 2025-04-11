@@ -31,7 +31,20 @@ export const HomePage = memo(() => (
             }}
         >
             <SectionTitle gridArea='title' title='Самое сочное' />
-            <SectionNavigationButton gridArea='nav-button' navigateTo={AppPaths.JUICY}>
+            <SectionNavigationButton
+                display={{ lg: 'flex', base: 'none' }}
+                data-test-id='juiciest-link'
+                gridArea='nav-button'
+                navigateTo={AppPaths.JUICY}
+            >
+                Вся подборка
+            </SectionNavigationButton>
+            <SectionNavigationButton
+                display={{ lg: 'none', base: 'flex' }}
+                data-test-id='juiciest-link-mobile'
+                gridArea='nav-button'
+                navigateTo={AppPaths.JUICY}
+            >
                 Вся подборка
             </SectionNavigationButton>
             <RecipeList gridArea='content' recipes={juicyItems.slice(0, 4)} />

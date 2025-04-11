@@ -1,11 +1,11 @@
-import { Tab, TabList, Tabs } from '@chakra-ui/react';
+import { Tab, TabList, Tabs, TabsProps } from '@chakra-ui/react';
 import { NavLink, useLocation } from 'react-router';
 
 import { AppPaths } from '~/01-app/router/consts/app-paths';
 
 import accordionItemProps from './navigation/consts/accordion-item-props';
 
-export const HorizontalNav = () => {
+export const HorizontalNav = (props: Partial<TabsProps>) => {
     const items = accordionItemProps.find((item) => item.path === AppPaths.VEGAN)!.subroutes;
     const location = useLocation();
     const currentPath = location.pathname;
@@ -13,11 +13,11 @@ export const HorizontalNav = () => {
 
     return (
         <Tabs
-            gridArea='hor-nav'
             justifySelf='center'
             width='max-content'
             index={activeIndex}
             variant='unstyled'
+            {...props}
         >
             <TabList borderBottom='1px solid rgba(0, 0, 0, 0.08)'>
                 {items.map((item) => (

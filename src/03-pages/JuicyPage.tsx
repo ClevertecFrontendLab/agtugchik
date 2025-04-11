@@ -10,9 +10,13 @@ import { PageLayout } from './ui/PageLayout';
 export const JuicyPage = () => (
     <PageLayout>
         <PageHeader title='Самое сочное' />
-        <PageSection>
-            <RecipeList recipes={juicyItems} />
-            <MoreButton />
+        <PageSection
+            gridTemplateAreas={`"content"
+                                "more-button"`}
+            gridTemplateColumns='1fr'
+        >
+            <RecipeList gridArea='content' recipes={juicyItems} />
+            <MoreButton gridArea='more-button' />
         </PageSection>
         <PageFooter>
             <SectionTitle title='Веганская кухня' gridArea='title' />

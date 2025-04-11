@@ -1,14 +1,17 @@
-import { GridItem } from '@chakra-ui/react';
+import { Flex } from '@chakra-ui/react';
 
 import { CreateRecipeButton } from '~/05-features';
 import { StatsIcons } from '~/05-features/StatsIcons';
+import layoutConfig from '~/07-shared/consts/app-layout-config';
 
 export const Sider = () => (
-    <GridItem
+    <Flex
         as='aside'
-        area='sider'
-        w='280px'
-        h='calc(100vh - 80px)'
+        position='fixed'
+        {...layoutConfig.sider.position}
+        zIndex={layoutConfig.sider.zIndex}
+        w={layoutConfig.sider.width}
+        h={layoutConfig.sider.height}
         display={{ lg: 'flex', base: 'none' }}
         flexDir='column'
         justifyContent='space-between'
@@ -16,5 +19,5 @@ export const Sider = () => (
     >
         <StatsIcons />
         <CreateRecipeButton />
-    </GridItem>
+    </Flex>
 );

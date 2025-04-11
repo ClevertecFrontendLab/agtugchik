@@ -1,4 +1,4 @@
-export { AppGrid } from './AppGrid';
+export { AppContainer } from './AppContainer';
 export { Header } from './Header';
 export { HorizontalNav } from './HorizontalNav';
 export { Navigation } from './navigation/Navigation';

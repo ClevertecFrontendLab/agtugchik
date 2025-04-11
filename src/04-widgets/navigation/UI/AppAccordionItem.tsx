@@ -15,11 +15,13 @@ export interface Props {
     icon: string;
     path: string;
     subroutes: readonly { label: string; path: string }[];
+    'data-test-id'?: string;
 }
 
 export const AppAccordionItem = memo((props: Props) => {
     const { label, icon, path, subroutes } = props;
     const navigate = useNavigate();
+    const dataTestId = props['data-test-id'];
 
     const onCLickHandler = () => {
         navigate(path);
@@ -28,6 +30,7 @@ export const AppAccordionItem = memo((props: Props) => {
     return (
         <AccordionItem onClick={onCLickHandler} key={label} border='none'>
             <AccordionButton
+                data-test-id={dataTestId}
                 _focus={{ outline: 'none' }}
                 _expanded={{
                     bg: 'var(--lime100)',

@@ -42,7 +42,8 @@ export const NavigationAccordion = memo(() => {
             ref={accordionRef}
             index={activeIndex}
             allowToggle
-            overflow='auto'
+            overflowX='hidden'
+            overflowY='auto'
             pr={hasScrollbar ? 1 : 0}
             mr={hasScrollbar ? 1 : 4}
             sx={{

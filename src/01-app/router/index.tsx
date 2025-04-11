@@ -10,10 +10,8 @@ export const Router = () => {
         <GridItem
             as='main'
             area='main'
-            maxW={{ lg: 'calc(100vw - 256px - 280px)', base: '100%' }}
             w='100%'
-            height={{ lg: 'calc(100vh - 80px)', base: 'calc(100vh - 64px - 84px)' }}
-            overflow='scroll'
+            overflow='auto'
             sx={{
                 scrollbarWidth: 'none',
                 '&::-webkit-scrollbar': {
