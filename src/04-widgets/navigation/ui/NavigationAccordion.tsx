@@ -2,7 +2,7 @@ import { Accordion } from '@chakra-ui/react';
 import { memo, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router';
 
-import { AppAccordionItem } from '~/04-widgets/navigation/ui1';
+import { AppAccordionItem } from '~/04-widgets/navigation/ui';
 
 import accordionItemProps from '../consts/accordion-item-props';
 
@@ -51,7 +51,7 @@ export const NavigationAccordion = memo(() => {
                     width: '8px',
                 },
                 '&::-webkit-scrollbar-track': {
-                    background: 'transparent',
+                    background: 'rgba(0, 0, 0, 0.04)',
                     borderRadius: '8px',
                 },
                 '&::-webkit-scrollbar-thumb': {

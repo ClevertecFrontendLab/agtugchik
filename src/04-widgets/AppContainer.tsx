@@ -14,7 +14,6 @@ export const AppContainer = ({ children }: Props) => (
             base: `${layoutConfig.header.height.base} 0 ${layoutConfig.footer.height.base} 0`,
         }}
         w='full'
-        overflowX='hidden'
         background='#fff'
     >
         {children}

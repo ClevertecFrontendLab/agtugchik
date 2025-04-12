@@ -1,4 +1,4 @@
-import { Box, CardBody, CardFooter, CardHeader, Flex, Image, Show, Text } from '@chakra-ui/react';
+import { Box, CardBody, CardFooter, CardHeader, Flex, Image, Text } from '@chakra-ui/react';
 import { memo } from 'react';
 
 import accordionItemProps from '~/04-widgets/navigation/consts/accordion-item-props';
@@ -29,7 +29,7 @@ export const HorizontalRecipeCard = memo((props: Props) => {
 
     return (
         <AppCard
-            width={{ xl: '668px', lg: '100%', md: '356px', base: '100%' }}
+            width='100%'
             height={{ lg: '244px', base: '128px' }}
             display='flex'
             flexDirection='row'
@@ -43,12 +43,15 @@ export const HorizontalRecipeCard = memo((props: Props) => {
                     alt='Card image'
                     borderRadius='8px 0 0 8px'
                 />
-
-                <Show below='lg'>
-                    <Box position='absolute' top='8px' left='8px' zIndex='1'>
-                        {badge}
-                    </Box>
-                </Show>
+                <Box
+                    display={{ lg: 'none', base: 'block' }}
+                    position='absolute'
+                    top='8px'
+                    left='8px'
+                    zIndex='1'
+                >
+                    {badge}
+                </Box>
             </Box>
 
             <Flex

@@ -3,8 +3,8 @@ import { memo } from 'react';
 
 import layoutConfig from '~/07-shared/consts/app-layout-config';
 
-import { NavigationFooter } from './ui1';
-import { NavigationAccordion } from './ui1';
+import { NavigationFooter } from './ui';
+import { NavigationAccordion } from './ui';
 
 export const Navigation = memo(() => (
     <GridItem

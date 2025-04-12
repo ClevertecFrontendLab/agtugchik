@@ -36,7 +36,7 @@ const accordionItemProps = [
         ],
         'data-test-id': 'vegan-cuisine',
     },
-    { label: 'Детская кухня', icon: icon8, path: AppPaths.KIDS, subroutes: [] },
+    { label: 'Детские блюда', icon: icon8, path: AppPaths.KIDS, subroutes: [] },
     { label: 'Лечебное питание', icon: icon9, path: AppPaths.MEDICAL, subroutes: [] },
     { label: 'Национальные', icon: icon10, path: AppPaths.NATIONAL, subroutes: [] },
     { label: 'Соусы', icon: icon11, path: AppPaths.SAUCES, subroutes: [] },

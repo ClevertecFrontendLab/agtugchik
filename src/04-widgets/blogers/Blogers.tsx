@@ -6,7 +6,7 @@ import { BlogerCard } from '~/05-features/BlogerCard';
 import blogersInfo from './consts/blogers-info';
 
 const Blogers = memo((props: StackProps) => (
-    <Stack maxW='100%' minW='100%' {...props} flexDirection={{ lg: 'row', base: 'column' }}>
+    <Stack maxW='100%' minW='100%' {...props} flexDirection={{ md: 'row', base: 'column' }}>
         {blogersInfo.map((bloger) => (
             <BlogerCard
                 key={bloger.nickname}

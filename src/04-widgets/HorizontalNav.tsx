@@ -14,7 +14,7 @@ export const HorizontalNav = (props: Partial<TabsProps>) => {
     return (
         <Tabs
             justifySelf='center'
-            width='max-content'
+            width={{ md: 'max-content', base: 'min-content' }}
             index={activeIndex}
             variant='unstyled'
             {...props}
@@ -32,11 +32,11 @@ export const HorizontalNav = (props: Partial<TabsProps>) => {
                         }}
                         fontFamily='var(--font-family)'
                         fontWeight={500}
-                        fontSize='16px'
+                        fontSize={{ lg: '16px', md: '14px', base: '9px' }}
                         lineHeight='150%'
                         textAlign='center'
                         color='var(--lime800)'
-                        padding={{ xl: '8px 16px', lg: '8px' }}
+                        padding={{ xl: '8px 16px', md: '8px 6px', base: '8px 1px' }}
                     >
                         {item.label}
                     </Tab>

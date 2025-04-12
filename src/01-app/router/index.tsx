@@ -7,18 +7,7 @@ export const Router = () => {
     const appRoutes = useRoutes(routes);
 
     return (
-        <GridItem
-            as='main'
-            area='main'
-            w='100%'
-            overflow='auto'
-            sx={{
-                scrollbarWidth: 'none',
-                '&::-webkit-scrollbar': {
-                    display: 'none',
-                },
-            }}
-        >
+        <GridItem as='main' area='main' w='100%'>
             {appRoutes}
         </GridItem>
     );
