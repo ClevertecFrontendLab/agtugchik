@@ -1,4 +1,4 @@
-import { Box, Image, Text } from '@chakra-ui/react';
+import { Image, Text } from '@chakra-ui/react';
 
 import accordionItems from '~/04-widgets/navigation/consts/accordion-item-props';
 import { AppButton, AppCard } from '~/07-shared/components';
@@ -10,37 +10,32 @@ interface Props {
 
 export const FastRecipe = ({ title, type }: Props) => (
     <AppCard
-        display='flex'
-        flexDirection='row'
+        display='grid'
         width='100%'
         height='100%'
         h={{ xl: '56px', lg: '52px', base: '48px' }}
         padding={{ xl: '0 24px', base: '0 12px' }}
         align='center'
+        gridTemplateColumns='min-content 1fr min-content'
+        gap='8px'
     >
-        <Box
-            display='flex'
-            flexDirection='row'
-            justifyContent='center'
-            columnGap='12px'
-            width='100%'
+        <Image
+            minW='24px'
+            w='24px'
+            h='24px'
+            src={accordionItems.find((item) => item.label === type)?.icon as string}
+        />
+        <Text
+            fontFamily='var(--font-family)'
+            fontWeight={500}
+            fontSize={{ xl: '20px', lg: '18px' }}
+            color='#000'
+            w='100%'
+            isTruncated
         >
-            <Image
-                w='24px'
-                h='24px'
-                src={accordionItems.find((item) => item.label === type)?.icon as string}
-            />
-            <Text
-                fontFamily='var(--font-family)'
-                fontWeight={500}
-                fontSize={{ xl: '20px', lg: '18px' }}
-                color='#000'
-                w='100%'
-                noOfLines={1}
-            >
-                {title}
-            </Text>
-        </Box>
+            {title}
+        </Text>
+
         <AppButton
             minW={{ xl: '87px', base: '70px' }}
             h={{ lg: '32px', base: '24px' }}

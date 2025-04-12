@@ -1,4 +1,4 @@
-import { Grid, GridProps, VStack } from '@chakra-ui/react';
+import { Grid, GridProps } from '@chakra-ui/react';
 import { memo } from 'react';
 
 import fastRecipeCards from './consts/fast-recipe-cards';
@@ -43,10 +43,10 @@ export const PageFooter = memo(({ children, ...props }: Props) => (
                 <FooterCard key={item.title} {...item} />
             ))}
         </Grid>
-        <VStack gridArea='fast' rowGap='12px' w='100%'>
+        <Grid gridTemplateRows='1fr' gridArea='fast' rowGap='12px' w='100%'>
             {fastRecipeCards.map((item) => (
                 <FastRecipe key={item.title} {...item} />
             ))}
-        </VStack>
+        </Grid>
     </Grid>
 ));

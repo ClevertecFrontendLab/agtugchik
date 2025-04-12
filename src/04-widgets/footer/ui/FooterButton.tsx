@@ -1,6 +1,5 @@
 import { Button, ButtonProps, Text } from '@chakra-ui/react';
 import { ReactElement } from 'react';
-import { useLocation } from 'react-router';
 
 interface FooterButtonProps extends ButtonProps {
     label: string;
@@ -9,13 +8,12 @@ interface FooterButtonProps extends ButtonProps {
 }
 
 export const FooterButton = ({ label, icon, path, ...props }: FooterButtonProps) => {
-    const location = useLocation();
-    const isActive = location.pathname === path;
+    const isMain = label === 'Главная';
 
     return (
         <Button
             background={
-                isActive
+                isMain
                     ? 'radial-gradient(62.52% 62.51% at 48.89% 37.5%, rgba(196, 255, 97, 0.4) 0%, rgba(255, 255, 255, 0) 100%)'
                     : 'none'
             }
@@ -31,7 +29,7 @@ export const FooterButton = ({ label, icon, path, ...props }: FooterButtonProps)
 
             <Text
                 fontFamily='var(--font-family)'
-                fontWeight={isActive ? 500 : 400}
+                fontWeight={isMain ? 500 : 400}
                 fontSize='12px'
                 lineHeight='133%'
                 textAlign='center'
