@@ -11,7 +11,7 @@ export const ArrowButton = ({ type }: Props) => (
         display={{ lg: 'flex', base: 'none' }}
         zIndex={9}
         position='absolute'
-        top={{ xl: '51%', lg: '97%' }}
+        top={{ xl: '551px', lg: '505px' }}
         left={type === 'left' ? '270px' : undefined}
         right={type === 'right' ? '266px' : undefined}
         bg='black'
