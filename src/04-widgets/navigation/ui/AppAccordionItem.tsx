@@ -19,12 +19,12 @@ export interface Props {
 }
 
 export const AppAccordionItem = memo((props: Props) => {
-    const { label, icon, path, subroutes } = props;
+    const { label, icon, subroutes } = props;
     const navigate = useNavigate();
     const dataTestId = props['data-test-id'];
 
     const onCLickHandler = () => {
-        navigate(path);
+        navigate(subroutes[0].path);
     };
 
     return (
@@ -52,7 +52,7 @@ export const AppAccordionItem = memo((props: Props) => {
             </AccordionButton>
 
             <AccordionPanel padding='0' color='black'>
-                {subroutes && subroutes.length > 0 && <VerticalSubmenu items={subroutes} />}
+                <VerticalSubmenu items={subroutes} />
             </AccordionPanel>
         </AccordionItem>
     );
