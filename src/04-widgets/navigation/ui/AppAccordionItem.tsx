@@ -28,7 +28,7 @@ export const AppAccordionItem = memo((props: Props) => {
     };
 
     return (
-        <AccordionItem onClick={onCLickHandler} key={label} border='none'>
+        <AccordionItem ml='-4px' onClick={onCLickHandler} key={label} border='none'>
             <AccordionButton
                 data-test-id={dataTestId}
                 _focus={{ outline: 'none' }}

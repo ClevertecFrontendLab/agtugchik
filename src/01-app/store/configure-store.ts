@@ -1,11 +1,14 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit';
 
-import { apiSlice } from '~/query/create-api';
+import { apiSlice } from '~/01-app/query/create-api';
 
 import appReducer, { appSlice } from './app-slice';
+import burgerMunuReducer, { burgerMenuSlice } from './burger-slice';
+
 const isProduction = false;
 const rootReducer = combineReducers({
     [appSlice.name]: appReducer,
+    [burgerMenuSlice.name]: burgerMunuReducer,
     [apiSlice.reducerPath]: apiSlice.reducer,
 });
 

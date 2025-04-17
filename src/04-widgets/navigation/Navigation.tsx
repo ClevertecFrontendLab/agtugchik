@@ -1,4 +1,4 @@
-import { GridItem } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import { memo } from 'react';
 
 import layoutConfig from '~/07-shared/consts/app-layout-config';
@@ -7,8 +7,7 @@ import { NavigationFooter } from './ui';
 import { NavigationAccordion } from './ui';
 
 export const Navigation = memo(() => (
-    <GridItem
-        gridArea='nav'
+    <Box
         position='fixed'
         {...layoutConfig.nav.position}
         zIndex={layoutConfig.nav.zIndex}
@@ -22,5 +21,5 @@ export const Navigation = memo(() => (
     >
         <NavigationAccordion />
         <NavigationFooter />
-    </GridItem>
+    </Box>
 ));

@@ -42,17 +42,24 @@ export const AppBreadcrumbs = (props: BreadcrumbProps) => {
 
     return (
         <Breadcrumb
-            display={{ lg: 'block', base: 'none' }}
+            display='flex'
+            flexWrap='wrap'
             spacing='8px'
             separator={<ChevronRightIcon color='black' />}
             padding='12px 24px'
+            listProps={{
+                display: 'flex',
+                flexWrap: 'wrap',
+                w: '100%',
+                gap: '8px',
+            }}
             {...props}
         >
             {crumbs.map((crumb, index) => {
                 const isLast = index === crumbs.length - 1;
 
                 return (
-                    <BreadcrumbItem key={crumb!.to} isCurrentPage={isLast}>
+                    <BreadcrumbItem key={crumb!.to} isCurrentPage={isLast} whiteSpace='nowrap'>
                         {isLast ? (
                             <span
                                 style={{
@@ -76,6 +83,7 @@ export const AppBreadcrumbs = (props: BreadcrumbProps) => {
                                 lineHeight='150%'
                                 textAlign='center'
                                 color='rgba(0, 0, 0, 0.64)'
+                                whiteSpace='nowrap'
                             >
                                 {crumb!.label}
                             </BreadcrumbLink>
