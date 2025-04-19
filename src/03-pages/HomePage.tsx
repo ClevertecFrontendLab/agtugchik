@@ -4,8 +4,9 @@ import { AppPaths } from '~/01-app';
 import juicyItems from '~/03-pages/consts/juicy-items';
 import { PageHeader, PageSection } from '~/04-widgets';
 import Blogers from '~/04-widgets/blogers/Blogers';
+import { NewRecipiesSection } from '~/04-widgets/NewRecipiesSection';
 import { PageFooter } from '~/04-widgets/page-footer/PageFooter';
-import { Carousel, RecipeList } from '~/05-features';
+import { RecipeList } from '~/05-features';
 import { PageSubtitle, SectionTitle } from '~/07-shared/components';
 
 import { PageLayout } from './ui/PageLayout';
@@ -14,13 +15,8 @@ import SectionNavigationButton from './ui/SectionNavigationButton';
 export const HomePage = memo(() => (
     <PageLayout>
         <PageHeader title='Приятного аппетита!' />
-        <PageSection
-            gridTemplateAreas={`"title"
-                            "content"`}
-        >
-            <SectionTitle gridArea='title' title='Новые рецепты' />
-            <Carousel gridArea='content' />
-        </PageSection>
+
+        <NewRecipiesSection />
         <PageSection
             gridTemplateAreas={{
                 lg: `"title nav-button"

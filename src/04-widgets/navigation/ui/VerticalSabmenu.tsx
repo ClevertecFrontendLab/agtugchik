@@ -12,7 +12,7 @@ interface Props {
 
 export const VerticalSubmenu = ({ items }: Props) => {
     const location = useLocation();
-    const activeIndex = items.findIndex((item) => item.path === location.pathname);
+    const activeIndex = items.findIndex((item) => location.pathname.startsWith(item.path));
 
     return (
         <Tabs
@@ -21,8 +21,8 @@ export const VerticalSubmenu = ({ items }: Props) => {
             orientation='vertical'
         >
             <TabList display='flex' flexDirection='column' alignItems='stretch' paddingTop='8px'>
-                {items.map((item) => {
-                    const isActive = item.path === location.pathname;
+                {items.map((item, index) => {
+                    const isActive = index === activeIndex;
                     const markerWidth = isActive ? 8 : 1;
                     const markerMarginLeft = isActive ? '-7px' : '0';
 
