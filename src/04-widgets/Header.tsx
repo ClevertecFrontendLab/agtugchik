@@ -24,7 +24,7 @@ export const Header = () => {
             position='fixed'
             top={layoutConfig.header.position.top}
             left={0}
-            w='100%'
+            w='100vw'
             h={{ lg: layoutConfig.header.height.lg, base: layoutConfig.header.height.base }}
             px='16px'
             bg={isOpenBurger ? '#fff' : 'var(--lime50)'}

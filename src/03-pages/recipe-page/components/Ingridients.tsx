@@ -40,7 +40,12 @@ const Ingridients = ({ ingridients }: Props) => {
 
     return (
         <VStack maxW='668px' width='100%'>
-            <HStack pl='24px' h='56px' justifyContent='space-between' width='100%'>
+            <HStack
+                pl={{ md: '24px', base: '8px' }}
+                h='56px'
+                justifyContent='space-between'
+                width='100%'
+            >
                 <TableTitle text='ИНГРЕДИЕНТЫ' />
                 <HStack>
                     <TableTitle text='ПОРЦИЙ' />
@@ -50,7 +55,7 @@ const Ingridients = ({ ingridients }: Props) => {
             {ingridients.map((ingridient, index) => (
                 <HStack
                     key={ingridient.title}
-                    p='0 24px'
+                    p={{ lg: '0 24px', base: '0 8px' }}
                     h='52px'
                     justifyContent='space-between'
                     width='100%'

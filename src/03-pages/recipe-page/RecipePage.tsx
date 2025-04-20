@@ -54,18 +54,42 @@ export const RecipePage = () => {
             <Text display='none'>
                 {id}, {category}, {subcategory}
             </Text>
-            <PageSection mt='56px' gridTemplateColumns='max-content 1fr' gap='40px' maxH='410px'>
-                <Image src={recipe.image} w='auto' h='410px' borderRadius='8px' />
+            <PageSection
+                mt={{ lg: '40px', md: '28px' }}
+                gridTemplateColumns={{ md: 'max-content 1fr', base: '1fr' }}
+                rowGap='40px'
+                columnGap={{ lg: '24px', md: '16px' }}
+                maxH={{ md: '410px' }}
+                w='100%'
+            >
+                <Image
+                    src={recipe.image}
+                    w={{ xl: '553px', lg: '353px', md: '232px', base: '100%' }}
+                    h={{ lg: '410px', base: '224px' }}
+                    borderRadius='8px'
+                    objectFit='cover'
+                />
                 <Grid
-                    gap='24px'
-                    gridTemplateColumns='1fr 1fr min-content'
-                    gridTemplateRows='min-content min-content 1fr min-content'
-                    gridTemplateAreas={`"badges badges stats"
-                                        "title title title"
-                                        "subtitle subtitle subtitle"
-                                        "time like add"`}
+                    rowGap='24px'
+                    columnGap={{ xl: '16px', base: '12px' }}
+                    gridTemplateColumns={{ md: '1fr 1fr min-content', base: 'min-content 1fr' }}
+                    gridTemplateRows={{
+                        md: 'min-content min-content 1fr min-content',
+                        base: 'repeat(5, max-content)',
+                    }}
+                    gridTemplateAreas={{
+                        md: `"badges badges stats"
+                            "title title title"
+                            "subtitle subtitle subtitle"
+                            "time like add"`,
+                        base: `"badges stats"
+                            "title title"
+                            "subtitle subtitle"
+                            "time ."
+                            "like add"`,
+                    }}
                 >
-                    <Flex gridArea='badges' gap='16px' wrap='wrap'>
+                    <Flex gridArea='badges' gap={{ xl: '16px', base: '8px' }} wrap='wrap'>
                         {badges}
                     </Flex>
                     <RecipeStatIcons
@@ -87,7 +111,7 @@ export const RecipePage = () => {
                         subtitle={recipe.description}
                         noOfLines={3}
                         height='min-content'
-                        maxW='528px'
+                        maxW={{ xl: '528px', base: '100%' }}
                     />
                     <AppBadge
                         gridArea='time'
@@ -97,24 +121,26 @@ export const RecipePage = () => {
                         alignSelf='end'
                     />
                     <AppButton
-                        gap='8px'
+                        gap={{ lg: '8px', base: '6px' }}
                         gridArea='like'
                         justifyContent='space-between'
-                        padding='0 24px'
+                        padding={{ xl: '0 24px', lg: '0 12px', base: '0 8px' }}
+                        height={{ xl: '48px', lg: '32px', base: '24px' }}
                         width='max-content'
-                        justifySelf='end'
+                        justifySelf={{ md: 'end', base: 'start' }}
                     >
                         <Image src={like} />
                         Оценить рецепт
                     </AppButton>
                     <AppButton
-                        gap='8px'
+                        gap={{ lg: '8px', base: '6px' }}
                         buttonType='green'
                         gridArea='add'
                         justifyContent='space-between'
-                        padding='0 24px'
+                        padding={{ xl: '0 24px', lg: '0 12px', base: '0 8px' }}
+                        height={{ xl: '48px', lg: '32px', base: '24px' }}
                         width='max-content'
-                        justifySelf='end'
+                        justifySelf={{ md: 'end', base: 'start' }}
                     >
                         <Image src={bookmark} />
                         Сохранить в закладки
@@ -128,7 +154,7 @@ export const RecipePage = () => {
                 {recipe.steps.map((step) => (
                     <AppCard
                         key={step.stepNumber}
-                        p='20px 24px'
+                        p={{ md: '20px 24px', base: '8px' }}
                         alignItems='start'
                         justifyContent='start'
                     >
@@ -138,17 +164,22 @@ export const RecipePage = () => {
                 ))}
             </PageSection>
             <PageSection
-                p='24px'
-                h='144px'
+                p={{ md: '24px', base: '12px' }}
                 maxW='668px'
                 w='100%'
                 backgroundColor='var(--lime300)'
                 borderRadius='8px'
                 gridTemplateColumns='min-content 1fr 1fr'
-                gridTemplateRows='1fr 1fr 1fr'
-                gridTemplateAreas={`"avatar title text"
-                                    "avatar subtitle ."
-                                    "avatar subscribe subscribers"`}
+                gridTemplateRows={{ md: 'repeat(3, min-content)', base: 'repeat(4, min-content)' }}
+                gridTemplateAreas={{
+                    md: `"avatar title text"
+                        "avatar subtitle ."
+                        "avatar subscribe subscribers"`,
+                    base: `"avatar text text"
+                        "avatar title title"
+                        "avatar subtitle ."
+                        "avatar subscribe subscribers"`,
+                }}
                 columnGap='16px'
                 rowGap={0}
             >
@@ -163,7 +194,7 @@ export const RecipePage = () => {
                     gridArea='title'
                     fontFamily='var(--font-family)'
                     fontWeight='700'
-                    fontSize='24px'
+                    fontSize={{ md: '24px', base: '18px' }}
                     lineHeight='133%'
                     textAlign='start'
                     color='#000'
@@ -201,7 +232,7 @@ export const RecipePage = () => {
                     gridArea='text'
                     fontFamily='var(--font-family)'
                     fontWeight='400'
-                    fontSize='14px'
+                    fontSize={{ md: '14px', base: '12px' }}
                     lineHeight='143%'
                     color='#000'
                     align='end'
@@ -213,6 +244,7 @@ export const RecipePage = () => {
                     alignSelf='end'
                     justifySelf='end'
                     gridArea='subscribers'
+                    h='min-content'
                     icon={subscribers}
                     count={125}
                 />
