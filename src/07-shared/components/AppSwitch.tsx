@@ -7,7 +7,7 @@ export const AppSwitch = memo(() => (
             'span.chakra-switch__track': {
                 bg: 'rgba(0, 0, 0, 0.16)',
                 _checked: {
-                    bg: 'var(--lime100)',
+                    bg: 'var(--lime400)',
                 },
             },
         }}
