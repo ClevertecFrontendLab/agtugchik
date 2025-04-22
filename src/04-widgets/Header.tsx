@@ -14,6 +14,7 @@ export const Header = () => {
 
     const burgerButtonClickHandler = () => {
         dispatch(toggleBurger());
+        console.log(document.querySelectorAll('[data-test-id="vegan-cuisine"]'));
     };
 
     return (

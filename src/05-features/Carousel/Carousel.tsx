@@ -25,11 +25,13 @@ export const Carousel = memo((props: BoxProps) => {
         <>
             <Portal>
                 <ArrowButton
+                    data-test-id='carousel-back'
                     arrowDirection='left'
                     aria-label='Prev'
                     onClick={() => swiperRef.current?.slidePrev()}
                 />
                 <ArrowButton
+                    data-test-id='carousel-forward'
                     arrowDirection='right'
                     aria-label='Next'
                     onClick={() => swiperRef.current?.slideNext()}
@@ -44,6 +46,7 @@ export const Carousel = memo((props: BoxProps) => {
                 {...props}
             >
                 <Swiper
+                    data-test-id='carousel'
                     slidesPerView='auto'
                     spaceBetween={spaceBetween}
                     loop={true}
@@ -54,8 +57,10 @@ export const Carousel = memo((props: BoxProps) => {
                     {newRecipies
                         .concat(newRecipies)
                         .concat(newRecipies)
+                        .slice(0, 10)
                         .map((recipe, index) => (
                             <SwiperSlide
+                                data-test-id={`carousel-card-${index}`}
                                 key={index}
                                 style={{
                                     width: cardWidth,

@@ -42,6 +42,7 @@ export const AppBreadcrumbs = (props: BreadcrumbProps) => {
 
     return (
         <Breadcrumb
+            data-test-id='breadcrumbs'
             display='flex'
             flexWrap='wrap'
             spacing='8px'

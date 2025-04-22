@@ -9,6 +9,7 @@ interface Props extends ButtonProps {
 
 export const BurgerButton = ({ isOpen, ...props }: Props) => (
     <Button
+        data-test-id={isOpen ? 'close-icon' : 'hamburger-icon'}
         w='48px'
         h='48px'
         p='0'
