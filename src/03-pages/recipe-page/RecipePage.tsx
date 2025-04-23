@@ -20,7 +20,7 @@ import {
     SectionTitle,
     StatIcon,
 } from '~/07-shared/components';
-import mockRecipies from '~/07-shared/consts/mockRecipes';
+import mockRecipies, { Recipe } from '~/07-shared/consts/mockRecipes';
 
 import { PageLayout } from '../ui/PageLayout';
 import Ingridients from './components/Ingridients';
@@ -33,7 +33,7 @@ export const RecipePage = () => {
         subcategory: string;
     }>();
 
-    const recipe = mockRecipies[0];
+    const recipe = mockRecipies.find((recipe) => recipe.id === id) as Recipe;
 
     const badges = recipe.category.map((badge) => {
         const item = accordionItemProps.find((item) =>

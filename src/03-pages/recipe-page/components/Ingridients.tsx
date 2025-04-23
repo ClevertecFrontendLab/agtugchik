@@ -1,5 +1,5 @@
 import { HStack, Text, VStack } from '@chakra-ui/react';
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 
 import { NumberStepper } from '~/07-shared/components/NumberStepper';
 
@@ -15,7 +15,7 @@ export const TableTitle = ({ text }: { text: string }) => (
         {text}
     </Text>
 );
-export const TableItem = ({ text }: { text: string }) => (
+export const TableItem = ({ text }: { text: ReactNode }) => (
     <Text
         fontFamily='var(--font-family)'
         fontWeight='500'
@@ -63,7 +63,19 @@ const Ingridients = ({ ingridients }: Props) => {
                 >
                     <TableItem text={ingridient.title} />
                     <TableItem
-                        text={`${Number(ingridient.count) ? Number(ingridient.count) * portionCount : ''} ${ingridient.measureUnit}`}
+                        text={
+                            <>
+                                <span data-test-id={`ingredient-quantity-${index}`}>
+                                    {`${
+                                        Number(ingridient.count)
+                                            ? Number(ingridient.count) *
+                                              (1 + (portionCount - 1) * 0.25)
+                                            : ''
+                                    }`}
+                                </span>
+                                {` ${ingridient.measureUnit}`}
+                            </>
+                        }
                     />
                 </HStack>
             ))}

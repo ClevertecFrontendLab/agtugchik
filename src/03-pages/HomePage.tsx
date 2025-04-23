@@ -3,7 +3,6 @@ import { memo } from 'react';
 import { AppPaths } from '~/01-app';
 import { useAppSelector } from '~/01-app/store/hooks';
 import { searchBarValueSelector } from '~/01-app/store/search-slice';
-import juicyItems from '~/03-pages/consts/juicy-items';
 import { PageHeader, PageSection } from '~/04-widgets';
 import Blogers from '~/04-widgets/blogers/Blogers';
 import { NewRecipiesSection } from '~/04-widgets/NewRecipiesSection';
@@ -56,7 +55,10 @@ export const HomePage = memo(() => {
                         >
                             Вся подборка
                         </SectionNavigationButton>
-                        <RecipeList gridArea='content' activeRecipes={juicyItems.slice(0, 4)} />
+                        <RecipeList
+                            gridArea='content'
+                            activeRecipes={[recipes[7], recipes[0], recipes[1], recipes[2]]}
+                        />
                     </PageSection>
                     <PageSection
                         borderRadius='16px'

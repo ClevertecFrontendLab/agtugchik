@@ -42,6 +42,7 @@ export const NumberStepper = ({ portionCount, setPortionCount }: Props) => (
             <IconButton
                 minW={0}
                 aria-label='Increment'
+                data-test-id='increment-stepper'
                 icon={
                     <Flex w='full' h='full' align='center' justify='center'>
                         <Image src={stepUp} alt='step-up' boxSize='12px' />
@@ -57,6 +58,7 @@ export const NumberStepper = ({ portionCount, setPortionCount }: Props) => (
             <IconButton
                 minW={0}
                 aria-label='Decrement'
+                data-test-id='decrement-stepper'
                 icon={
                     <Flex w='full' h='full' align='center' justify='center'>
                         <Image src={stepDown} alt='step-down' boxSize='12px' />

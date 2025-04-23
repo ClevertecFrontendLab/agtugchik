@@ -9,6 +9,7 @@ import {
     Text,
 } from '@chakra-ui/react';
 import { memo } from 'react';
+import { useLocation, useNavigate } from 'react-router';
 
 import accordionItemProps from '~/04-widgets/navigation/consts/accordion-item-props';
 import bookmark from '~/07-shared/assets/svg/bookmark.svg';
@@ -19,26 +20,32 @@ import { RecipeStatIcons } from './new-recipe-card/ui/RecipeStatIcons';
 
 interface Props extends CardProps {
     recipe: Recipe;
+    index: number;
 }
 
 const Badge = ({ label, icon }: { label: string; icon: string }) => (
     <AppBadge label={label} icon={icon} bgColor='var(--lime50)' />
 );
 
-export const HorizontalRecipeCard = memo(({ recipe, ...props }: Props) => {
-    const { title, image, description, bookmarks, likes, category } = recipe;
+export const HorizontalRecipeCard = memo(({ recipe, index, ...props }: Props) => {
+    const { title, image, description, bookmarks, likes, category, subcategory, id } = recipe;
+    const { pathname } = useLocation();
+    const navigate = useNavigate();
 
-    const badges = category.map((cat) => {
-        const accordionItem = accordionItemProps.find((item) => item.path.startsWith(`/${cat}`));
+    const CardBadge = () => {
+        const accordionItem = accordionItemProps.find((item) =>
+            item.path.startsWith(`/${category[0]}`),
+        );
 
         return (
-            <Badge
-                key={cat}
-                label={accordionItem?.label as string}
-                icon={accordionItem?.icon as string}
-            />
+            <Badge label={accordionItem?.label as string} icon={accordionItem?.icon as string} />
         );
-    });
+    };
+
+    const cookHandler = () => {
+        if (pathname !== '/') navigate(`${pathname}/${id}`);
+        else navigate(`/${category[0]}/${subcategory[0]}/${id}`);
+    };
 
     return (
         <AppCard
@@ -64,7 +71,7 @@ export const HorizontalRecipeCard = memo(({ recipe, ...props }: Props) => {
                     left='8px'
                     zIndex='1'
                 >
-                    {badges}
+                    <CardBadge />
                 </Box>
             </Box>
 
@@ -86,7 +93,9 @@ export const HorizontalRecipeCard = memo(({ recipe, ...props }: Props) => {
                     alignItems='center'
                     display='flex'
                 >
-                    <Box display={{ base: 'none', lg: 'block' }}>{badges}</Box>
+                    <Box display={{ base: 'none', lg: 'block' }}>
+                        <CardBadge />
+                    </Box>
                     <RecipeStatIcons bookmarks={bookmarks} likes={likes} />
                 </CardHeader>
 
@@ -109,10 +118,12 @@ export const HorizontalRecipeCard = memo(({ recipe, ...props }: Props) => {
                         <Text display={{ lg: 'block', base: 'none' }}>Сохрнаить</Text>
                     </AppButton>
                     <AppButton
+                        data-test-id={`card-link-${index}`}
                         w={{ lg: '87px', base: '70px' }}
                         h={{ lg: '32px', base: '24px' }}
                         backgroundColor='black'
                         color='white'
+                        onClick={cookHandler}
                     >
                         Готовить
                     </AppButton>
