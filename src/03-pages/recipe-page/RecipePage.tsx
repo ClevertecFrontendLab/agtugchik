@@ -20,7 +20,7 @@ import {
     SectionTitle,
     StatIcon,
 } from '~/07-shared/components';
-import mockRecipies from '~/07-shared/consts/mockRecipies';
+import mockRecipies from '~/07-shared/consts/mockRecipes';
 
 import { PageLayout } from '../ui/PageLayout';
 import Ingridients from './components/Ingridients';

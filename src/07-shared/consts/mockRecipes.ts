@@ -19,7 +19,45 @@ import vegan5 from '~/07-shared/assets/png/vegan5.png';
 // import vegan7 from '~/07-shared/assets/png/vegan7.png';
 // import vegan8 from '~/07-shared/assets/png/vegan8.png';
 
-const recipies = [
+export type Ingredient = {
+    title: string;
+    count: string;
+    measureUnit: string;
+};
+
+export type Step = {
+    stepNumber: number;
+    description: string;
+    image: string;
+};
+
+export type NutritionValue = {
+    calories: number;
+    proteins: number;
+    fats: number;
+    carbohydrates: number;
+};
+
+export type Recipe = {
+    id: string;
+    title: string;
+    description: string;
+    category: string[];
+    subcategory: string[];
+    image: string;
+    bookmarks: number;
+    likes: number;
+    date: string;
+    time: string;
+    portions?: number;
+    nutritionValue: NutritionValue;
+    ingredients: Ingredient[];
+    steps: Step[];
+    meat?: string;
+    side?: string;
+};
+
+const recipes: Recipe[] = [
     {
         id: '0',
         title: 'Картошка, тушенная с болгарским перцем и фасолью в томатном соусе',
@@ -366,4 +404,4 @@ const recipies = [
     },
 ];
 
-export default recipies;
+export default recipes;

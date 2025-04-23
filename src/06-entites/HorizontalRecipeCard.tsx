@@ -1,31 +1,44 @@
-import { Box, CardBody, CardFooter, CardHeader, Flex, Image, Text } from '@chakra-ui/react';
+import {
+    Box,
+    CardBody,
+    CardFooter,
+    CardHeader,
+    CardProps,
+    Flex,
+    Image,
+    Text,
+} from '@chakra-ui/react';
 import { memo } from 'react';
 
 import accordionItemProps from '~/04-widgets/navigation/consts/accordion-item-props';
 import bookmark from '~/07-shared/assets/svg/bookmark.svg';
 import { AppBadge, AppButton, AppCard, AppCardText, AppCardTitle } from '~/07-shared/components';
+import { Recipe } from '~/07-shared/consts/mockRecipes';
 
 import { RecipeStatIcons } from './new-recipe-card/ui/RecipeStatIcons';
 
-interface Props {
-    title: string;
-    text: string;
-    image: string;
-    type: string;
-    bookmarks: number;
-    likes: number;
+interface Props extends CardProps {
+    recipe: Recipe;
 }
 
-export const HorizontalRecipeCard = memo((props: Props) => {
-    const { title, image, text, type, bookmarks, likes } = props;
+const Badge = ({ label, icon }: { label: string; icon: string }) => (
+    <AppBadge label={label} icon={icon} bgColor='var(--lime50)' />
+);
 
-    const badge = (
-        <AppBadge
-            label={type}
-            icon={accordionItemProps.find((item) => item.label === type)?.icon as string}
-            bgColor='var(--lime50)'
-        />
-    );
+export const HorizontalRecipeCard = memo(({ recipe, ...props }: Props) => {
+    const { title, image, description, bookmarks, likes, category } = recipe;
+
+    const badges = category.map((cat) => {
+        const accordionItem = accordionItemProps.find((item) => item.path.startsWith(`/${cat}`));
+
+        return (
+            <Badge
+                key={cat}
+                label={accordionItem?.label as string}
+                icon={accordionItem?.icon as string}
+            />
+        );
+    });
 
     return (
         <AppCard
@@ -33,6 +46,7 @@ export const HorizontalRecipeCard = memo((props: Props) => {
             height={{ lg: '244px', base: '128px' }}
             display='flex'
             flexDirection='row'
+            {...props}
         >
             <Box position='relative' height='100%'>
                 <Image
@@ -50,7 +64,7 @@ export const HorizontalRecipeCard = memo((props: Props) => {
                     left='8px'
                     zIndex='1'
                 >
-                    {badge}
+                    {badges}
                 </Box>
             </Box>
 
@@ -72,13 +86,13 @@ export const HorizontalRecipeCard = memo((props: Props) => {
                     alignItems='center'
                     display='flex'
                 >
-                    <Box display={{ base: 'none', lg: 'block' }}>{badge}</Box>
+                    <Box display={{ base: 'none', lg: 'block' }}>{badges}</Box>
                     <RecipeStatIcons bookmarks={bookmarks} likes={likes} />
                 </CardHeader>
 
                 <CardBody padding='0'>
                     <AppCardTitle>{title}</AppCardTitle>
-                    <AppCardText>{text}</AppCardText>
+                    <AppCardText>{description}</AppCardText>
                 </CardBody>
 
                 <CardFooter padding='0' justifyContent='end' alignItems='center' columnGap='8px'>
