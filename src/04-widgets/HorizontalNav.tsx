@@ -33,8 +33,9 @@ export const HorizontalNav = (props: Partial<TabsProps>) => {
                 {...props}
             >
                 <TabList borderBottom='1px solid rgba(0, 0, 0, 0.08)'>
-                    {items.map((item) => (
+                    {items.map((item, index) => (
                         <Tab
+                            data-test-id={`tab-${item.path.split('/')[2]}-${index}`}
                             width='max-content'
                             key={item.path}
                             as={NavLink}

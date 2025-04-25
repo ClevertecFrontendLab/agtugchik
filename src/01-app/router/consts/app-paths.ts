@@ -18,7 +18,7 @@ export const AppPaths = {
 
     VEGAN_SNACKS: '/vegan/snacks',
     VEGAN_FIRST_COURSES: '/vegan/first-courses',
-    VEGAN_SIDE: '/vegan/side-dish',
+    VEGAN_SIDE: '/vegan/second-dish',
     VEGAN_SIDES: '/vegan/sides',
     VEGAN_DESSERTS: '/vegan/desserts',
     VEGAN_BAKING: '/vegan/baking',

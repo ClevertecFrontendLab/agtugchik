@@ -28,6 +28,7 @@ export const VerticalSubmenu = ({ items }: Props) => {
 
                     return (
                         <Tab
+                            data-test-id={`${item.path.split('/')[2]}${isActive ? '-active' : ''}`}
                             as={NavLink}
                             key={item.path}
                             to={item.path}

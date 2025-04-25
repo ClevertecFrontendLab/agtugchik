@@ -39,7 +39,14 @@ export const BurgerMenu = () => {
                     transform: 'translateX(0) !important',
                 }}
             >
-                <AppBreadcrumbs w='100%' p={0} display='flex' flexWrap='wrap' padding='16px 24px' />
+                <AppBreadcrumbs
+                    w='100%'
+                    maxW='100%'
+                    p={0}
+                    display='flex'
+                    flexWrap='wrap'
+                    padding='16px 24px'
+                />
                 <NavigationAccordion />
                 <NavigationFooter />
             </DrawerContent>

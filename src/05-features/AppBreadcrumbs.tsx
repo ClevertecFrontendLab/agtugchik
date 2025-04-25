@@ -3,7 +3,10 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbProps } from '@ch
 import { Link, useLocation } from 'react-router';
 
 import { AppPaths } from '~/01-app';
+import { burgerActiveSelector, toggleBurger } from '~/01-app/store/burger-slice';
+import { useAppDispatch, useAppSelector } from '~/01-app/store/hooks';
 import accordionItemProps from '~/04-widgets/navigation/consts/accordion-item-props';
+import recipes from '~/07-shared/consts/mockRecipes';
 
 const additionalRoute = [
     {
@@ -17,26 +20,35 @@ const additionalRoute = [
 const itemProps = [...accordionItemProps, ...additionalRoute];
 
 export const AppBreadcrumbs = (props: BreadcrumbProps) => {
+    const dispatch = useAppDispatch();
     const location = useLocation();
     const segments = location.pathname.split('/').filter(Boolean);
+    const isOpenBurger = useAppSelector(burgerActiveSelector);
 
-    const [parentSegment, subSegment] = segments;
+    const [category, subcategory, id] = segments;
 
-    const parentItem = itemProps.find((item) => item.path.split('/')[1] === parentSegment);
-    const subItem = parentItem?.subroutes?.find((sub) => sub.path.split('/')[2] === subSegment);
+    const categoryItem = itemProps.find((item) => item.path.split('/')[1] === category);
+    const subcategoryItem = categoryItem?.subroutes?.find(
+        (sub) => sub.path.split('/')[2] === subcategory,
+    );
+    const idItem = recipes.find((recipe) => recipe.id === id);
 
     const crumbs = [
         {
             label: 'Главная',
             to: '/',
         },
-        parentItem && {
-            label: parentItem.label,
-            to: parentItem.path,
+        categoryItem && {
+            label: categoryItem.label,
+            to: categoryItem.path,
         },
-        subItem && {
-            label: subItem.label,
-            to: subItem.path,
+        subcategoryItem && {
+            label: subcategoryItem.label,
+            to: subcategoryItem.path,
+        },
+        idItem && {
+            label: idItem.title,
+            to: idItem.id,
         },
     ].filter(Boolean);
 
@@ -85,6 +97,9 @@ export const AppBreadcrumbs = (props: BreadcrumbProps) => {
                                 textAlign='center'
                                 color='rgba(0, 0, 0, 0.64)'
                                 whiteSpace='nowrap'
+                                onClick={() => {
+                                    if (isOpenBurger) dispatch(toggleBurger());
+                                }}
                             >
                                 {crumb!.label}
                             </BreadcrumbLink>

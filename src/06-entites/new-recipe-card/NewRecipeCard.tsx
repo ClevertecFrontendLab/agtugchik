@@ -1,29 +1,28 @@
 import { Box, CardBody, CardFooter, Image } from '@chakra-ui/react';
 import { memo } from 'react';
 
-import accordionItems from '~/04-widgets/navigation/consts/accordion-item-props';
+import accordionItemProps from '~/04-widgets/navigation/consts/accordion-item-props';
 import { AppBadge, AppCard, AppCardText, AppCardTitle } from '~/07-shared/components';
+import { Recipe } from '~/07-shared/consts/mockRecipes';
 
 import { RecipeStatIcons } from './ui/RecipeStatIcons';
 
 interface Props {
-    title: string;
-    text: string;
-    image: string;
-    type: string;
-    bookmarks: number;
-    likes: number;
+    recipe: Recipe;
 }
 
-export const NewRecipeCard = memo((props: Props) => {
-    const { title, image, text, type, bookmarks, likes } = props;
+export const NewRecipeCard = memo(({ recipe }: Props) => {
+    const { title, image, description, bookmarks, likes, category } = recipe;
 
-    const badge = (
-        <AppBadge
-            icon={accordionItems.find((item) => item.label === type)?.icon as string}
-            label={type}
-        />
-    );
+    const CardBadge = () => {
+        const accordionItem = accordionItemProps.find((item) =>
+            item.path.startsWith(`/${category[0]}`),
+        );
+
+        return (
+            <AppBadge label={accordionItem?.label as string} icon={accordionItem?.icon as string} />
+        );
+    };
 
     return (
         <AppCard
@@ -39,19 +38,21 @@ export const NewRecipeCard = memo((props: Props) => {
                     left='8px'
                     display={{ base: 'block', lg: 'none' }}
                 >
-                    {badge}
+                    <CardBadge />
                 </Box>
             </Box>
             <CardBody padding={{ xl: '24px', lg: '12px 12px 24px 12px', base: '8px' }}>
                 <AppCardTitle>{title}</AppCardTitle>
-                <AppCardText>{text}</AppCardText>
+                <AppCardText>{description}</AppCardText>
             </CardBody>
 
             <CardFooter
                 padding={{ xl: '0 24px 20px 24px', lg: '0 12px 12px 12px', base: '0 8px' }}
                 justifyContent='space-between'
             >
-                <Box display={{ base: 'none', lg: 'block' }}>{badge}</Box>
+                <Box display={{ base: 'none', lg: 'block' }}>
+                    <CardBadge />
+                </Box>
                 <RecipeStatIcons bookmarks={bookmarks} likes={likes} />
             </CardFooter>
         </AppCard>

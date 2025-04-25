@@ -2,16 +2,18 @@ import 'swiper/css';
 
 import { Box, BoxProps, Portal, useBreakpointValue } from '@chakra-ui/react';
 import { memo, useRef } from 'react';
+import { useNavigate } from 'react-router';
 import type { Swiper as SwiperType } from 'swiper';
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { NewRecipeCard } from '~/06-entites';
+import recipes from '~/07-shared/consts/mockRecipes';
 
-import newRecipies from './consts/new-recipies';
 import { ArrowButton } from './ui/ArrowButton';
 
 export const Carousel = memo((props: BoxProps) => {
+    const navigate = useNavigate();
     const cardWidth = useBreakpointValue({
         base: '158px',
         lg: '279px',
@@ -54,12 +56,16 @@ export const Carousel = memo((props: BoxProps) => {
                     onSwiper={(swiper) => (swiperRef.current = swiper)}
                     style={{ width: '100%', overflow: 'visible' }}
                 >
-                    {newRecipies
-                        .concat(newRecipies)
-                        .concat(newRecipies)
+                    {recipes
+                        .concat(recipes)
                         .slice(0, 10)
                         .map((recipe, index) => (
                             <SwiperSlide
+                                onClick={() => {
+                                    navigate(
+                                        `/${recipe.category[0]}/${recipe.subcategory[0]}/${recipe.id}`,
+                                    );
+                                }}
                                 data-test-id={`carousel-card-${index}`}
                                 key={index}
                                 style={{
@@ -70,7 +76,7 @@ export const Carousel = memo((props: BoxProps) => {
                                     overflow: 'hidden',
                                 }}
                             >
-                                <NewRecipeCard {...recipe} />
+                                <NewRecipeCard recipe={recipe} />
                             </SwiperSlide>
                         ))}
                 </Swiper>

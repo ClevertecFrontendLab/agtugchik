@@ -1,4 +1,4 @@
-import { Grid } from '@chakra-ui/react';
+import { Grid, useBreakpointValue } from '@chakra-ui/react';
 
 import { burgerActiveSelector, toggleBurger } from '~/01-app/store/burger-slice';
 import { useAppDispatch, useAppSelector } from '~/01-app/store/hooks';
@@ -13,6 +13,7 @@ export const Header = () => {
     const dispatch = useAppDispatch();
     const isOpenBurger = useAppSelector(burgerActiveSelector);
     const isOpenFilterDrawer = useAppSelector(isOpenFilterDrawerSelector);
+    const isLargeScreen = useBreakpointValue({ base: false, lg: true });
 
     const burgerButtonClickHandler = () => {
         dispatch(toggleBurger());
@@ -41,7 +42,7 @@ export const Header = () => {
             alignItems='center'
         >
             <Logo gridArea='logo' />
-            <AppBreadcrumbs gridArea='crumbs' display={{ lg: 'block', base: 'none' }} />
+            {isLargeScreen && <AppBreadcrumbs gridArea='crumbs' />}
             <User gridArea='user' mr='64px' />
             <StatsIcons
                 display={isOpenBurger ? 'none' : { lg: 'none', base: 'flex' }}
