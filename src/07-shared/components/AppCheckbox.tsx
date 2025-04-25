@@ -1,12 +1,12 @@
-import { Checkbox } from '@chakra-ui/react';
+import { Checkbox, CheckboxProps } from '@chakra-ui/react';
 
-type CustomCheckboxProps = {
+interface CustomCheckboxProps extends CheckboxProps {
     value: string;
     onChange: () => void;
     children: React.ReactNode;
-};
+}
 
-export const CustomCheckbox = ({ value, onChange, children }: CustomCheckboxProps) => (
+export const AppCheckbox = ({ value, onChange, children, ...props }: CustomCheckboxProps) => (
     <Checkbox
         value={value}
         onChange={onChange}
@@ -46,6 +46,7 @@ export const CustomCheckbox = ({ value, onChange, children }: CustomCheckboxProp
         lineHeight='143%'
         color='#1a202c'
         icon={<CustomCheckIcon />}
+        {...props}
     >
         {children}
     </Checkbox>

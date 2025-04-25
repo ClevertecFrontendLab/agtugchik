@@ -1,8 +1,10 @@
+export { AppSelector } from './app-selector/AppSelector';
 export { AppBadge } from './AppBadge';
 export { AppButton } from './AppButton';
 export { AppCard } from './AppCard';
 export { AppCardText } from './AppCardText';
 export { AppCardTitle } from './AppCardTitle';
+export { AppCheckbox } from './AppCheckbox';
 export { AppSwitch } from './AppSwitch';
 export { BurgerButton } from './BurgerButton';
 export { Logo } from './Logo';

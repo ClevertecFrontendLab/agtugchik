@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import { AppPaths } from '~/01-app';
 import { useAppSelector } from '~/01-app/store/hooks';
-import { searchBarValueSelector } from '~/01-app/store/search-slice';
+import { searchSliceSelector } from '~/01-app/store/search-slice';
 import { PageHeader, PageSection } from '~/04-widgets';
 import Blogers from '~/04-widgets/blogers/Blogers';
 import { NewRecipiesSection } from '~/04-widgets/NewRecipiesSection';
@@ -10,22 +10,21 @@ import { PageFooter } from '~/04-widgets/page-footer/PageFooter';
 import { RecipeList } from '~/05-features';
 import { PageSubtitle, SectionTitle } from '~/07-shared/components';
 import recipes from '~/07-shared/consts/mockRecipes';
+import useFilter from '~/07-shared/hooks/use-filter';
 
 import { PageLayout } from './ui/PageLayout';
 import SectionNavigationButton from './ui/SectionNavigationButton';
 
 export const HomePage = memo(() => {
-    const searchBarValue = useAppSelector(searchBarValueSelector);
+    const { searchBarValue, startFilter } = useAppSelector(searchSliceSelector);
+
+    const activeRecipes = useFilter(recipes);
 
     return (
         <PageLayout>
             <PageHeader title='Приятного аппетита!' />
-            {searchBarValue ? (
-                <RecipeList
-                    activeRecipes={recipes.filter((recipe) =>
-                        recipe.title.toLowerCase().includes(searchBarValue.toLowerCase()),
-                    )}
-                />
+            {searchBarValue || startFilter ? (
+                <RecipeList activeRecipes={activeRecipes} />
             ) : (
                 <>
                     <NewRecipiesSection />

@@ -1,6 +1,7 @@
 import './styles/index.scss';
 
 import { AppContainer, BurgerMenu, Footer, Header, Navigation, Sider } from '~/04-widgets';
+import { FilterDrawer } from '~/04-widgets/filter-drawer/FilterDrawer';
 
 import { Router } from './router';
 
@@ -9,6 +10,7 @@ export { AppPaths } from './router/consts/app-paths';
 const App = () => (
     <AppContainer>
         <BurgerMenu />
+        <FilterDrawer />
         <Header />
         <Navigation />
         <Router />

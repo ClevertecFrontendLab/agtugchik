@@ -9,14 +9,16 @@ import { NavigationAccordion, NavigationFooter } from './navigation';
 export const BurgerMenu = () => {
     const dispatch = useAppDispatch();
     const isOpenBurger = useAppSelector(burgerActiveSelector);
+
+    const onCloseHandler = () => {
+        dispatch(toggleBurger());
+    };
     return (
         <Drawer
             closeOnOverlayClick={true}
             placement='top'
             isOpen={isOpenBurger}
-            onClose={() => {
-                dispatch(toggleBurger());
-            }}
+            onClose={onCloseHandler}
         >
             <DrawerOverlay mt='64px' />
             <DrawerContent

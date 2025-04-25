@@ -1,7 +1,7 @@
-import { Switch } from '@chakra-ui/react';
+import { Switch, SwitchProps } from '@chakra-ui/react';
 import { memo } from 'react';
 
-export const AppSwitch = memo(() => (
+export const AppSwitch = memo((props: SwitchProps) => (
     <Switch
         sx={{
             'span.chakra-switch__track': {
@@ -11,5 +11,6 @@ export const AppSwitch = memo(() => (
                 },
             },
         }}
+        {...props}
     />
 ));

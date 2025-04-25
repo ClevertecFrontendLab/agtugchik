@@ -1,6 +1,6 @@
 import { Box, CheckboxGroup, Stack } from '@chakra-ui/react';
 
-import { CustomCheckbox } from './CustomCheckbox';
+import { AppCheckbox } from '../../../07-shared/components';
 
 type AllergenOptionsListProps = {
     allergenOptions: string[];
@@ -22,9 +22,9 @@ export const AllergenOptionsList = ({
                     px='14px'
                     py='8px'
                 >
-                    <CustomCheckbox value={option} onChange={() => toggleAllergen(option)}>
+                    <AppCheckbox value={option} onChange={() => toggleAllergen(option)}>
                         {option}
-                    </CustomCheckbox>
+                    </AppCheckbox>
                 </Box>
             ))}
         </Stack>

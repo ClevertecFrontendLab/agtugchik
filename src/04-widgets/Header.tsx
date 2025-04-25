@@ -2,6 +2,7 @@ import { Grid } from '@chakra-ui/react';
 
 import { burgerActiveSelector, toggleBurger } from '~/01-app/store/burger-slice';
 import { useAppDispatch, useAppSelector } from '~/01-app/store/hooks';
+import { isOpenFilterDrawerSelector } from '~/01-app/store/search-slice';
 import { AppBreadcrumbs } from '~/05-features';
 import { StatsIcons } from '~/05-features/StatsIcons';
 import { User } from '~/06-entites';
@@ -11,15 +12,15 @@ import layoutConfig from '~/07-shared/consts/app-layout-config';
 export const Header = () => {
     const dispatch = useAppDispatch();
     const isOpenBurger = useAppSelector(burgerActiveSelector);
+    const isOpenFilterDrawer = useAppSelector(isOpenFilterDrawerSelector);
 
     const burgerButtonClickHandler = () => {
         dispatch(toggleBurger());
-        console.log(document.querySelectorAll('[data-test-id="vegan-cuisine"]'));
     };
 
     return (
         <Grid
-            zIndex={1401}
+            zIndex={isOpenFilterDrawer ? 1399 : 1401}
             data-test-id='header'
             as='header'
             position='fixed'
