@@ -4,19 +4,20 @@ interface Props extends BoxProps {
     placeholder: string;
     selectedValues: string[];
     isActivePopover?: boolean;
+    withTags?: boolean;
 }
 
 export const SelectedValues = ({
     placeholder,
     selectedValues,
     isActivePopover,
+    withTags,
     ...props
 }: Props) => (
     <Box flex='1' display='flex' flexWrap='wrap' gap='4px' alignItems='center' {...props}>
-        {selectedValues.length && isActivePopover ? (
+        {selectedValues.length && isActivePopover && withTags ? (
             selectedValues.map((allergen) => (
                 <Box
-                    data-test-id='filter-tag'
                     key={allergen}
                     border='1px solid #b1ff2e'
                     borderRadius='6px'

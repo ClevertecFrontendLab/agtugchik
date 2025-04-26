@@ -1,8 +1,8 @@
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
 
 import { AppPaths } from '~/01-app';
-import { useAppSelector } from '~/01-app/store/hooks';
-import { searchSliceSelector } from '~/01-app/store/search-slice';
+import { useAppDispatch, useAppSelector } from '~/01-app/store/hooks';
+import { searchSliceSelector, setFoundRecipes } from '~/01-app/store/search-slice';
 import { PageHeader, PageSection } from '~/04-widgets';
 import Blogers from '~/04-widgets/blogers/Blogers';
 import { NewRecipiesSection } from '~/04-widgets/NewRecipiesSection';
@@ -16,9 +16,16 @@ import { PageLayout } from './ui/PageLayout';
 import SectionNavigationButton from './ui/SectionNavigationButton';
 
 export const HomePage = memo(() => {
-    const { searchBarValue, startFilter } = useAppSelector(searchSliceSelector);
+    const dispatch = useAppDispatch();
+
+    const { searchBarValue, startFilter, isFoundRecipes } = useAppSelector(searchSliceSelector);
 
     const activeRecipes = useFilter(recipes);
+
+    useEffect(() => {
+        if (startFilter && activeRecipes.length > 0) dispatch(setFoundRecipes(true));
+        else if (startFilter && activeRecipes.length === 0) dispatch(setFoundRecipes(false));
+    }, [activeRecipes, dispatch, isFoundRecipes, startFilter]);
 
     return (
         <PageLayout>

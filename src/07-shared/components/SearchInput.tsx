@@ -1,11 +1,11 @@
 import { SearchIcon } from '@chakra-ui/icons';
-import { IconButton, Input, InputGroup, InputRightElement } from '@chakra-ui/react';
+import { IconButton, Input, InputGroup, InputProps, InputRightElement } from '@chakra-ui/react';
 import { memo, useState } from 'react';
 
 import { useAppDispatch } from '~/01-app/store/hooks';
 import { setSearchBarValue } from '~/01-app/store/search-slice';
 
-export const SearchInput = memo(() => {
+export const SearchInput = memo((props: InputProps) => {
     const dispatch = useAppDispatch();
     const [inputValue, setInputValue] = useState('');
 
@@ -27,6 +27,7 @@ export const SearchInput = memo(() => {
                 fontSize={{ lg: '18px', base: '14px' }}
                 color='black'
                 _placeholder={{ color: 'var(--lime800)' }}
+                {...props}
             />
             <InputRightElement
                 pointerEvents={inputValue.length >= 3 ? 'all' : 'none'}

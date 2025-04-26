@@ -17,7 +17,7 @@ import allergens from '~/07-shared/consts/alergens';
 
 export const SearchBar = () => {
     const dispatch = useAppDispatch();
-    const { alergenFilter, excludeAllergens, startFilter, isOpenFilterDrawer } =
+    const { alergenFilter, excludeAllergens, startFilter, isOpenFilterDrawer, isFoundRecipes } =
         useAppSelector(searchSliceSelector);
 
     const filterButtonClickHandler = () => {
@@ -51,7 +51,15 @@ export const SearchBar = () => {
                         src={sbi}
                     />
                 </AppButton>
-                <SearchInput />
+                <SearchInput
+                    borderColor={
+                        startFilter && isFoundRecipes
+                            ? 'var(--lime400)'
+                            : startFilter && !isFoundRecipes
+                              ? '#e53e3e'
+                              : undefined
+                    }
+                />
             </HStack>
 
             <HStack display={{ lg: 'flex', base: 'none' }} spacing='16px'>

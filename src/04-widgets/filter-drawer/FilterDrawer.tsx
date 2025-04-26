@@ -15,7 +15,6 @@ import {
 
 import { useAppDispatch, useAppSelector } from '~/01-app/store/hooks';
 import {
-    isOpenFilterDrawerSelector,
     resetFilters,
     searchSliceSelector,
     setExcludeAllergens,
@@ -27,10 +26,10 @@ import {
     toggleStartFilter,
 } from '~/01-app/store/search-slice';
 import { AppSelector, AppSwitch } from '~/07-shared/components';
-import { SelectedValues } from '~/07-shared/components/app-selector/components/SelectedValues';
 
 import allergens from '../../07-shared/consts/alergens';
 import { CheckboxStack } from './components/CheckBoxStack';
+import { Tags } from './components/Tags';
 import categoryNames from './consts/categories';
 
 const sideDishOptions = [
@@ -61,8 +60,8 @@ export const FilterDrawer = () => {
         meatFilter,
         categoryFilter,
         isActiveFilters,
+        isOpenFilterDrawer,
     } = useAppSelector(searchSliceSelector);
-    const isOpenFilterDrawer = useAppSelector(isOpenFilterDrawerSelector);
 
     const toggleFilter = (type: 'meat' | 'side' | 'alergen' | 'category', value: string) => {
         if (type === 'alergen') {
@@ -110,6 +109,7 @@ export const FilterDrawer = () => {
                             dataTestId='filter-menu-button-категория'
                             options={categoryNames}
                             placeholder='Категория'
+                            withTags={false}
                         />
 
                         <Input placeholder='Поиск по автору' />
@@ -154,6 +154,7 @@ export const FilterDrawer = () => {
                                 options={allergens}
                                 placeholder='Выберите из списка аллергенов...'
                                 isDisabled={!excludeAllergens}
+                                withTags={false}
                             />
                         </Box>
                     </Stack>
@@ -166,11 +167,14 @@ export const FilterDrawer = () => {
                             "clear-button find-button"`}
                     gridTemplateColumns='max-content 1fr'
                 >
-                    <SelectedValues
-                        isActivePopover={isOpenFilterDrawer}
+                    <Tags
                         gridArea='selected-values'
-                        placeholder=''
-                        selectedValues={[...meatFilter, ...sideDishFilter]}
+                        tagNames={[
+                            ...meatFilter,
+                            ...sideDishFilter,
+                            ...alergenFilter,
+                            ...categoryFilter,
+                        ]}
                     />
                     <Button
                         onClick={resetOnClickHandler}

@@ -9,15 +9,16 @@ import juicy3 from '~/07-shared/assets/png/juicy3.png';
 // import juicy5 from '~/07-shared/assets/png/juicy5.png';
 // import juicy6 from '~/07-shared/assets/png/juicy6.png';
 import juicy7 from '~/07-shared/assets/png/juicy7.png';
+// import vegan6 from '~/07-shared/assets/png/vegan6.png';
+// import vegan7 from '~/07-shared/assets/png/vegan7.png';
+// import vegan8 from '~/07-shared/assets/png/vegan8.png';
+import stepImage from '~/07-shared/assets/png/step-holder.png';
 // import juicy8 from '~/07-shared/assets/png/juicy8.png';
 import vegan1 from '~/07-shared/assets/png/vegan1.png';
 import vegan2 from '~/07-shared/assets/png/vegan2.png';
 // import vegan3 from '~/07-shared/assets/png/vegan3.png';
 import vegan4 from '~/07-shared/assets/png/vegan4.png';
 import vegan5 from '~/07-shared/assets/png/vegan5.png';
-// import vegan6 from '~/07-shared/assets/png/vegan6.png';
-// import vegan7 from '~/07-shared/assets/png/vegan7.png';
-// import vegan8 from '~/07-shared/assets/png/vegan8.png';
 
 export type Ingredient = {
     title: string;
@@ -84,22 +85,22 @@ const recipes: Recipe[] = [
             {
                 stepNumber: 1,
                 description: 'Нарезать картошку и перец.',
-                image: 'url',
+                image: stepImage,
             },
             {
                 stepNumber: 2,
                 description: 'Обжарить лук до золотистого цвета.',
-                image: 'url',
+                image: '',
             },
             {
                 stepNumber: 3,
                 description: 'Добавить картошку, перец и фасоль, залить соусом.',
-                image: 'url',
+                image: '',
             },
             {
                 stepNumber: 4,
                 description: 'Тушить на медленном огне 30 минут.',
-                image: 'url',
+                image: '',
             },
         ],
         meat: '',
@@ -129,17 +130,17 @@ const recipes: Recipe[] = [
             {
                 stepNumber: 1,
                 description: 'Отварить картошку и сделать пюре.',
-                image: 'url',
+                image: '',
             },
             {
                 stepNumber: 2,
                 description: 'Обжарить грибы до готовности.',
-                image: 'url',
+                image: '',
             },
             {
                 stepNumber: 3,
                 description: 'Сформировать рулетики и обжарить.',
-                image: 'url',
+                image: '',
             },
         ],
         side: 'potatoes',
@@ -168,17 +169,17 @@ const recipes: Recipe[] = [
             {
                 stepNumber: 1,
                 description: 'Приготовить соусы.',
-                image: 'url',
+                image: '',
             },
             {
                 stepNumber: 2,
                 description: 'Сложить слои лазаньи.',
-                image: 'url',
+                image: '',
             },
             {
                 stepNumber: 3,
                 description: 'Запекать 30 минут.',
-                image: 'url',
+                image: '',
             },
         ],
     },
@@ -206,17 +207,17 @@ const recipes: Recipe[] = [
             {
                 stepNumber: 1,
                 description: 'Смешать булгур и чечевицу.',
-                image: 'url',
+                image: '',
             },
             {
                 stepNumber: 2,
                 description: 'Сформировать тефтели и запечь.',
-                image: 'url',
+                image: '',
             },
             {
                 stepNumber: 3,
                 description: 'Подавать с соусом.',
-                image: 'url',
+                image: '',
             },
         ],
     },
@@ -244,17 +245,17 @@ const recipes: Recipe[] = [
             {
                 stepNumber: 1,
                 description: 'Очистить и нарезать картошку.',
-                image: 'url',
+                image: '',
             },
             {
                 stepNumber: 2,
                 description: 'Обжарить с чесноком.',
-                image: 'url',
+                image: '',
             },
             {
                 stepNumber: 3,
                 description: 'Подавать горячей.',
-                image: 'url',
+                image: '',
             },
         ],
         side: 'potatoes',
@@ -282,17 +283,17 @@ const recipes: Recipe[] = [
             {
                 stepNumber: 1,
                 description: 'Нарезать капусту и отварить.',
-                image: 'url',
+                image: '',
             },
             {
                 stepNumber: 2,
                 description: 'Смешать с мукой и сформировать котлеты.',
-                image: 'url',
+                image: '',
             },
             {
                 stepNumber: 3,
                 description: 'Обжарить до золотистой корочки.',
-                image: 'url',
+                image: '',
             },
         ],
     },
@@ -320,17 +321,17 @@ const recipes: Recipe[] = [
             {
                 stepNumber: 1,
                 description: 'Нарезать все овощи.',
-                image: 'url',
+                image: '',
             },
             {
                 stepNumber: 2,
                 description: 'Обжарить на сковороде.',
-                image: 'url',
+                image: '',
             },
             {
                 stepNumber: 3,
                 description: 'Добавить специи и тушить до готовности.',
-                image: 'url',
+                image: '',
             },
         ],
     },
@@ -357,17 +358,17 @@ const recipes: Recipe[] = [
             {
                 stepNumber: 1,
                 description: 'Отварить лапшу.',
-                image: 'url',
+                image: '',
             },
             {
                 stepNumber: 2,
                 description: 'Обжарить курицу с луком и шафраном.',
-                image: 'url',
+                image: '',
             },
             {
                 stepNumber: 3,
                 description: 'Смешать лапшу с курицей и подавать.',
-                image: 'url',
+                image: '',
             },
         ],
     },
@@ -393,12 +394,12 @@ const recipes: Recipe[] = [
             {
                 stepNumber: 1,
                 description: 'Обжарить овощи на гриле.',
-                image: 'url',
+                image: '',
             },
             {
                 stepNumber: 2,
                 description: 'Смешать с заправкой и подавать.',
-                image: 'url',
+                image: '',
             },
         ],
     },

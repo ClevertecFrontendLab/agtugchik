@@ -23,6 +23,7 @@ interface Props {
     selectedValues: string[];
     toggleValue: (value: string) => void;
     isActivePopover?: boolean;
+    withTags?: boolean;
 }
 
 export const AppSelector = ({
@@ -35,6 +36,7 @@ export const AppSelector = ({
     selectedValues,
     toggleValue,
     isActivePopover = true,
+    withTags = true,
 }: Props) => {
     const [customValue, setCustomValue] = useState('');
     const [isOpen, setIsOpen] = useState(false);
@@ -62,7 +64,9 @@ export const AppSelector = ({
                         isDisabled={isDisabled}
                         data-test-id={dataTestId}
                         border='1px solid'
-                        borderColor={selectedValues.length ? '#c4ff61' : 'rgba(0, 0, 0, 0.08)'}
+                        borderColor={
+                            selectedValues.length && withTags ? '#c4ff61' : 'rgba(0, 0, 0, 0.08)'
+                        }
                         borderRadius='6px'
                         w={w || '100%'}
                         minHeight='40px'
@@ -87,6 +91,7 @@ export const AppSelector = ({
                             isActivePopover={isActivePopover}
                             placeholder={placeholder}
                             selectedValues={selectedValues}
+                            withTags={withTags}
                         />
                         <Box ml='auto' display='flex' alignItems='center'>
                             {isOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}

@@ -1,4 +1,4 @@
-import { Avatar, Flex, Grid, Image, Text } from '@chakra-ui/react';
+import { Avatar, Flex, Grid, Image, Text, VStack } from '@chakra-ui/react';
 import { useParams } from 'react-router';
 
 import { PageSection } from '~/04-widgets';
@@ -153,13 +153,33 @@ export const RecipePage = () => {
                 <SectionTitle title='Шаги приготовления' />
                 {recipe.steps.map((step) => (
                     <AppCard
+                        display='grid'
                         key={step.stepNumber}
-                        p={{ md: '20px 24px', base: '8px' }}
                         alignItems='start'
                         justifyContent='start'
+                        gridTemplateAreas={step.image ? `'image text'` : `'text text'`}
+                        gridTemplateColumns='max-content 1fr'
+                        gridTemplateRows='max-content'
                     >
-                        <AppBadge label={`Шаг ${step.stepNumber}`} bgColor='rgba(0, 0, 0, 0.06)' />
-                        {step.description}
+                        {step.image && (
+                            <Image
+                                w={{ lg: '346px', base: '158px' }}
+                                h={{ lg: '244px', base: '128px' }}
+                                gridArea='image'
+                                src={step.image}
+                            />
+                        )}
+                        <VStack
+                            gridArea='text'
+                            p={{ lg: '20px 24px', base: '8px' }}
+                            alignItems='start'
+                        >
+                            <AppBadge
+                                label={`Шаг ${step.stepNumber}`}
+                                bgColor='rgba(0, 0, 0, 0.06)'
+                            />
+                            <Text alignSelf='start'>{step.description}</Text>
+                        </VStack>
                     </AppCard>
                 ))}
             </PageSection>

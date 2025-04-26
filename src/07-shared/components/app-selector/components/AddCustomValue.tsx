@@ -9,7 +9,6 @@ interface Props {
 
 export const AddCustomValue = ({ customValue, setCustomValue, addCustomValue }: Props) => {
     const handleSubmit = (e: React.FormEvent) => {
-        // console.log('handleSubmit');
         e.preventDefault();
         addCustomValue();
     };
@@ -21,7 +20,7 @@ export const AddCustomValue = ({ customValue, setCustomValue, addCustomValue }: 
                     data-test-id='add-other-allergen'
                     value={customValue}
                     onChange={(e) => setCustomValue(e.target.value)}
-                    placeholder='Добавить свой'
+                    placeholder='Другой аллерген'
                     size='sm'
                     borderRadius='4px'
                     width='205px'
@@ -42,8 +41,8 @@ export const AddCustomValue = ({ customValue, setCustomValue, addCustomValue }: 
                     icon={<AddIcon boxSize='8px' color='white' />}
                     bg='#2db100'
                     borderRadius='50%'
-                    width='40px'
-                    height='40px'
+                    width='12px'
+                    height='12px'
                     minWidth='12px'
                     minHeight='12px'
                     p='0'

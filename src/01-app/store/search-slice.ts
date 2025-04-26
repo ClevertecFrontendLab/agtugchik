@@ -14,6 +14,7 @@ const initialState = {
     excludeAllergens: false,
     isActiveFilters: false,
     startFilter: false,
+    isFoundRecipes: false,
 };
 
 const toggleValueInArray = <T>(array: T[], value: T): T[] =>
@@ -44,6 +45,7 @@ export const searchBarSlice = createSlice({
     reducers: {
         setSearchBarValue: (state, { payload: value }: PayloadAction<string>) => {
             state.searchBarValue = value;
+            state.startFilter = true;
         },
         toggleIsOpenFilterDrawer: (state) => {
             state.isOpenFilterDrawer = !state.isOpenFilterDrawer;
@@ -71,10 +73,14 @@ export const searchBarSlice = createSlice({
             state.categoryFilter = [];
             state.excludeAllergens = false;
             state.isActiveFilters = false;
+            state.startFilter = false;
         },
         toggleStartFilter: (state) => {
             state.isOpenFilterDrawer = false;
             state.startFilter = !state.startFilter;
+        },
+        setFoundRecipes: (state, { payload: value }: PayloadAction<boolean>) => {
+            state.isFoundRecipes = value;
         },
     },
 });
@@ -86,6 +92,7 @@ export const excludeAllergensSelector = (state: ApplicationState) =>
     state.searchBar.excludeAllergens;
 export const searchSliceSelector = (state: ApplicationState) => state.searchBar;
 export const {
+    setFoundRecipes,
     setSearchBarValue,
     toggleIsOpenFilterDrawer,
     setExcludeAllergens,

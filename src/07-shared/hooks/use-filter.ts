@@ -48,6 +48,7 @@ const useFilter = (r: typeof recipes) => {
                 ),
         ),
     );
+
     return newRecipes;
 };
 

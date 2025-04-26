@@ -11,6 +11,8 @@ import {
 import { memo } from 'react';
 import { useLocation, useNavigate } from 'react-router';
 
+import { useAppSelector } from '~/01-app/store/hooks';
+import { searchBarValueSelector } from '~/01-app/store/search-slice';
 import accordionItemProps from '~/04-widgets/navigation/consts/accordion-item-props';
 import bookmark from '~/07-shared/assets/svg/bookmark.svg';
 import { AppBadge, AppButton, AppCard, AppCardText, AppCardTitle } from '~/07-shared/components';
@@ -31,6 +33,7 @@ export const HorizontalRecipeCard = memo(({ recipe, index, ...props }: Props) =>
     const { title, image, description, bookmarks, likes, category, subcategory, id } = recipe;
     const { pathname } = useLocation();
     const navigate = useNavigate();
+    const searchBarValue = useAppSelector(searchBarValueSelector);
 
     const CardBadge = () => {
         const accordionItem = accordionItemProps.find((item) =>
@@ -100,7 +103,7 @@ export const HorizontalRecipeCard = memo(({ recipe, index, ...props }: Props) =>
                 </CardHeader>
 
                 <CardBody padding='0'>
-                    <AppCardTitle>{title}</AppCardTitle>
+                    <AppCardTitle searchBarValue={searchBarValue}>{title}</AppCardTitle>
                     <AppCardText>{description}</AppCardText>
                 </CardBody>
 
