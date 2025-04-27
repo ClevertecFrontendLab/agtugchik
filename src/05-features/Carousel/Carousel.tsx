@@ -1,7 +1,7 @@
 import 'swiper/css';
 
 import { Box, BoxProps, Portal, useBreakpointValue } from '@chakra-ui/react';
-import { memo, useRef } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router';
 import type { Swiper as SwiperType } from 'swiper';
 import { Navigation } from 'swiper/modules';
@@ -22,6 +22,35 @@ export const Carousel = memo((props: BoxProps) => {
     const spaceBetween = useBreakpointValue({ base: 12, xl: 24 });
 
     const swiperRef = useRef<SwiperType | null>(null);
+    const carouselRef = useRef<HTMLDivElement | null>(null);
+
+    const [position, setPosition] = useState<{ top: number; left: number; right: number }>({
+        top: 0,
+        left: 0,
+        right: 0,
+    });
+
+    const updatePosition = () => {
+        if (carouselRef.current) {
+            const rect = carouselRef.current.getBoundingClientRect();
+            setPosition({
+                top: rect.top + window.scrollY,
+                left: rect.left + window.scrollX,
+                right: document.documentElement.clientWidth - rect.right + window.scrollX,
+            });
+        }
+    };
+
+    useEffect(() => {
+        updatePosition();
+        window.addEventListener('resize', updatePosition);
+        window.addEventListener('scroll', updatePosition);
+
+        return () => {
+            window.removeEventListener('resize', updatePosition);
+            window.removeEventListener('scroll', updatePosition);
+        };
+    }, []);
 
     return (
         <>
@@ -30,16 +59,21 @@ export const Carousel = memo((props: BoxProps) => {
                     data-test-id='carousel-back'
                     arrowDirection='left'
                     aria-label='Prev'
+                    top={position.top + 147}
+                    left={position.left - 8}
                     onClick={() => swiperRef.current?.slidePrev()}
                 />
                 <ArrowButton
                     data-test-id='carousel-forward'
                     arrowDirection='right'
                     aria-label='Next'
+                    top={position.top + 147}
+                    right={position.right - 8}
                     onClick={() => swiperRef.current?.slideNext()}
                 />
             </Portal>
             <Box
+                ref={carouselRef}
                 width='100%'
                 maxW='1345px'
                 mx='auto'

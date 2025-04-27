@@ -41,7 +41,7 @@ const Ingridients = ({ ingridients }: Props) => {
     return (
         <VStack maxW='668px' width='100%'>
             <HStack
-                pl={{ md: '24px', base: '8px' }}
+                pl={{ lg: '24px', base: '8px' }}
                 h='56px'
                 justifyContent='space-between'
                 width='100%'

@@ -46,6 +46,7 @@ export const BurgerMenu = () => {
                     display='flex'
                     flexWrap='wrap'
                     padding='16px 24px'
+                    pr='18px'
                 />
                 <NavigationAccordion />
                 <NavigationFooter />

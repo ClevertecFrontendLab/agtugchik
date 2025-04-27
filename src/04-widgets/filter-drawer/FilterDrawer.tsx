@@ -3,7 +3,6 @@ import {
     Button,
     Drawer,
     DrawerBody,
-    DrawerCloseButton,
     DrawerContent,
     DrawerFooter,
     DrawerHeader,
@@ -29,6 +28,7 @@ import { AppSelector, AppSwitch } from '~/07-shared/components';
 
 import allergens from '../../07-shared/consts/alergens';
 import { CheckboxStack } from './components/CheckBoxStack';
+import { CloseButton } from './components/CloseButton';
 import { Tags } from './components/Tags';
 import categoryNames from './consts/categories';
 
@@ -96,9 +96,18 @@ export const FilterDrawer = () => {
         >
             <DrawerOverlay />
             <DrawerContent data-test-id='filter-drawer'>
-                <DrawerCloseButton data-test-id='close-filter-drawer' />
-                <DrawerHeader fontSize='xl' fontWeight='bold'>
+                <DrawerHeader
+                    fontSize='xl'
+                    fontWeight='bold'
+                    display='flex'
+                    justifyContent='space-between'
+                >
                     Фильтр
+                    <CloseButton
+                        aria-label='Close'
+                        data-test-id='close-filter-drawer'
+                        onClick={onCloseHandler}
+                    />
                 </DrawerHeader>
 
                 <DrawerBody>
@@ -109,7 +118,6 @@ export const FilterDrawer = () => {
                             dataTestId='filter-menu-button-категория'
                             options={categoryNames}
                             placeholder='Категория'
-                            withTags={false}
                         />
 
                         <Input placeholder='Поиск по автору' />
@@ -154,7 +162,6 @@ export const FilterDrawer = () => {
                                 options={allergens}
                                 placeholder='Выберите из списка аллергенов...'
                                 isDisabled={!excludeAllergens}
-                                withTags={false}
                             />
                         </Box>
                     </Stack>

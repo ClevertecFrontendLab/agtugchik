@@ -31,7 +31,7 @@ export const NewRecipeCard = memo(({ recipe }: Props) => {
             h='100%'
         >
             <Box position='relative'>
-                <Image src={image} width='100%' height='auto' objectFit='cover' alt='Card image' />
+                <Image src={image} width='100%' height='230px' objectFit='cover' alt='Card image' />
                 <Box
                     position='absolute'
                     top='8px'
