@@ -1,4 +1,7 @@
 export { AppContainer } from './AppContainer';
+export { BurgerMenu } from './BurgerMenu';
+export { FilterDrawer } from './filter-drawer/FilterDrawer';
+export { Footer } from './footer/Footer';
 export { Header } from './Header';
 export { HorizontalNav } from './HorizontalNav';
 export { Navigation } from './navigation/Navigation';

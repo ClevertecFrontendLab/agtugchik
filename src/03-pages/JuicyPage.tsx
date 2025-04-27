@@ -15,7 +15,7 @@ export const JuicyPage = () => (
                                 "more-button"`}
             gridTemplateColumns='1fr'
         >
-            <RecipeList gridArea='content' recipes={juicyItems} />
+            <RecipeList gridArea='content' activeRecipes={juicyItems} />
             <MoreButton gridArea='more-button' />
         </PageSection>
         <PageFooter>

@@ -14,7 +14,9 @@ export const HorizontalNav = (props: Partial<TabsProps>) => {
     return (
         <Box
             maxWidth='100%'
-            overflow='auto'
+            overflowX='auto'
+            overflowY='hidden'
+            minW='0'
             sx={{
                 '&::-webkit-scrollbar': {
                     display: 'none',
@@ -25,20 +27,14 @@ export const HorizontalNav = (props: Partial<TabsProps>) => {
                 },
             }}
         >
-            <Tabs
-                justifySelf='center'
-                width='max-content'
-                index={activeIndex}
-                variant='unstyled'
-                {...props}
-            >
-                <TabList borderBottom='1px solid rgba(0, 0, 0, 0.08)'>
-                    {items.map((item) => (
+            <Tabs width='100%' variant='unstyled' index={activeIndex} {...props}>
+                <TabList display='inline-flex' borderBottom='1px solid rgba(0, 0, 0, 0.08)'>
+                    {items.map((item, index) => (
                         <Tab
-                            width='max-content'
-                            key={item.path}
+                            data-test-id={`tab-${item.path.split('/')[2]}-${index}`}
                             as={NavLink}
                             to={item.path}
+                            key={item.path}
                             _selected={{
                                 color: 'var(--lime600)',
                                 borderBottom: '2px solid var(--lime600)',
@@ -51,6 +47,7 @@ export const HorizontalNav = (props: Partial<TabsProps>) => {
                             textAlign='center'
                             color='var(--lime800)'
                             padding={{ lg: '8px 16px', base: '4px 16px' }}
+                            width='max-content'
                         >
                             {item.label}
                         </Tab>

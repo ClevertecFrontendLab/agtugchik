@@ -1,31 +1,54 @@
-import { Box, CardBody, CardFooter, CardHeader, Flex, Image, Text } from '@chakra-ui/react';
+import {
+    Box,
+    CardBody,
+    CardFooter,
+    CardHeader,
+    CardProps,
+    Flex,
+    Image,
+    Text,
+} from '@chakra-ui/react';
 import { memo } from 'react';
+import { useLocation, useNavigate } from 'react-router';
 
+import { useAppSelector } from '~/01-app/store/hooks';
+import { searchBarValueSelector } from '~/01-app/store/search-slice';
 import accordionItemProps from '~/04-widgets/navigation/consts/accordion-item-props';
 import bookmark from '~/07-shared/assets/svg/bookmark.svg';
 import { AppBadge, AppButton, AppCard, AppCardText, AppCardTitle } from '~/07-shared/components';
+import { Recipe } from '~/07-shared/consts/mockRecipes';
 
 import { RecipeStatIcons } from './new-recipe-card/ui/RecipeStatIcons';
 
-interface Props {
-    title: string;
-    text: string;
-    image: string;
-    type: string;
-    bookmarks: number;
-    likes: number;
+interface Props extends CardProps {
+    recipe: Recipe;
+    index: number;
 }
 
-export const HorizontalRecipeCard = memo((props: Props) => {
-    const { title, image, text, type, bookmarks, likes } = props;
+const Badge = ({ label, icon }: { label: string; icon: string }) => (
+    <AppBadge label={label} icon={icon} bgColor='var(--lime50)' />
+);
 
-    const badge = (
-        <AppBadge
-            label={type}
-            icon={accordionItemProps.find((item) => item.label === type)?.icon as string}
-            bgColor='var(--lime50)'
-        />
-    );
+export const HorizontalRecipeCard = memo(({ recipe, index, ...props }: Props) => {
+    const { title, image, description, bookmarks, likes, category, subcategory, id } = recipe;
+    const { pathname } = useLocation();
+    const navigate = useNavigate();
+    const searchBarValue = useAppSelector(searchBarValueSelector);
+
+    const CardBadge = () => {
+        const accordionItem = accordionItemProps.find((item) =>
+            item.path.startsWith(`/${category[0]}`),
+        );
+
+        return (
+            <Badge label={accordionItem?.label as string} icon={accordionItem?.icon as string} />
+        );
+    };
+
+    const cookHandler = () => {
+        if (pathname !== '/') navigate(`${pathname}/${id}`);
+        else navigate(`/${category[0]}/${subcategory[0]}/${id}`);
+    };
 
     return (
         <AppCard
@@ -33,6 +56,7 @@ export const HorizontalRecipeCard = memo((props: Props) => {
             height={{ lg: '244px', base: '128px' }}
             display='flex'
             flexDirection='row'
+            {...props}
         >
             <Box position='relative' height='100%'>
                 <Image
@@ -50,7 +74,7 @@ export const HorizontalRecipeCard = memo((props: Props) => {
                     left='8px'
                     zIndex='1'
                 >
-                    {badge}
+                    <CardBadge />
                 </Box>
             </Box>
 
@@ -72,13 +96,15 @@ export const HorizontalRecipeCard = memo((props: Props) => {
                     alignItems='center'
                     display='flex'
                 >
-                    <Box display={{ base: 'none', lg: 'block' }}>{badge}</Box>
+                    <Box display={{ base: 'none', lg: 'block' }}>
+                        <CardBadge />
+                    </Box>
                     <RecipeStatIcons bookmarks={bookmarks} likes={likes} />
                 </CardHeader>
 
                 <CardBody padding='0'>
-                    <AppCardTitle>{title}</AppCardTitle>
-                    <AppCardText>{text}</AppCardText>
+                    <AppCardTitle searchBarValue={searchBarValue}>{title}</AppCardTitle>
+                    <AppCardText>{description}</AppCardText>
                 </CardBody>
 
                 <CardFooter padding='0' justifyContent='end' alignItems='center' columnGap='8px'>
@@ -95,10 +121,12 @@ export const HorizontalRecipeCard = memo((props: Props) => {
                         <Text display={{ lg: 'block', base: 'none' }}>Сохрнаить</Text>
                     </AppButton>
                     <AppButton
+                        data-test-id={`card-link-${index}`}
                         w={{ lg: '87px', base: '70px' }}
                         h={{ lg: '32px', base: '24px' }}
                         backgroundColor='black'
                         color='white'
+                        onClick={cookHandler}
                     >
                         Готовить
                     </AppButton>

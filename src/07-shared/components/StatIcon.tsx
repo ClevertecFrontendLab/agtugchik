@@ -1,12 +1,12 @@
-import { HStack, Image, Text } from '@chakra-ui/react';
+import { HStack, Image, StackProps, Text } from '@chakra-ui/react';
 
-interface StatIconProps {
+interface StatIconProps extends StackProps {
     icon: string;
     count: number;
     type?: 'default' | 'card';
 }
 
-export const StatIcon = ({ icon, count, type = 'default' }: StatIconProps) => {
+export const StatIcon = ({ icon, count, type = 'default', ...props }: StatIconProps) => {
     const isCard = type === 'card';
 
     return (
@@ -16,6 +16,7 @@ export const StatIcon = ({ icon, count, type = 'default' }: StatIconProps) => {
             height={isCard ? '24px' : '40px'}
             align='center'
             justify='center'
+            {...props}
         >
             <Image src={icon} boxSize={isCard ? '12px' : { lg: '16px', base: '12px' }} />
             <Text

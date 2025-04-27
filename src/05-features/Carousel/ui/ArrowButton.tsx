@@ -1,19 +1,16 @@
-import { Button, Image } from '@chakra-ui/react';
+import { Button, ButtonProps, Image } from '@chakra-ui/react';
 
 import arrow from '~/07-shared/assets/svg/carousel-arrow.svg';
 
-interface Props {
-    type: 'right' | 'left';
+interface Props extends ButtonProps {
+    arrowDirection: 'right' | 'left';
 }
 
-export const ArrowButton = ({ type }: Props) => (
+export const ArrowButton = ({ arrowDirection, ...props }: Props) => (
     <Button
         display={{ lg: 'flex', base: 'none' }}
-        zIndex={9}
+        zIndex={11}
         position='absolute'
-        top={{ xl: '551px', lg: '505px' }}
-        left={type === 'left' ? '270px' : undefined}
-        right={type === 'right' ? '266px' : undefined}
         bg='black'
         color='white'
         borderRadius='6px'
@@ -23,11 +20,12 @@ export const ArrowButton = ({ type }: Props) => (
         h={{ xl: '48px', lg: '40px' }}
         _hover={{ bg: 'black' }}
         _active={{ bg: 'black' }}
+        {...props}
     >
         <Image
             src={arrow}
             alt='Arrow icon'
-            transform={type === 'right' ? 'rotate(180deg)' : undefined}
+            transform={arrowDirection === 'right' ? 'rotate(180deg)' : undefined}
             boxSize={{ xl: '24px', lg: '16px' }}
         />
     </Button>

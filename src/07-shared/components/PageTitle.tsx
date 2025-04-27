@@ -1,11 +1,11 @@
-import { Heading } from '@chakra-ui/react';
+import { Heading, HeadingProps } from '@chakra-ui/react';
 import { memo } from 'react';
 
-interface Props {
+interface Props extends HeadingProps {
     title: string;
 }
 
-export const PageTitle = memo(({ title }: Props) => (
+export const PageTitle = memo(({ title, ...props }: Props) => (
     <Heading
         as='h1'
         fontFamily='var(--font-family)'
@@ -14,14 +14,8 @@ export const PageTitle = memo(({ title }: Props) => (
         lineHeight={{ lg: '100%', base: '133%' }}
         textAlign='center'
         color='#000'
+        {...props}
     >
         {title}
     </Heading>
 ));
-
-// font-family: var(--font-family);
-// font-weight: 700;
-// font-size: 24px;
-// line-height: 133%;
-// text-align: center;
-// color: #000;

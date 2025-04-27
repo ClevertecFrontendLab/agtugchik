@@ -6,7 +6,7 @@ import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router';
 
-import { store } from '~/store/configure-store.ts';
+import { store } from '~/01-app/store/configure-store';
 
 import App from './01-app';
 import theme from './07-shared/consts/chakra-theme';

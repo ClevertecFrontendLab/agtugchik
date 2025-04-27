@@ -1,9 +1,15 @@
 import { Button, ButtonProps, Image } from '@chakra-ui/react';
 
 import burgerIcon from '~/07-shared/assets/svg/burger-icon.svg';
+import exitBurgerIcon from '~/07-shared/assets/svg/exit-burger-icon.svg';
 
-export const BurgerButton = (props: ButtonProps) => (
+interface Props extends ButtonProps {
+    isOpen: boolean;
+}
+
+export const BurgerButton = ({ isOpen, ...props }: Props) => (
     <Button
+        data-test-id={isOpen ? 'close-icon' : 'hamburger-icon'}
         w='48px'
         h='48px'
         p='0'
@@ -15,6 +21,10 @@ export const BurgerButton = (props: ButtonProps) => (
         _focusVisible={{ boxShadow: 'none' }}
         {...props}
     >
-        <Image src={burgerIcon} alt='burger-button' />
+        {isOpen ? (
+            <Image src={exitBurgerIcon} alt='exit-burger-button' />
+        ) : (
+            <Image src={burgerIcon} alt='burger-button' />
+        )}
     </Button>
 );

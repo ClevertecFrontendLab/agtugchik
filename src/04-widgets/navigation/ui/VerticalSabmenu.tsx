@@ -1,4 +1,4 @@
-import { Box, Text, VStack } from '@chakra-ui/react';
+import { Box, Tab, TabList, Tabs, Text } from '@chakra-ui/react';
 import { NavLink, useLocation } from 'react-router';
 
 interface Subroute {
@@ -12,27 +12,34 @@ interface Props {
 
 export const VerticalSubmenu = ({ items }: Props) => {
     const location = useLocation();
+    const activeIndex = items.findIndex((item) => location.pathname.startsWith(item.path));
 
     return (
-        <VStack align='stretch' spacing='0' paddingTop='8px'>
-            {items.map((item) => {
-                const isActive = item.path === location.pathname;
-                const markerWidth = isActive ? 8 : 1;
-                const markerMarginLeft = isActive ? '-7px' : '0';
-                return (
-                    <NavLink
-                        onClick={(e) => {
-                            e.stopPropagation();
-                        }}
-                        key={item.path}
-                        to={item.path}
-                    >
-                        <Box
-                            display='flex'
-                            alignItems='center'
+        <Tabs
+            index={activeIndex === -1 ? undefined : activeIndex}
+            variant='unstyled'
+            orientation='vertical'
+        >
+            <TabList display='flex' flexDirection='column' alignItems='stretch' paddingTop='8px'>
+                {items.map((item, index) => {
+                    const isActive = index === activeIndex;
+                    const markerWidth = isActive ? 8 : 1;
+                    const markerMarginLeft = isActive ? '-7px' : '0';
+
+                    return (
+                        <Tab
+                            data-test-id={`${item.path.split('/')[2]}${isActive ? '-active' : ''}`}
+                            as={NavLink}
+                            key={item.path}
+                            to={item.path}
+                            onClick={(e) => e.stopPropagation()}
+                            justifyContent='flex-start'
                             height='36px'
                             paddingLeft='40px'
                             position='relative'
+                            _selected={{}}
+                            _focus={{ boxShadow: 'none' }}
+                            _hover={{}}
                         >
                             <Box
                                 width={`${markerWidth}px`}
@@ -55,10 +62,10 @@ export const VerticalSubmenu = ({ items }: Props) => {
                             >
                                 {item.label}
                             </Text>
-                        </Box>
-                    </NavLink>
-                );
-            })}
-        </VStack>
+                        </Tab>
+                    );
+                })}
+            </TabList>
+        </Tabs>
     );
 };
