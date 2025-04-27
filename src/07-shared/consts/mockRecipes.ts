@@ -358,12 +358,12 @@ const recipes: Recipe[] = [
             {
                 stepNumber: 1,
                 description: 'Отварить лапшу.',
-                image: '',
+                image: stepImage,
             },
             {
                 stepNumber: 2,
                 description: 'Обжарить курицу с луком и шафраном.',
-                image: '',
+                image: stepImage,
             },
             {
                 stepNumber: 3,
