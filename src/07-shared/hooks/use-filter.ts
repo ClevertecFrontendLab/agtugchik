@@ -1,17 +1,16 @@
 import { useAppSelector } from '~/01-app/store/hooks';
 import { searchSliceSelector } from '~/01-app/store/search-slice';
 import categories from '~/07-shared/consts/categories';
+import { Recipe } from '~/07-shared/types/api';
 
-import recipes from '../consts/mockRecipes';
-
-const useFilter = (r: typeof recipes) => {
+const useFilter = (r: Recipe[]) => {
     const { searchBarValue, categoryFilter, meatFilter, sideDishFilter, alergenFilter } =
         useAppSelector(searchSliceSelector);
     let newRecipes = [...r];
 
     if (categoryFilter.length > 0) {
         newRecipes = newRecipes.filter((recipe) =>
-            recipe.category.some((category) =>
+            recipe.categoriesIds.some((category) =>
                 categoryFilter.length
                     ? categoryFilter
                           .map((cat) => categories.find((c) => c.category === cat)?.key)

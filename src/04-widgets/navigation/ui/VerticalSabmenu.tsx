@@ -1,18 +1,19 @@
 import { Box, Tab, TabList, Tabs, Text } from '@chakra-ui/react';
 import { NavLink, useLocation } from 'react-router';
 
-interface Subroute {
-    label: string;
-    path: string;
-}
+import { getSubcategoryPath } from '~/07-shared/lib';
+import { SubCategory } from '~/07-shared/types/api';
 
 interface Props {
-    items: Readonly<Subroute[]>;
+    category: string;
+    items: SubCategory[];
 }
 
-export const VerticalSubmenu = ({ items }: Props) => {
+export const VerticalSubmenu = ({ items, category }: Props) => {
     const location = useLocation();
-    const activeIndex = items.findIndex((item) => location.pathname.startsWith(item.path));
+    const activeIndex = items.findIndex((item) =>
+        location.pathname.startsWith(getSubcategoryPath(category, item)),
+    );
 
     return (
         <Tabs
@@ -28,10 +29,10 @@ export const VerticalSubmenu = ({ items }: Props) => {
 
                     return (
                         <Tab
-                            data-test-id={`${item.path.split('/')[2]}${isActive ? '-active' : ''}`}
+                            data-test-id={`${item.category}${isActive ? '-active' : ''}`}
                             as={NavLink}
-                            key={item.path}
-                            to={item.path}
+                            key={item.category}
+                            to={getSubcategoryPath(category, item)}
                             onClick={(e) => e.stopPropagation()}
                             justifyContent='flex-start'
                             height='36px'
@@ -60,7 +61,7 @@ export const VerticalSubmenu = ({ items }: Props) => {
                                 whiteSpace='nowrap'
                                 isTruncated
                             >
-                                {item.label}
+                                {item.title}
                             </Text>
                         </Tab>
                     );

@@ -2,21 +2,29 @@ import { GridProps } from '@chakra-ui/react';
 import { useEffect } from 'react';
 import { useParams } from 'react-router';
 
+import { useGetCategoriesQuery } from '~/01-app/query/services/categories';
+import { useGetRecipesByCategoryQuery } from '~/01-app/query/services/recipes';
 import { useAppDispatch, useAppSelector } from '~/01-app/store/hooks';
 import { searchSliceSelector, setFoundRecipes } from '~/01-app/store/search-slice';
 import { RecipeList } from '~/05-features';
-import recipes from '~/07-shared/consts/mockRecipes';
 import useFilter from '~/07-shared/hooks/use-filter';
 
-const SubcategoryFilter = (props: GridProps) => {
+export const FilteredRecipeList = (props: GridProps) => {
     const dispatch = useAppDispatch();
-    const { subcategory } = useParams();
+    const { data: categories } = useGetCategoriesQuery();
+    const { category, subcategory } = useParams();
     const { searchBarValue, startFilter, isFoundRecipes } = useAppSelector(searchSliceSelector);
+    const subcategoryId = categories
+        ?.find((cat) => cat.category === category)
+        ?.subCategories.find((sub) => sub.category === subcategory)?._id;
+    const { data: recipes } = useGetRecipesByCategoryQuery({
+        id: subcategoryId as string,
+    });
 
     const activeRecipes = useFilter(
-        recipes
-            .filter((recipe) => recipe.subcategory.includes(subcategory as string))
-            .filter((recipe) => recipe.title.toLowerCase().includes(searchBarValue.toLowerCase())),
+        (recipes?.data || []).filter((recipe) =>
+            recipe.title.toLowerCase().includes(searchBarValue.toLowerCase()),
+        ),
     );
 
     useEffect(() => {
@@ -26,5 +34,3 @@ const SubcategoryFilter = (props: GridProps) => {
 
     return <RecipeList activeRecipes={activeRecipes} {...props} />;
 };
-
-export default SubcategoryFilter;

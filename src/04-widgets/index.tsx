@@ -1,10 +1,12 @@
 export { AppContainer } from './AppContainer';
 export { BurgerMenu } from './BurgerMenu';
 export { FilterDrawer } from './filter-drawer/FilterDrawer';
+export { FilteredRecipeList } from './FilteredRecipeList';
 export { Footer } from './footer/Footer';
 export { Header } from './Header';
 export { HorizontalNav } from './HorizontalNav';
 export { Navigation } from './navigation/Navigation';
 export { PageHeader } from './PageHeader';
 export { PageSection } from './PageSection';
+export { RelevantKitchen } from './relevant-kitchen/RelevantKithcen';
 export { Sider } from './Sider';

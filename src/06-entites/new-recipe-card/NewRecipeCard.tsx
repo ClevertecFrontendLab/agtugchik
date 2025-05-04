@@ -1,27 +1,27 @@
-import { Box, CardBody, CardFooter, Image } from '@chakra-ui/react';
+import { Box, CardBody, CardFooter, CardProps, Image } from '@chakra-ui/react';
 import { memo } from 'react';
+import { useNavigate } from 'react-router';
 
-import accordionItemProps from '~/04-widgets/navigation/consts/accordion-item-props';
 import { AppBadge, AppCard, AppCardText, AppCardTitle } from '~/07-shared/components';
-import { Recipe } from '~/07-shared/consts/mockRecipes';
+import useGetCardValues from '~/07-shared/hooks/use-get-card-values';
+import { Recipe } from '~/07-shared/types/api';
 
 import { RecipeStatIcons } from './ui/RecipeStatIcons';
 
-interface Props {
+interface Props extends CardProps {
     recipe: Recipe;
+    index: number;
 }
 
-export const NewRecipeCard = memo(({ recipe }: Props) => {
-    const { title, image, description, bookmarks, likes, category } = recipe;
+export const NewRecipeCard = memo(({ recipe, index, ...props }: Props) => {
+    const { title, image, description, bookmarks, likes, categoriesIds, _id: id } = recipe;
+    const navigate = useNavigate();
+    const { fullPath, badgeTitle, badgeIcon } = useGetCardValues(categoriesIds[0], id);
 
-    const CardBadge = () => {
-        const accordionItem = accordionItemProps.find((item) =>
-            item.path.startsWith(`/${category[0]}`),
-        );
+    const CardBadge = () => <AppBadge label={badgeTitle} icon={badgeIcon} />;
 
-        return (
-            <AppBadge label={accordionItem?.label as string} icon={accordionItem?.icon as string} />
-        );
+    const cookHandler = () => {
+        navigate(fullPath);
     };
 
     return (
@@ -29,9 +29,17 @@ export const NewRecipeCard = memo(({ recipe }: Props) => {
             minWidth={{ xl: '322px', lg: '279px', base: '158px' }}
             maxWidth={{ xl: '322px', lg: '279px', base: '158px' }}
             h='100%'
+            onClick={cookHandler}
+            {...props}
         >
             <Box position='relative'>
-                <Image src={image} width='100%' height='230px' objectFit='cover' alt='Card image' />
+                <Image
+                    src={image}
+                    width='100%'
+                    height={{ lg: '230px', base: '128px' }}
+                    objectFit='cover'
+                    alt='Card image'
+                />
                 <Box
                     position='absolute'
                     top='8px'

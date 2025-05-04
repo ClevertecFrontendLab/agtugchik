@@ -8,29 +8,22 @@ import {
 import { memo } from 'react';
 import { useNavigate } from 'react-router';
 
+import { Category } from '~/07-shared/types/api';
+
 import { VerticalSubmenu } from './VerticalSabmenu';
 
-export interface Props {
-    label: string;
-    icon: string;
-    path: string;
-    subroutes: readonly { label: string; path: string }[];
-    'data-test-id'?: string;
-}
-
-export const AppAccordionItem = memo((props: Props) => {
-    const { label, icon, subroutes } = props;
+export const AppAccordionItem = memo((props: Category) => {
+    const { title, icon, category, subCategories } = props;
     const navigate = useNavigate();
-    const dataTestId = props['data-test-id'];
 
     const onCLickHandler = () => {
-        navigate(subroutes[0].path);
+        navigate(`/${category}/${subCategories[0].category}`);
     };
 
     return (
-        <AccordionItem ml='-4px' onClick={onCLickHandler} key={label} border='none'>
+        <AccordionItem ml='-4px' onClick={onCLickHandler} key={title} border='none'>
             <AccordionButton
-                data-test-id={dataTestId}
+                data-test-id={category === 'vegan' ? 'vegan-cuisine' : ''}
                 _focus={{ outline: 'none' }}
                 _expanded={{
                     bg: 'var(--lime100)',
@@ -47,12 +40,12 @@ export const AppAccordionItem = memo((props: Props) => {
                 whiteSpace='nowrap'
             >
                 <Image color='black' src={icon} boxSize='24px' mr='2px' />
-                {label}
+                {title}
                 <AccordionIcon ml='auto' />
             </AccordionButton>
 
             <AccordionPanel padding='0' color='black'>
-                <VerticalSubmenu items={subroutes} />
+                <VerticalSubmenu category={category} items={subCategories} />
             </AccordionPanel>
         </AccordionItem>
     );

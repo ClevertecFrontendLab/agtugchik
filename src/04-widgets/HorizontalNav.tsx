@@ -1,15 +1,20 @@
 import { Box, Tab, TabList, Tabs, TabsProps } from '@chakra-ui/react';
 import { NavLink, useLocation } from 'react-router';
 
-import { AppPaths } from '~/01-app/router/consts/app-paths';
+import { getSubcategoryPath } from '~/07-shared/lib';
+import { SubCategory } from '~/07-shared/types/api';
 
-import accordionItemProps from './navigation/consts/accordion-item-props';
+interface Props extends Partial<TabsProps> {
+    category: string;
+    items: SubCategory[];
+}
 
-export const HorizontalNav = (props: Partial<TabsProps>) => {
-    const items = accordionItemProps.find((item) => item.path === AppPaths.VEGAN)!.subroutes;
+export const HorizontalNav = ({ category, items, ...props }: Props) => {
     const location = useLocation();
     const currentPath = location.pathname;
-    const activeIndex = items.findIndex((item) => item.path === currentPath);
+    const activeIndex = items.findIndex(
+        (item) => getSubcategoryPath(category, item) === currentPath,
+    );
 
     return (
         <Box
@@ -31,10 +36,10 @@ export const HorizontalNav = (props: Partial<TabsProps>) => {
                 <TabList display='inline-flex' borderBottom='1px solid rgba(0, 0, 0, 0.08)'>
                     {items.map((item, index) => (
                         <Tab
-                            data-test-id={`tab-${item.path.split('/')[2]}-${index}`}
+                            data-test-id={`tab-${item.category}-${index}`}
                             as={NavLink}
-                            to={item.path}
-                            key={item.path}
+                            to={getSubcategoryPath(category, item)}
+                            key={getSubcategoryPath(category, item)}
                             _selected={{
                                 color: 'var(--lime600)',
                                 borderBottom: '2px solid var(--lime600)',
@@ -49,7 +54,7 @@ export const HorizontalNav = (props: Partial<TabsProps>) => {
                             padding={{ lg: '8px 16px', base: '4px 16px' }}
                             width='max-content'
                         >
-                            {item.label}
+                            {item.title}
                         </Tab>
                     ))}
                 </TabList>
