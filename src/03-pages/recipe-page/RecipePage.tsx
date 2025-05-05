@@ -147,7 +147,7 @@ export const RecipePage = () => {
                 </Grid>
             </PageSection>
             <NutritionValues {...recipe?.nutritionValue} />
-            <Ingridients ingridients={recipe?.ingredients || []} />
+            <Ingridients portions={recipe?.portions || 0} ingridients={recipe?.ingredients || []} />
             <PageSection maxW='668px'>
                 <SectionTitle title='Шаги приготовления' />
                 {recipe?.steps.map((step) => (

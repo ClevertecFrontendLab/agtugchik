@@ -1,5 +1,5 @@
 import { HStack, Text, VStack } from '@chakra-ui/react';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 
 import { NumberStepper } from '~/07-shared/components/NumberStepper';
 
@@ -33,10 +33,15 @@ interface Props {
         count: string;
         measureUnit: string;
     }[];
+    portions: number;
 }
 
-const Ingridients = ({ ingridients }: Props) => {
-    const [portionCount, setPortionCount] = useState(1);
+const Ingridients = ({ ingridients, portions }: Props) => {
+    const [portionCount, setPortionCount] = useState(portions);
+
+    useEffect(() => {
+        setPortionCount(portions);
+    }, [portions]);
 
     return (
         <VStack maxW='668px' width='100%'>
@@ -68,8 +73,7 @@ const Ingridients = ({ ingridients }: Props) => {
                                 <span data-test-id={`ingredient-quantity-${index}`}>
                                     {`${
                                         Number(ingridient.count)
-                                            ? Number(ingridient.count) *
-                                              (1 + (portionCount - 1) * 0.25)
+                                            ? (Number(ingridient.count) / portions) * portionCount
                                             : ''
                                     }`}
                                 </span>

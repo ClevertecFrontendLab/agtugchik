@@ -81,5 +81,9 @@ export const recipesApiSlice = apiSlice
         }),
     });
 
-export const { useGetRecipesQuery, useGetRecipesByCategoryQuery, useGetRecipeByIdQuery } =
-    recipesApiSlice;
+export const {
+    useGetRecipesQuery,
+    useGetRecipesByCategoryQuery,
+    useGetRecipeByIdQuery,
+    useLazyGetRecipesQuery,
+} = recipesApiSlice;

@@ -1,23 +1,21 @@
-import { memo, useEffect } from 'react';
+import { memo } from 'react';
 
 import { AppPaths } from '~/01-app';
 import { useGetRecipesQuery } from '~/01-app/query/services/recipes';
-import { useAppDispatch, useAppSelector } from '~/01-app/store/hooks';
-import { searchSliceSelector, setFoundRecipes } from '~/01-app/store/search-slice';
+import { useAppSelector } from '~/01-app/store/hooks';
+import { searchSliceSelector } from '~/01-app/store/search-slice';
 import { PageHeader, PageSection } from '~/04-widgets';
 import { RelevantKitchen } from '~/04-widgets';
 import Blogers from '~/04-widgets/blogers/Blogers';
 import { NewRecipiesSection } from '~/04-widgets/NewRecipiesSection';
 import { RecipeList } from '~/05-features';
 import { SectionTitle } from '~/07-shared/components';
-import useFilter from '~/07-shared/hooks/use-filter';
 
 import { PageLayout } from './ui/PageLayout';
 import SectionNavigationButton from './ui/SectionNavigationButton';
 
 export const HomePage = memo(() => {
-    const dispatch = useAppDispatch();
-    const { data: recipes } = useGetRecipesQuery({});
+    const { activeRecipes } = useAppSelector(searchSliceSelector);
     const { data: juicyRecipes } = useGetRecipesQuery({
         page: 1,
         limit: 4,
@@ -25,19 +23,11 @@ export const HomePage = memo(() => {
         sortOrder: 'desc',
     });
 
-    const { searchBarValue, startFilter, isFoundRecipes } = useAppSelector(searchSliceSelector);
-
-    const activeRecipes = useFilter(recipes?.data || []);
-
-    useEffect(() => {
-        if (startFilter && activeRecipes.length > 0) dispatch(setFoundRecipes(true));
-        else if (startFilter && activeRecipes.length === 0) dispatch(setFoundRecipes(false));
-    }, [activeRecipes, dispatch, isFoundRecipes, startFilter]);
-
     return (
         <PageLayout>
             <PageHeader title='Приятного аппетита!' />
-            {searchBarValue || startFilter ? (
+
+            {activeRecipes.length ? (
                 <RecipeList activeRecipes={activeRecipes} />
             ) : (
                 <>
@@ -103,6 +93,7 @@ export const HomePage = memo(() => {
                     </PageSection>
                 </>
             )}
+
             <RelevantKitchen />
         </PageLayout>
     );

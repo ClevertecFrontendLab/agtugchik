@@ -11,18 +11,22 @@ import {
     Stack,
     Text,
 } from '@chakra-ui/react';
+import { useEffect } from 'react';
 
+import { useLazyGetRecipesQuery } from '~/01-app/query/services/recipes';
 import { useAppDispatch, useAppSelector } from '~/01-app/store/hooks';
 import {
     resetFilters,
     searchSliceSelector,
+    setActiveRecipes,
     setExcludeAllergens,
+    setSearchLoading,
     toggleAllergenValue,
     toggleCategoryValue,
     toggleIsOpenFilterDrawer,
     toggleMeatValue,
+    toggleOpenFilterDrawer,
     toggleSideDishValue,
-    toggleStartFilter,
 } from '~/01-app/store/search-slice';
 import { AppSelector, AppSwitch } from '~/07-shared/components';
 
@@ -52,6 +56,9 @@ const meatTypeOptions = [
 ];
 
 export const FilterDrawer = () => {
+    const { isActiveFilters } = useAppSelector(searchSliceSelector);
+    const [fetchRecipes, { data: recipes, isLoading: isLoadingRecipes }] = useLazyGetRecipesQuery();
+
     const dispatch = useAppDispatch();
     const {
         excludeAllergens,
@@ -59,7 +66,6 @@ export const FilterDrawer = () => {
         sideDishFilter,
         meatFilter,
         categoryFilter,
-        isActiveFilters,
         isOpenFilterDrawer,
     } = useAppSelector(searchSliceSelector);
 
@@ -79,12 +85,27 @@ export const FilterDrawer = () => {
     };
 
     const findOnClickHandler = () => {
-        dispatch(toggleStartFilter());
+        fetchRecipes({
+            meat: meatFilter.length ? meatFilter.join(',') : undefined,
+            garnish: sideDishFilter.length ? sideDishFilter.join(',') : undefined,
+            allergens: alergenFilter.length ? alergenFilter.join(',') : undefined,
+        });
+        dispatch(toggleOpenFilterDrawer());
     };
 
     const resetOnClickHandler = () => {
         dispatch(resetFilters());
     };
+
+    useEffect(() => {
+        if (recipes?.data.length) dispatch(setActiveRecipes(recipes.data));
+        else dispatch(setActiveRecipes([]));
+    }, [dispatch, recipes]);
+
+    useEffect(() => {
+        if (isLoadingRecipes) dispatch(setSearchLoading(true));
+        else if (!isLoadingRecipes) dispatch(setSearchLoading(false));
+    }, [dispatch, isLoadingRecipes]);
 
     return (
         <Drawer

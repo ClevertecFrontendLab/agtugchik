@@ -1,5 +1,5 @@
 import { Grid, GridProps } from '@chakra-ui/react';
-import { memo, useEffect } from 'react';
+import { memo } from 'react';
 import { useParams } from 'react-router';
 
 import { useGetCategoriesQuery } from '~/01-app/query/services/categories';
@@ -27,9 +27,6 @@ export const RelevantKitchen = memo(({ children, ...props }: Props) => {
     const id = randomCategory?._id;
 
     const { data: recipes } = useGetRecipesByCategoryQuery({ id, limit: 5 }, { skip: !id });
-    useEffect(() => {
-        console.log(recipes);
-    }, [recipes]);
     return (
         <Grid
             as='section'
