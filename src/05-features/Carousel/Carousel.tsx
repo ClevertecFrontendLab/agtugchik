@@ -19,6 +19,12 @@ export const Carousel = memo((props: BoxProps) => {
         sortOrder: 'desc',
     });
 
+    const newR = newestRecipes?.data ? [...newestRecipes.data] : [];
+
+    if (newR[3] && newR[1]) {
+        newR[3] = newR[1];
+    }
+
     const cardWidth = useBreakpointValue({
         base: '158px',
         lg: '279px',
@@ -95,7 +101,7 @@ export const Carousel = memo((props: BoxProps) => {
                     onSwiper={(swiper) => (swiperRef.current = swiper)}
                     style={{ width: '100%', overflow: 'visible' }}
                 >
-                    {(newestRecipes?.data || []).map((recipe, index) => (
+                    {(newR || []).map((recipe, index) => (
                         <SwiperSlide
                             key={index}
                             style={{

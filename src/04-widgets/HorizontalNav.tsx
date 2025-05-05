@@ -13,7 +13,7 @@ export const HorizontalNav = ({ category, items, ...props }: Props) => {
     const location = useLocation();
     const currentPath = location.pathname;
     const activeIndex = items.findIndex(
-        (item) => getSubcategoryPath(category, item) === currentPath,
+        (item) => getSubcategoryPath(category, item.category) === currentPath,
     );
 
     return (
@@ -38,8 +38,8 @@ export const HorizontalNav = ({ category, items, ...props }: Props) => {
                         <Tab
                             data-test-id={`tab-${item.category}-${index}`}
                             as={NavLink}
-                            to={getSubcategoryPath(category, item)}
-                            key={getSubcategoryPath(category, item)}
+                            to={getSubcategoryPath(category, item.category)}
+                            key={getSubcategoryPath(category, item.category)}
                             _selected={{
                                 color: 'var(--lime600)',
                                 borderBottom: '2px solid var(--lime600)',

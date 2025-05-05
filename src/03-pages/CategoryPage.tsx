@@ -10,7 +10,9 @@ import { PageLayout } from './ui/PageLayout';
 export const CategoryPage = () => {
     const { data: categories } = useGetCategoriesQuery();
     const location = useLocation();
-    const categpory = categories?.find((category) => location.pathname.includes(category.category));
+    const categpory = categories?.find((category) =>
+        location.pathname.startsWith(`/${category.category}`),
+    );
     return (
         <PageLayout>
             <PageHeader title={categpory?.title || ''} subtitle={categpory?.description} />

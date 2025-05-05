@@ -6,9 +6,7 @@ const useGetCardValues = (categoryId: string, id: string) => {
         ?.filter((category) => category.icon)
         .find((category) => category.subCategories.find((sub) => sub._id === categoryId));
     const categoryPath = category?.category;
-    const subcategoryPath = category?.subCategories.find(
-        (sub) => sub._id === categoryId[0],
-    )?.category;
+    const subcategoryPath = category?.subCategories.find((sub) => sub._id === categoryId)?.category;
 
     const fullPath = `/${categoryPath}/${subcategoryPath}/${id}`;
 

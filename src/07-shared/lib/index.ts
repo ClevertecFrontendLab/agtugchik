@@ -1,1 +1,1 @@
-export { getSubcategoryPath } from './get-subcategory-path';
+export { getCategoryPath, getRecipePath, getSubcategoryPath } from './get-path';

@@ -12,7 +12,7 @@ interface Props {
 export const VerticalSubmenu = ({ items, category }: Props) => {
     const location = useLocation();
     const activeIndex = items.findIndex((item) =>
-        location.pathname.startsWith(getSubcategoryPath(category, item)),
+        location.pathname.startsWith(getSubcategoryPath(category, item.category)),
     );
 
     return (
@@ -32,7 +32,7 @@ export const VerticalSubmenu = ({ items, category }: Props) => {
                             data-test-id={`${item.category}${isActive ? '-active' : ''}`}
                             as={NavLink}
                             key={item.category}
-                            to={getSubcategoryPath(category, item)}
+                            to={getSubcategoryPath(category, item.category)}
                             onClick={(e) => e.stopPropagation()}
                             justifyContent='flex-start'
                             height='36px'

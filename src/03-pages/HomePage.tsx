@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
-import { AppPaths } from '~/01-app';
 import { useGetRecipesQuery } from '~/01-app/query/services/recipes';
+import { AppPaths } from '~/01-app/router/consts/app-paths';
 import { useAppSelector } from '~/01-app/store/hooks';
 import { searchSliceSelector } from '~/01-app/store/search-slice';
 import { PageHeader, PageSection } from '~/04-widgets';
