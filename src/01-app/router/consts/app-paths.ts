@@ -1,5 +1,7 @@
 export const AppPaths = {
     HOME: '/',
+    JUICY: '/the-juiciest',
+    NOT_FOUND: '/not-found',
 
     SALADS: '/salads',
     SNACKS: '/snacks',
@@ -14,7 +16,6 @@ export const AppPaths = {
     SAUCES: '/sauces',
     DRINKS: '/drinks',
     PRESERVES: '/preserves',
-    JUICY: '/the-juiciest',
 
     VEGAN_SNACKS: '/vegan/snacks',
     VEGAN_FIRST_COURSES: '/vegan/first-courses',

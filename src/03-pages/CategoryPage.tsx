@@ -1,6 +1,7 @@
-import { useLocation } from 'react-router';
+import { Navigate, useLocation } from 'react-router';
 
 import { useGetCategoriesQuery } from '~/01-app/query/services/categories';
+import { AppPaths } from '~/01-app/router/consts/app-paths';
 import { FilteredRecipeList, HorizontalNav, PageHeader, PageSection } from '~/04-widgets';
 import { RelevantKitchen } from '~/04-widgets';
 
@@ -14,23 +15,29 @@ export const CategoryPage = () => {
         location.pathname.startsWith(`/${category.category}`),
     );
     return (
-        <PageLayout>
-            <PageHeader title={categpory?.title || ''} subtitle={categpory?.description} />
-            <PageSection
-                gridTemplateAreas={`"tabs"
+        <>
+            {categpory ? (
+                <PageLayout>
+                    <PageHeader title={categpory?.title || ''} subtitle={categpory?.description} />
+                    <PageSection
+                        gridTemplateAreas={`"tabs"
                                 "content"
                                 "more-button"`}
-                gridTemplateColumns='1fr'
-            >
-                <HorizontalNav
-                    category={categpory?.category || ''}
-                    items={categpory?.subCategories || []}
-                    gridArea='tabs'
-                />
-                <FilteredRecipeList />
-                <MoreButton gridArea='more-button' />
-            </PageSection>
-            <RelevantKitchen />
-        </PageLayout>
+                        gridTemplateColumns='1fr'
+                    >
+                        <HorizontalNav
+                            category={categpory?.category || ''}
+                            items={categpory?.subCategories || []}
+                            gridArea='tabs'
+                        />
+                        <FilteredRecipeList />
+                        <MoreButton gridArea='more-button' />
+                    </PageSection>
+                    <RelevantKitchen />
+                </PageLayout>
+            ) : (
+                <Navigate to={AppPaths.NOT_FOUND} />
+            )}
+        </>
     );
 };
