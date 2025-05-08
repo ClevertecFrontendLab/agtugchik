@@ -28,17 +28,24 @@ export const recipesApiSlice = apiSlice
                 }),
                 transformResponse: (response: RecipeResponse): RecipeResponse => ({
                     ...response,
-                    data: response.data.map((recipe) => ({
-                        ...recipe,
-                        image: recipe.image ? `${baseSrcUrl}${recipe.image}` : '',
-                        steps: recipe.steps.map((step) => ({
-                            ...step,
-                            image: step.image ? `${baseSrcUrl}${step.image}` : '',
-                        })),
-                    })),
+                    data: Array.isArray(response.data)
+                        ? response.data.map((recipe) => {
+                              const safeSteps = Array.isArray(recipe.steps) ? recipe.steps : [];
+                              return {
+                                  ...recipe,
+                                  image: recipe.image ? `${baseSrcUrl}${recipe.image}` : '',
+                                  steps: safeSteps.map((step) => ({
+                                      ...step,
+                                      image: step.image ? `${baseSrcUrl}${step.image}` : '',
+                                  })),
+                              };
+                          })
+                        : [],
                 }),
                 providesTags: [Tags.RECIPE],
+                keepUnusedDataFor: 3000,
             }),
+
             getRecipesByCategory: builder.query<RecipeResponse, GetRecipesByCategoryParams>({
                 query: ({ id, ...params }) => ({
                     url: `${ApiEndpoints.RECIPE}/category/${id}`,
@@ -49,14 +56,19 @@ export const recipesApiSlice = apiSlice
                 }),
                 transformResponse: (response: RecipeResponse): RecipeResponse => ({
                     ...response,
-                    data: response.data.map((recipe) => ({
-                        ...recipe,
-                        image: recipe.image ? `${baseSrcUrl}${recipe.image}` : '',
-                        steps: recipe.steps.map((step) => ({
-                            ...step,
-                            image: step.image ? `${baseSrcUrl}${step.image}` : '',
-                        })),
-                    })),
+                    data: Array.isArray(response.data)
+                        ? response.data.map((recipe) => {
+                              const safeSteps = Array.isArray(recipe.steps) ? recipe.steps : [];
+                              return {
+                                  ...recipe,
+                                  image: recipe.image ? `${baseSrcUrl}${recipe.image}` : '',
+                                  steps: safeSteps.map((step) => ({
+                                      ...step,
+                                      image: step.image ? `${baseSrcUrl}${step.image}` : '',
+                                  })),
+                              };
+                          })
+                        : [],
                 }),
                 providesTags: [Tags.RECIPE],
             }),
@@ -68,14 +80,17 @@ export const recipesApiSlice = apiSlice
                     apiGroupName: ApiGroupNames.RECIPE,
                     name: EndpointNames.GET_RECIPE_BY_ID,
                 }),
-                transformResponse: (response: Recipe): Recipe => ({
-                    ...response,
-                    image: response.image ? `${baseSrcUrl}${response.image}` : '',
-                    steps: response.steps.map((step) => ({
-                        ...step,
-                        image: step.image ? `${baseSrcUrl}${step.image}` : '',
-                    })),
-                }),
+                transformResponse: (response: Recipe): Recipe => {
+                    const safeSteps = Array.isArray(response.steps) ? response.steps : [];
+                    return {
+                        ...response,
+                        image: response.image ? `${baseSrcUrl}${response.image}` : '',
+                        steps: safeSteps.map((step) => ({
+                            ...step,
+                            image: step.image ? `${baseSrcUrl}${step.image}` : '',
+                        })),
+                    };
+                },
                 providesTags: [Tags.RECIPE],
             }),
         }),

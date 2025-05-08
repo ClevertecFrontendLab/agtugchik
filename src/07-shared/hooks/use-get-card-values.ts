@@ -1,7 +1,8 @@
-import { useGetCategoriesQuery } from '~/01-app/query/services/categories';
+import { appCategoriesSelector } from '~/01-app/store/app-slice';
+import { useAppSelector } from '~/01-app/store/hooks';
 
 const useGetCardValues = (categoryId: string, id: string) => {
-    const { data: categories } = useGetCategoriesQuery();
+    const categories = useAppSelector(appCategoriesSelector);
     const category = categories
         ?.filter((category) => category.icon)
         .find((category) => category.subCategories.find((sub) => sub._id === categoryId));

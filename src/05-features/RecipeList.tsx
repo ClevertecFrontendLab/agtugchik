@@ -18,7 +18,7 @@ export const RecipeList = memo(({ activeRecipes, ...props }: Props) => (
             <HorizontalRecipeCard
                 index={index}
                 data-test-id={`food-card-${index}`}
-                key={recipe._id}
+                key={index}
                 recipe={recipe}
             />
         ))}

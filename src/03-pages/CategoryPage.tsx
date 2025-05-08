@@ -1,7 +1,8 @@
 import { Navigate, useLocation } from 'react-router';
 
-import { useGetCategoriesQuery } from '~/01-app/query/services/categories';
 import { AppPaths } from '~/01-app/router/consts/app-paths';
+import { appCategoriesSelector } from '~/01-app/store/app-slice';
+import { useAppSelector } from '~/01-app/store/hooks';
 import { FilteredRecipeList, HorizontalNav, PageHeader, PageSection } from '~/04-widgets';
 import { RelevantKitchen } from '~/04-widgets';
 
@@ -9,11 +10,12 @@ import { MoreButton } from './ui/MoreButton';
 import { PageLayout } from './ui/PageLayout';
 
 export const CategoryPage = () => {
-    const { data: categories } = useGetCategoriesQuery();
+    const categories = useAppSelector(appCategoriesSelector);
     const location = useLocation();
     const categpory = categories?.find((category) =>
         location.pathname.startsWith(`/${category.category}`),
     );
+
     return (
         <>
             {categpory ? (

@@ -1,12 +1,13 @@
 import { Navigate, useParams } from 'react-router';
 
-import { useGetCategoriesQuery } from '~/01-app/query/services/categories';
 import { AppPaths } from '~/01-app/router/consts/app-paths';
+import { appCategoriesSelector } from '~/01-app/store/app-slice';
+import { useAppSelector } from '~/01-app/store/hooks';
 import { getSubcategoryPath } from '~/07-shared/lib';
 
 export const CategoryRedirect = () => {
     const { category } = useParams();
-    const { data: categories } = useGetCategoriesQuery();
+    const categories = useAppSelector(appCategoriesSelector);
     const categoryItem = categories?.find((c) => c.category === category);
 
     return (

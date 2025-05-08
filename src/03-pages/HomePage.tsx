@@ -10,18 +10,27 @@ import Blogers from '~/04-widgets/blogers/Blogers';
 import { NewRecipiesSection } from '~/04-widgets/NewRecipiesSection';
 import { RecipeList } from '~/05-features';
 import { SectionTitle } from '~/07-shared/components';
+import useAppStatus from '~/07-shared/hooks/use-app-status';
+import { parseError } from '~/07-shared/lib';
 
 import { PageLayout } from './ui/PageLayout';
 import SectionNavigationButton from './ui/SectionNavigationButton';
 
 export const HomePage = memo(() => {
     const { activeRecipes } = useAppSelector(searchSliceSelector);
-    const { data: juicyRecipes } = useGetRecipesQuery({
+    const {
+        data: juicyRecipes,
+        isLoading: isLoadingRecipes,
+        isError: isErrorRecipes,
+        error: errorRecipes,
+    } = useGetRecipesQuery({
         page: 1,
         limit: 4,
         sortBy: 'likes',
         sortOrder: 'desc',
     });
+
+    useAppStatus(isLoadingRecipes, isErrorRecipes, parseError(errorRecipes));
 
     return (
         <PageLayout>

@@ -3,12 +3,13 @@ import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbProps } from '@ch
 import { memo, useMemo } from 'react';
 import { Link, useLocation } from 'react-router';
 
-import { useGetCategoriesQuery } from '~/01-app/query/services/categories';
 import { useGetRecipeByIdQuery } from '~/01-app/query/services/recipes';
 import { AppPaths } from '~/01-app/router/consts/app-paths';
+import { appCategoriesSelector } from '~/01-app/store/app-slice';
 import { burgerActiveSelector, toggleBurger } from '~/01-app/store/burger-slice';
 import { useAppDispatch, useAppSelector } from '~/01-app/store/hooks';
-import { getCategoryPath, getRecipePath, getSubcategoryPath } from '~/07-shared/lib';
+import useAppStatus from '~/07-shared/hooks/use-app-status';
+import { getCategoryPath, getRecipePath, getSubcategoryPath, parseError } from '~/07-shared/lib';
 
 const theJuiciest = {
     title: 'Самое сочное',
@@ -22,7 +23,7 @@ interface Crumb {
 }
 
 export const AppBreadcrumbs = memo((props: BreadcrumbProps) => {
-    const { data: categories } = useGetCategoriesQuery();
+    const categories = useAppSelector(appCategoriesSelector);
     const dispatch = useAppDispatch();
     const location = useLocation();
     const segments = location.pathname.split('/').filter(Boolean);
@@ -30,7 +31,12 @@ export const AppBreadcrumbs = memo((props: BreadcrumbProps) => {
 
     const [category, subcategory, id] = segments;
 
-    const { data: recipeItem } = useGetRecipeByIdQuery({ id });
+    const {
+        data: recipeItem,
+        isLoading: isLoadingRecipeById,
+        isError: isErrorRecipeById,
+        error: errorRecipeById,
+    } = useGetRecipeByIdQuery({ id }, { skip: !id });
 
     const crumbs: Crumb[] = useMemo(() => {
         if (!categories) return [];
@@ -65,6 +71,8 @@ export const AppBreadcrumbs = memo((props: BreadcrumbProps) => {
 
         return result;
     }, [categories, category, subcategory, recipeItem, id]);
+
+    useAppStatus(isLoadingRecipeById, isErrorRecipeById, parseError(errorRecipeById));
 
     return (
         <Breadcrumb

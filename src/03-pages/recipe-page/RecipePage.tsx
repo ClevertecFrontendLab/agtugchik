@@ -20,6 +20,8 @@ import {
     SectionTitle,
     StatIcon,
 } from '~/07-shared/components';
+import useAppStatus from '~/07-shared/hooks/use-app-status';
+import { parseError } from '~/07-shared/lib';
 
 import { PageLayout } from '../ui/PageLayout';
 import Ingridients from './components/Ingridients';
@@ -32,7 +34,14 @@ export const RecipePage = () => {
         subcategory: string;
     }>();
 
-    const { data: recipe } = useGetRecipeByIdQuery({ id: id as string });
+    const {
+        data: recipe,
+        isLoading: isLoadingRecipeById,
+        isError: isErrorRecipeById,
+        error: errorRecipeByID,
+    } = useGetRecipeByIdQuery({
+        id: id as string,
+    });
 
     // const badges = recipe.category.map((badge) => {
     //     const item = accordionItemProps.find((item) =>
@@ -48,6 +57,9 @@ export const RecipePage = () => {
     //         />
     //     );
     // });
+
+    useAppStatus(isLoadingRecipeById, isErrorRecipeById, parseError(errorRecipeByID));
+
     return (
         <PageLayout>
             <Text display='none'>
@@ -150,7 +162,7 @@ export const RecipePage = () => {
             <Ingridients portions={recipe?.portions || 0} ingridients={recipe?.ingredients || []} />
             <PageSection maxW='668px'>
                 <SectionTitle title='Шаги приготовления' />
-                {recipe?.steps.map((step) => (
+                {recipe?.steps?.map?.((step) => (
                     <AppCard
                         display='grid'
                         key={step.stepNumber}

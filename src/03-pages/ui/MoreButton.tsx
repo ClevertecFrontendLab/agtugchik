@@ -11,7 +11,5 @@ export const MoreButton = memo((props: ButtonProps) => (
         padding='0 16px'
         margin='0 auto'
         {...props}
-    >
-        Загрузить еще
-    </AppButton>
+    ></AppButton>
 ));

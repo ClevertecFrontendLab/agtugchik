@@ -19,7 +19,6 @@ export const SearchInput = memo((props: InputProps) => {
     useEffect(() => {
         if (recipes?.data.length) dispatch(setActiveRecipes(recipes.data));
         else dispatch(setActiveRecipes([]));
-        console.log(recipes?.data);
     }, [dispatch, recipes]);
 
     useEffect(() => {

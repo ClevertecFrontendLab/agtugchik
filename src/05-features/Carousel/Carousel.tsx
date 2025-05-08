@@ -8,11 +8,18 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { useGetRecipesQuery } from '~/01-app/query/services/recipes';
 import { NewRecipeCard } from '~/06-entites';
+import useAppStatus from '~/07-shared/hooks/use-app-status';
+import { parseError } from '~/07-shared/lib';
 
 import { ArrowButton } from './ui/ArrowButton';
 
 export const Carousel = memo((props: BoxProps) => {
-    const { data: newestRecipes } = useGetRecipesQuery({
+    const {
+        data: newestRecipes,
+        isLoading: isLoadingRecipes,
+        isError: isErrorRecipes,
+        error: errorRecipes,
+    } = useGetRecipesQuery({
         page: 1,
         limit: 10,
         sortBy: 'createdAt',
@@ -62,6 +69,8 @@ export const Carousel = memo((props: BoxProps) => {
             window.removeEventListener('scroll', updatePosition);
         };
     }, []);
+
+    useAppStatus(isLoadingRecipes, isErrorRecipes, parseError(errorRecipes));
 
     return (
         <>

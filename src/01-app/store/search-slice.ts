@@ -44,7 +44,6 @@ const updateFilter = (
 
     state.isActiveFilters = hasAnyActiveFilters;
     state.isActiveSearch = hasActiveAlergensOrSearchValue;
-    console.log('is active search', state.isActiveSearch);
 };
 
 export const searchBarSlice = createSlice({

@@ -2,11 +2,12 @@ import { Accordion } from '@chakra-ui/react';
 import { memo, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router';
 
-import { useGetCategoriesQuery } from '~/01-app/query/services/categories';
+import { appCategoriesSelector } from '~/01-app/store/app-slice';
+import { useAppSelector } from '~/01-app/store/hooks';
 import { AppAccordionItem } from '~/04-widgets/navigation/ui';
 
 export const NavigationAccordion = memo(() => {
-    const { data: cat } = useGetCategoriesQuery();
+    const cat = useAppSelector(appCategoriesSelector);
     const accordionRef = useRef<HTMLDivElement | null>(null);
     const [hasScrollbar, setHasScrollbar] = useState(false);
     const [activeIndex, setActiveIndex] = useState(-1);
