@@ -20,7 +20,7 @@ import {
     SectionTitle,
     StatIcon,
 } from '~/07-shared/components';
-import useAppStatus from '~/07-shared/hooks/use-app-status';
+import { useAppStatus, useGetCardValues } from '~/07-shared/hooks';
 import { parseError } from '~/07-shared/lib';
 
 import { PageLayout } from '../ui/PageLayout';
@@ -42,21 +42,9 @@ export const RecipePage = () => {
     } = useGetRecipeByIdQuery({
         id: id as string,
     });
+    const { badgeTitle, badgeIcon } = useGetCardValues(recipe?.categoriesIds[0] || '', id || '');
 
-    // const badges = recipe.category.map((badge) => {
-    //     const item = accordionItemProps.find((item) =>
-    //         item.path.includes(badge),
-    //     ) as (typeof accordionItemProps)[0];
-
-    //     return (
-    //         <AppBadge
-    //             key={item.label}
-    //             icon={item.icon}
-    //             label={item.label}
-    //             bgColor='var(--lime50)'
-    //         />
-    //     );
-    // });
+    const Badge = () => <AppBadge label={badgeTitle} icon={badgeIcon} bgColor='var(--lime50)' />;
 
     useAppStatus(isLoadingRecipeById, isErrorRecipeById, parseError(errorRecipeByID));
 
@@ -101,7 +89,7 @@ export const RecipePage = () => {
                     }}
                 >
                     <Flex gridArea='badges' gap={{ xl: '16px', base: '8px' }} wrap='wrap'>
-                        {/* {badges} */}
+                        <Badge />
                     </Flex>
                     <RecipeStatIcons
                         gridArea='stats'

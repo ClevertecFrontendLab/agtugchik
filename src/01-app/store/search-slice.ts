@@ -92,14 +92,15 @@ export const searchBarSlice = createSlice({
             state.isActiveFilters = false;
         },
     },
+    selectors: {
+        isOpenFilterDrawerSelector: (state) => state.isOpenFilterDrawer,
+        searchBarValueSelector: (state) => state.searchBarValue,
+        excludeAllergensSelector: (state) => state.excludeAllergens,
+    },
 });
 
-export const isOpenFilterDrawerSelector = (state: ApplicationState) =>
-    state.searchBar.isOpenFilterDrawer;
-export const searchBarValueSelector = (state: ApplicationState) => state.searchBar.searchBarValue;
-export const excludeAllergensSelector = (state: ApplicationState) =>
-    state.searchBar.excludeAllergens;
 export const searchSliceSelector = (state: ApplicationState) => state.searchBar;
+
 export const {
     setSearchBarValue,
     toggleIsOpenFilterDrawer,
@@ -113,4 +114,6 @@ export const {
     setSearchLoading,
     resetFilters,
 } = searchBarSlice.actions;
+export const { isOpenFilterDrawerSelector, searchBarValueSelector, excludeAllergensSelector } =
+    searchBarSlice.selectors;
 export default searchBarSlice.reducer;

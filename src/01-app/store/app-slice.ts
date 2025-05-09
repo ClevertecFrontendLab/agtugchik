@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { Category } from '~/07-shared/types/api';
 
-import { ApplicationState } from './configure-store';
 export type AppState = typeof initialState;
 
 function getInitialCategories(): Category[] {
@@ -34,10 +33,13 @@ export const appSlice = createSlice({
             localStorage.setItem('appCategories', JSON.stringify(categories));
         },
     },
+    selectors: {
+        userLoadingSelector: (state) => state.isLoading,
+        userErrorSelector: (state) => state.error,
+        appCategoriesSelector: (state) => state.categories,
+    },
 });
-export const userLoadingSelector = (state: ApplicationState) => state.app.isLoading;
-export const userErrorSelector = (state: ApplicationState) => state.app.error;
-export const appCategoriesSelector = (state: ApplicationState) => state.app.categories;
 
 export const { setAppError, setAppLoader, setAppCategories } = appSlice.actions;
+export const { userLoadingSelector, userErrorSelector, appCategoriesSelector } = appSlice.selectors;
 export default appSlice.reducer;

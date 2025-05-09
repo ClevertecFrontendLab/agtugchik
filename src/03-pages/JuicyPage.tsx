@@ -4,7 +4,7 @@ import { useGetRecipesQuery, useLazyGetRecipesQuery } from '~/01-app/query/servi
 import { PageHeader, PageSection } from '~/04-widgets';
 import { RelevantKitchen } from '~/04-widgets';
 import { RecipeList } from '~/05-features';
-import useAppStatus from '~/07-shared/hooks/use-app-status';
+import { useAppStatus } from '~/07-shared/hooks';
 import { parseError } from '~/07-shared/lib';
 import { Recipe } from '~/07-shared/types/api';
 

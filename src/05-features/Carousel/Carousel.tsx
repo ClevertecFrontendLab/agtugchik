@@ -8,7 +8,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { useGetRecipesQuery } from '~/01-app/query/services/recipes';
 import { NewRecipeCard } from '~/06-entites';
-import useAppStatus from '~/07-shared/hooks/use-app-status';
+import { useAppStatus } from '~/07-shared/hooks';
 import { parseError } from '~/07-shared/lib';
 
 import { ArrowButton } from './ui/ArrowButton';

@@ -1,7 +1,7 @@
 import { appCategoriesSelector } from '~/01-app/store/app-slice';
 import { useAppSelector } from '~/01-app/store/hooks';
 
-const useGetCardValues = (categoryId: string, id: string) => {
+export const useGetCardValues = (categoryId: string, id: string) => {
     const categories = useAppSelector(appCategoriesSelector);
     const category = categories
         ?.filter((category) => category.icon)
@@ -23,5 +23,3 @@ const useGetCardValues = (categoryId: string, id: string) => {
         badgeIcon: item?.icon as string,
     };
 };
-
-export default useGetCardValues;

@@ -8,7 +8,7 @@ import { AppPaths } from '~/01-app/router/consts/app-paths';
 import { appCategoriesSelector } from '~/01-app/store/app-slice';
 import { burgerActiveSelector, toggleBurger } from '~/01-app/store/burger-slice';
 import { useAppDispatch, useAppSelector } from '~/01-app/store/hooks';
-import useAppStatus from '~/07-shared/hooks/use-app-status';
+import { useAppStatus } from '~/07-shared/hooks';
 import { getCategoryPath, getRecipePath, getSubcategoryPath, parseError } from '~/07-shared/lib';
 
 const theJuiciest = {

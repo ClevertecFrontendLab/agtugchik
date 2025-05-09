@@ -1,9 +1,9 @@
 import { ApiEndpoints } from '~/01-app/query/constants/api';
 import { ApiGroupNames } from '~/01-app/query/constants/api-group-names';
-import { baseSrcUrl } from '~/01-app/query/constants/base-api-url';
 import { EndpointNames } from '~/01-app/query/constants/endpoint-names';
 import { Tags } from '~/01-app/query/constants/tags';
 import { apiSlice } from '~/01-app/query/create-api';
+import { normalizeRecipe, normalizeRecipeArray } from '~/07-shared/lib';
 import { GetRecipesParams, Recipe, RecipeResponse } from '~/07-shared/types/api';
 
 interface GetRecipesByCategoryParams extends GetRecipesParams {
@@ -26,22 +26,7 @@ export const recipesApiSlice = apiSlice
                     apiGroupName: ApiGroupNames.RECIPE,
                     name: EndpointNames.GET_RECIPES,
                 }),
-                transformResponse: (response: RecipeResponse): RecipeResponse => ({
-                    ...response,
-                    data: Array.isArray(response.data)
-                        ? response.data.map((recipe) => {
-                              const safeSteps = Array.isArray(recipe.steps) ? recipe.steps : [];
-                              return {
-                                  ...recipe,
-                                  image: recipe.image ? `${baseSrcUrl}${recipe.image}` : '',
-                                  steps: safeSteps.map((step) => ({
-                                      ...step,
-                                      image: step.image ? `${baseSrcUrl}${step.image}` : '',
-                                  })),
-                              };
-                          })
-                        : [],
-                }),
+                transformResponse: normalizeRecipeArray,
                 providesTags: [Tags.RECIPE],
                 keepUnusedDataFor: 3000,
             }),
@@ -54,22 +39,7 @@ export const recipesApiSlice = apiSlice
                     apiGroupName: ApiGroupNames.RECIPE,
                     name: EndpointNames.GET_RECIPES_BY_CATEGORY,
                 }),
-                transformResponse: (response: RecipeResponse): RecipeResponse => ({
-                    ...response,
-                    data: Array.isArray(response.data)
-                        ? response.data.map((recipe) => {
-                              const safeSteps = Array.isArray(recipe.steps) ? recipe.steps : [];
-                              return {
-                                  ...recipe,
-                                  image: recipe.image ? `${baseSrcUrl}${recipe.image}` : '',
-                                  steps: safeSteps.map((step) => ({
-                                      ...step,
-                                      image: step.image ? `${baseSrcUrl}${step.image}` : '',
-                                  })),
-                              };
-                          })
-                        : [],
-                }),
+                transformResponse: normalizeRecipeArray,
                 providesTags: [Tags.RECIPE],
             }),
 
@@ -80,17 +50,7 @@ export const recipesApiSlice = apiSlice
                     apiGroupName: ApiGroupNames.RECIPE,
                     name: EndpointNames.GET_RECIPE_BY_ID,
                 }),
-                transformResponse: (response: Recipe): Recipe => {
-                    const safeSteps = Array.isArray(response.steps) ? response.steps : [];
-                    return {
-                        ...response,
-                        image: response.image ? `${baseSrcUrl}${response.image}` : '',
-                        steps: safeSteps.map((step) => ({
-                            ...step,
-                            image: step.image ? `${baseSrcUrl}${step.image}` : '',
-                        })),
-                    };
-                },
+                transformResponse: normalizeRecipe,
                 providesTags: [Tags.RECIPE],
             }),
         }),

@@ -14,7 +14,8 @@ import {
 export const SearchInput = memo((props: InputProps) => {
     const dispatch = useAppDispatch();
     const [fetchRecipes, { data: recipes, isLoading: isLoadingRecipes }] = useLazyGetRecipesQuery();
-    const { isActiveSearch, searchBarValue, alergenFilter } = useAppSelector(searchSliceSelector);
+    const { isActiveSearch, searchBarValue, alergenFilter, activeRecipes } =
+        useAppSelector(searchSliceSelector);
 
     useEffect(() => {
         if (recipes?.data.length) dispatch(setActiveRecipes(recipes.data));
@@ -22,8 +23,7 @@ export const SearchInput = memo((props: InputProps) => {
     }, [dispatch, recipes]);
 
     useEffect(() => {
-        if (isLoadingRecipes) dispatch(setSearchLoading(true));
-        else if (!isLoadingRecipes) dispatch(setSearchLoading(false));
+        dispatch(setSearchLoading(isLoadingRecipes));
     }, [dispatch, isLoadingRecipes]);
 
     return (
@@ -46,6 +46,13 @@ export const SearchInput = memo((props: InputProps) => {
                 fontSize={{ lg: '18px', base: '14px' }}
                 color='black'
                 _placeholder={{ color: 'var(--lime800)' }}
+                borderColor={
+                    (searchBarValue || alergenFilter.length) && !activeRecipes.length
+                        ? 'var(--red500)'
+                        : (searchBarValue || alergenFilter.length) && activeRecipes.length
+                          ? 'var(--lime600)'
+                          : 'rgba(0, 0, 0, 0.48)'
+                }
                 {...props}
             />
             <InputRightElement

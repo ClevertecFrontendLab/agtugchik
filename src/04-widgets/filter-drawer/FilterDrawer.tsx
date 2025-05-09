@@ -103,8 +103,7 @@ export const FilterDrawer = () => {
     }, [dispatch, recipes]);
 
     useEffect(() => {
-        if (isLoadingRecipes) dispatch(setSearchLoading(true));
-        else if (!isLoadingRecipes) dispatch(setSearchLoading(false));
+        dispatch(setSearchLoading(isLoadingRecipes));
     }, [dispatch, isLoadingRecipes]);
 
     return (

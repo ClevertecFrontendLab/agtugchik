@@ -1,7 +1,7 @@
 import { SerializedError } from '@reduxjs/toolkit';
 import { FetchBaseQueryError } from '@reduxjs/toolkit/query';
 
-export const parseError = (error: FetchBaseQueryError | SerializedError | undefined) => {
+export const parseError = (error?: FetchBaseQueryError | SerializedError) => {
     if (!error) return 'Неизвестная ошибка';
 
     if ('status' in error) {

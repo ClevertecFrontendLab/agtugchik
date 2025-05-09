@@ -6,11 +6,12 @@ import { useGetRecipesByCategoryQuery } from '~/01-app/query/services/recipes';
 import { appCategoriesSelector } from '~/01-app/store/app-slice';
 import { useAppSelector } from '~/01-app/store/hooks';
 import { PageSubtitle, SectionTitle } from '~/07-shared/components';
-import useAppStatus from '~/07-shared/hooks/use-app-status';
+import { useAppStatus } from '~/07-shared/hooks';
 import { parseError } from '~/07-shared/lib';
 import getRandomItemFromArray from '~/07-shared/lib/get-random-item-from-array';
-import { Category, Recipe } from '~/07-shared/types/api';
+import { Category } from '~/07-shared/types/api';
 
+import { mapValidRecipes } from './lib/map-valid-recipes';
 import { FastRecipe } from './ui/FastRecipe';
 import FooterCard from './ui/FooterCard';
 
@@ -92,19 +93,15 @@ export const RelevantKitchen = memo(({ children, ...props }: Props) => {
                 gap={{ xl: '24px', base: '16px' }}
                 gridTemplateColumns={{ md: '1fr 1fr', base: '1fr' }}
             >
-                {Array.isArray(recipes?.data) &&
-                    recipes.data
-                        .filter((r): r is Recipe => r && !!r._id)
-                        .slice(0, 2)
-                        .map((recipe) => <FooterCard key={recipe._id} recipe={recipe} />)}
+                {mapValidRecipes(recipes?.data, 0, 2, (recipe) => (
+                    <FooterCard key={recipe._id} recipe={recipe} />
+                ))}
             </Grid>
 
             <Grid gridTemplateRows='1fr' gridArea='fast' rowGap='12px' w='100%'>
-                {Array.isArray(recipes?.data) &&
-                    recipes.data
-                        .filter((r): r is Recipe => r && !!r._id)
-                        .slice(2, 3)
-                        .map((recipe) => <FastRecipe key={recipe._id} recipe={recipe} />)}
+                {mapValidRecipes(recipes?.data, 2, 3, (recipe) => (
+                    <FastRecipe key={recipe._id} recipe={recipe} />
+                ))}
             </Grid>
         </Grid>
     );

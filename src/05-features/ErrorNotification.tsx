@@ -77,9 +77,7 @@ export const ErrorNotification = () => {
                         </Alert>
                     </Box>
                 </Portal>
-            ) : (
-                <></>
-            )}
+            ) : null}
         </>
     );
 };

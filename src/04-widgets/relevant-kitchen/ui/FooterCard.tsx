@@ -2,7 +2,7 @@ import { CardBody, CardFooter, CardProps } from '@chakra-ui/react';
 
 import { RecipeStatIcons } from '~/06-entites';
 import { AppBadge, AppCard, AppCardText, AppCardTitle } from '~/07-shared/components';
-import useGetCardValues from '~/07-shared/hooks/use-get-card-values';
+import { useGetCardValues } from '~/07-shared/hooks';
 import { Recipe } from '~/07-shared/types/api';
 
 interface Props extends CardProps {

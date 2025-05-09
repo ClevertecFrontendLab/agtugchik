@@ -3,7 +3,7 @@ import { memo } from 'react';
 import { useNavigate } from 'react-router';
 
 import { AppBadge, AppCard, AppCardText, AppCardTitle } from '~/07-shared/components';
-import useGetCardValues from '~/07-shared/hooks/use-get-card-values';
+import { useGetCardValues } from '~/07-shared/hooks';
 import { Recipe } from '~/07-shared/types/api';
 
 import { RecipeStatIcons } from './ui/RecipeStatIcons';

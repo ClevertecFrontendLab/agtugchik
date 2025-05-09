@@ -5,7 +5,7 @@ import { useGetCategoriesQuery } from '~/01-app/query/services/categories';
 import { setAppCategories } from '~/01-app/store/app-slice';
 import { useAppDispatch } from '~/01-app/store/hooks';
 import layoutConfig from '~/07-shared/consts/app-layout-config';
-import useAppStatus from '~/07-shared/hooks/use-app-status';
+import { useAppStatus } from '~/07-shared/hooks';
 import { parseError } from '~/07-shared/lib';
 
 interface Props {
