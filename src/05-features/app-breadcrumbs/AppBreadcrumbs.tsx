@@ -4,23 +4,13 @@ import { memo, useMemo } from 'react';
 import { Link, useLocation } from 'react-router';
 
 import { useGetRecipeByIdQuery } from '~/01-app/query/services/recipes';
-import { AppPaths } from '~/01-app/router/consts/app-paths';
 import { appCategoriesSelector } from '~/01-app/store/app-slice';
 import { burgerActiveSelector, toggleBurger } from '~/01-app/store/burger-slice';
 import { useAppDispatch, useAppSelector } from '~/01-app/store/hooks';
 import { useAppStatus } from '~/07-shared/hooks';
-import { getCategoryPath, getRecipePath, getSubcategoryPath, parseError } from '~/07-shared/lib';
+import { parseError } from '~/07-shared/lib';
 
-const theJuiciest = {
-    title: 'Самое сочное',
-    category: AppPaths.JUICY.replace('/', ''),
-    subCategories: [],
-};
-
-interface Crumb {
-    label: string;
-    to: string;
-}
+import { getBreadcrumbs } from './lib/get-breadcrumbs';
 
 export const AppBreadcrumbs = memo((props: BreadcrumbProps) => {
     const categories = useAppSelector(appCategoriesSelector);
@@ -38,39 +28,17 @@ export const AppBreadcrumbs = memo((props: BreadcrumbProps) => {
         error: errorRecipeById,
     } = useGetRecipeByIdQuery({ id }, { skip: !id });
 
-    const crumbs: Crumb[] = useMemo(() => {
-        if (!categories) return [];
-
-        const categoryItem = [...categories, theJuiciest].find((c) => c.category === category);
-        const subcategoryItem = categoryItem?.subCategories?.find(
-            (sc) => sc.category === subcategory,
-        );
-
-        const result: Crumb[] = [{ label: 'Главная', to: '/' }];
-
-        if (categoryItem) {
-            result.push({
-                label: categoryItem.title,
-                to: getCategoryPath(categoryItem.category),
-            });
-        }
-
-        if (categoryItem && subcategoryItem) {
-            result.push({
-                label: subcategoryItem.title,
-                to: getSubcategoryPath(categoryItem.category, subcategoryItem.category),
-            });
-        }
-
-        if (id && categoryItem && subcategoryItem && recipeItem) {
-            result.push({
-                label: recipeItem.title,
-                to: getRecipePath(categoryItem.category, subcategoryItem.category, recipeItem._id),
-            });
-        }
-
-        return result;
-    }, [categories, category, subcategory, recipeItem, id]);
+    const crumbs = useMemo(
+        () =>
+            getBreadcrumbs({
+                category,
+                subcategory,
+                id,
+                categories,
+                recipeItem,
+            }),
+        [categories, category, subcategory, recipeItem, id],
+    );
 
     useAppStatus(isLoadingRecipeById, isErrorRecipeById, parseError(errorRecipeById));
 

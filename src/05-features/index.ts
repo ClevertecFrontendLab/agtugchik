@@ -1,4 +1,4 @@
-export { AppBreadcrumbs } from './AppBreadcrumbs';
+export { AppBreadcrumbs } from './app-breadcrumbs/AppBreadcrumbs';
 export { AppLoader } from './AppLoader';
 export { Carousel } from './Carousel/Carousel';
 export { CategoryRedirect } from './CategoyRedirect';
