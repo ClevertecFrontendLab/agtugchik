@@ -5,6 +5,7 @@ export { AppCard } from './AppCard';
 export { AppCardText } from './AppCardText';
 export { AppCardTitle } from './AppCardTitle';
 export { AppCheckbox } from './AppCheckbox';
+export { AppSpinner } from './AppSpinner';
 export { AppSwitch } from './AppSwitch';
 export { BurgerButton } from './BurgerButton';
 export { Logo } from './Logo';

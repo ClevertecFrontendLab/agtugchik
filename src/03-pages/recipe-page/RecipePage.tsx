@@ -1,8 +1,8 @@
 import { Avatar, Flex, Grid, Image, Text, VStack } from '@chakra-ui/react';
 import { useParams } from 'react-router';
 
+import { useGetRecipeByIdQuery } from '~/01-app/query/services/recipes';
 import { PageSection } from '~/04-widgets';
-import accordionItemProps from '~/04-widgets/navigation/consts/accordion-item-props';
 import { NewRecipiesSection } from '~/04-widgets/NewRecipiesSection';
 import { RecipeStatIcons } from '~/06-entites';
 import author from '~/07-shared/assets/png/author.png';
@@ -20,7 +20,8 @@ import {
     SectionTitle,
     StatIcon,
 } from '~/07-shared/components';
-import mockRecipies, { Recipe } from '~/07-shared/consts/mockRecipes';
+import { useAppStatus, useGetCardValues } from '~/07-shared/hooks';
+import { parseError } from '~/07-shared/lib';
 
 import { PageLayout } from '../ui/PageLayout';
 import Ingridients from './components/Ingridients';
@@ -33,22 +34,20 @@ export const RecipePage = () => {
         subcategory: string;
     }>();
 
-    const recipe = mockRecipies.find((recipe) => recipe.id === id) as Recipe;
-
-    const badges = recipe.category.map((badge) => {
-        const item = accordionItemProps.find((item) =>
-            item.path.includes(badge),
-        ) as (typeof accordionItemProps)[0];
-
-        return (
-            <AppBadge
-                key={item.label}
-                icon={item.icon}
-                label={item.label}
-                bgColor='var(--lime50)'
-            />
-        );
+    const {
+        data: recipe,
+        isLoading: isLoadingRecipeById,
+        isError: isErrorRecipeById,
+        error: errorRecipeByID,
+    } = useGetRecipeByIdQuery({
+        id: id as string,
     });
+    const { badgeTitle, badgeIcon } = useGetCardValues(recipe?.categoriesIds[0] || '', id || '');
+
+    const Badge = () => <AppBadge label={badgeTitle} icon={badgeIcon} bgColor='var(--lime50)' />;
+
+    useAppStatus(isLoadingRecipeById, isErrorRecipeById, parseError(errorRecipeByID));
+
     return (
         <PageLayout>
             <Text display='none'>
@@ -63,7 +62,7 @@ export const RecipePage = () => {
                 w='100%'
             >
                 <Image
-                    src={recipe.image}
+                    src={recipe?.image}
                     w={{ xl: '553px', lg: '353px', md: '232px', base: '100%' }}
                     h={{ lg: '410px', base: '224px' }}
                     borderRadius='8px'
@@ -90,25 +89,25 @@ export const RecipePage = () => {
                     }}
                 >
                     <Flex gridArea='badges' gap={{ xl: '16px', base: '8px' }} wrap='wrap'>
-                        {badges}
+                        <Badge />
                     </Flex>
                     <RecipeStatIcons
                         gridArea='stats'
                         justify='end'
-                        bookmarks={recipe.bookmarks}
-                        likes={recipe.likes}
+                        bookmarks={recipe?.bookmarks || 0}
+                        likes={recipe?.likes || 0}
                     />
                     <PageTitle
                         gridArea='title'
                         textAlign='start'
-                        title={recipe.title}
+                        title={recipe?.title || ''}
                         maxW='528px'
                     />
                     <PageSubtitle
                         color='black'
                         gridArea='subtitle'
                         textAlign='start'
-                        subtitle={recipe.description}
+                        subtitle={recipe?.description || ''}
                         noOfLines={3}
                         height='min-content'
                         maxW={{ xl: '528px', base: '100%' }}
@@ -116,7 +115,7 @@ export const RecipePage = () => {
                     <AppBadge
                         gridArea='time'
                         icon={alarmClock}
-                        label={recipe.time}
+                        label={String(recipe?.time)}
                         bgColor='rgba(0, 0, 0, 0.06)'
                         alignSelf='end'
                     />
@@ -147,11 +146,11 @@ export const RecipePage = () => {
                     </AppButton>
                 </Grid>
             </PageSection>
-            <NutritionValues {...recipe.nutritionValue} />
-            <Ingridients ingridients={recipe.ingredients} />
+            <NutritionValues {...recipe?.nutritionValue} />
+            <Ingridients portions={recipe?.portions || 0} ingridients={recipe?.ingredients || []} />
             <PageSection maxW='668px'>
                 <SectionTitle title='Шаги приготовления' />
-                {recipe.steps.map((step) => (
+                {recipe?.steps?.map?.((step) => (
                     <AppCard
                         display='grid'
                         key={step.stepNumber}

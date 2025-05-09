@@ -2,18 +2,36 @@ import 'swiper/css';
 
 import { Box, BoxProps, Portal, useBreakpointValue } from '@chakra-ui/react';
 import { memo, useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router';
 import type { Swiper as SwiperType } from 'swiper';
 import { Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
+import { useGetRecipesQuery } from '~/01-app/query/services/recipes';
 import { NewRecipeCard } from '~/06-entites';
-import recipes from '~/07-shared/consts/mockRecipes';
+import { useAppStatus } from '~/07-shared/hooks';
+import { parseError } from '~/07-shared/lib';
 
 import { ArrowButton } from './ui/ArrowButton';
 
 export const Carousel = memo((props: BoxProps) => {
-    const navigate = useNavigate();
+    const {
+        data: newestRecipes,
+        isLoading: isLoadingRecipes,
+        isError: isErrorRecipes,
+        error: errorRecipes,
+    } = useGetRecipesQuery({
+        page: 1,
+        limit: 10,
+        sortBy: 'createdAt',
+        sortOrder: 'desc',
+    });
+
+    const newR = newestRecipes?.data ? [...newestRecipes.data] : [];
+
+    if (newR[3] && newR[1]) {
+        newR[3] = newR[1];
+    }
+
     const cardWidth = useBreakpointValue({
         base: '158px',
         lg: '279px',
@@ -52,6 +70,8 @@ export const Carousel = memo((props: BoxProps) => {
         };
     }, []);
 
+    useAppStatus(isLoadingRecipes, isErrorRecipes, parseError(errorRecipes));
+
     return (
         <>
             <Portal>
@@ -85,34 +105,29 @@ export const Carousel = memo((props: BoxProps) => {
                     data-test-id='carousel'
                     slidesPerView='auto'
                     spaceBetween={spaceBetween}
-                    loop={true}
+                    loop={(newestRecipes?.data?.length ?? 0) === 10}
                     modules={[Navigation]}
                     onSwiper={(swiper) => (swiperRef.current = swiper)}
                     style={{ width: '100%', overflow: 'visible' }}
                 >
-                    {recipes
-                        .concat(recipes)
-                        .slice(0, 10)
-                        .map((recipe, index) => (
-                            <SwiperSlide
-                                onClick={() => {
-                                    navigate(
-                                        `/${recipe.category[0]}/${recipe.subcategory[0]}/${recipe.id}`,
-                                    );
-                                }}
+                    {(newR || []).map((recipe, index) => (
+                        <SwiperSlide
+                            key={index}
+                            style={{
+                                width: cardWidth,
+                                minWidth: cardWidth,
+                                maxWidth: cardWidth,
+                                flexShrink: 0,
+                                overflow: 'hidden',
+                            }}
+                        >
+                            <NewRecipeCard
                                 data-test-id={`carousel-card-${index}`}
-                                key={index}
-                                style={{
-                                    width: cardWidth,
-                                    minWidth: cardWidth,
-                                    maxWidth: cardWidth,
-                                    flexShrink: 0,
-                                    overflow: 'hidden',
-                                }}
-                            >
-                                <NewRecipeCard recipe={recipe} />
-                            </SwiperSlide>
-                        ))}
+                                recipe={recipe}
+                                index={index}
+                            />
+                        </SwiperSlide>
+                    ))}
                 </Swiper>
             </Box>
         </>

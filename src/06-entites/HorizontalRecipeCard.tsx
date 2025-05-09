@@ -9,14 +9,14 @@ import {
     Text,
 } from '@chakra-ui/react';
 import { memo } from 'react';
-import { useLocation, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 
 import { useAppSelector } from '~/01-app/store/hooks';
 import { searchBarValueSelector } from '~/01-app/store/search-slice';
-import accordionItemProps from '~/04-widgets/navigation/consts/accordion-item-props';
 import bookmark from '~/07-shared/assets/svg/bookmark.svg';
 import { AppBadge, AppButton, AppCard, AppCardText, AppCardTitle } from '~/07-shared/components';
-import { Recipe } from '~/07-shared/consts/mockRecipes';
+import { useGetCardValues } from '~/07-shared/hooks';
+import { Recipe } from '~/07-shared/types/api';
 
 import { RecipeStatIcons } from './new-recipe-card/ui/RecipeStatIcons';
 
@@ -25,29 +25,18 @@ interface Props extends CardProps {
     index: number;
 }
 
-const Badge = ({ label, icon }: { label: string; icon: string }) => (
-    <AppBadge label={label} icon={icon} bgColor='var(--lime50)' />
-);
-
 export const HorizontalRecipeCard = memo(({ recipe, index, ...props }: Props) => {
-    const { title, image, description, bookmarks, likes, category, subcategory, id } = recipe;
-    const { pathname } = useLocation();
+    const { title, image, description, bookmarks, likes, _id: id, categoriesIds } = recipe;
     const navigate = useNavigate();
+    const { fullPath, badgeTitle, badgeIcon } = useGetCardValues(categoriesIds[0], id);
     const searchBarValue = useAppSelector(searchBarValueSelector);
 
-    const CardBadge = () => {
-        const accordionItem = accordionItemProps.find((item) =>
-            item.path.startsWith(`/${category[0]}`),
-        );
-
-        return (
-            <Badge label={accordionItem?.label as string} icon={accordionItem?.icon as string} />
-        );
-    };
+    const CardBadge = () => (
+        <AppBadge label={badgeTitle} icon={badgeIcon} bgColor='var(--lime50)' />
+    );
 
     const cookHandler = () => {
-        if (pathname !== '/') navigate(`${pathname}/${id}`);
-        else navigate(`/${category[0]}/${subcategory[0]}/${id}`);
+        navigate(fullPath);
     };
 
     return (

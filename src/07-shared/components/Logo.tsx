@@ -2,7 +2,7 @@ import { HStack, Image, StackProps } from '@chakra-ui/react';
 import { memo } from 'react';
 import { useNavigate } from 'react-router';
 
-import { AppPaths } from '~/01-app';
+import { AppPaths } from '~/01-app/router/consts/app-paths';
 import logo1 from '~/07-shared/assets/svg/logo1.svg';
 import logo2 from '~/07-shared/assets/svg/logo2.svg';
 

@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { Recipe } from '~/07-shared/types/api';
+
 import { ApplicationState } from './configure-store';
 
 export type SearchBarState = typeof initialState;
@@ -12,9 +14,10 @@ const initialState = {
     alergenFilter: [] as string[],
     categoryFilter: [] as string[],
     excludeAllergens: false,
+    activeRecipes: [] as Recipe[],
+    searchLoading: false,
     isActiveFilters: false,
-    startFilter: false,
-    isFoundRecipes: false,
+    isActiveSearch: false,
 };
 
 const toggleValueInArray = <T>(array: T[], value: T): T[] =>
@@ -36,7 +39,11 @@ const updateFilter = (
         state.alergenFilter.length > 0 ||
         state.categoryFilter.length > 0;
 
+    const hasActiveAlergensOrSearchValue =
+        state.alergenFilter.length > 0 || state.searchBarValue.length > 2;
+
     state.isActiveFilters = hasAnyActiveFilters;
+    state.isActiveSearch = hasActiveAlergensOrSearchValue;
 };
 
 export const searchBarSlice = createSlice({
@@ -45,7 +52,8 @@ export const searchBarSlice = createSlice({
     reducers: {
         setSearchBarValue: (state, { payload: value }: PayloadAction<string>) => {
             state.searchBarValue = value;
-            state.startFilter = true;
+            state.isActiveSearch =
+                state.alergenFilter.length > 0 || state.searchBarValue.length > 2;
         },
         toggleIsOpenFilterDrawer: (state) => {
             state.isOpenFilterDrawer = !state.isOpenFilterDrawer;
@@ -66,6 +74,15 @@ export const searchBarSlice = createSlice({
         toggleCategoryValue: (state, { payload: value }: PayloadAction<string>) => {
             updateFilter(state, 'categoryFilter', value);
         },
+        toggleOpenFilterDrawer: (state) => {
+            state.isOpenFilterDrawer = false;
+        },
+        setActiveRecipes: (state, { payload: value }: PayloadAction<Recipe[]>) => {
+            state.activeRecipes = value;
+        },
+        setSearchLoading: (state, { payload: value }: PayloadAction<boolean>) => {
+            state.searchLoading = value;
+        },
         resetFilters: (state) => {
             state.meatFilter = [];
             state.sideDishFilter = [];
@@ -73,26 +90,18 @@ export const searchBarSlice = createSlice({
             state.categoryFilter = [];
             state.excludeAllergens = false;
             state.isActiveFilters = false;
-            state.startFilter = false;
         },
-        toggleStartFilter: (state) => {
-            state.isOpenFilterDrawer = false;
-            state.startFilter = !state.startFilter;
-        },
-        setFoundRecipes: (state, { payload: value }: PayloadAction<boolean>) => {
-            state.isFoundRecipes = value;
-        },
+    },
+    selectors: {
+        isOpenFilterDrawerSelector: (state) => state.isOpenFilterDrawer,
+        searchBarValueSelector: (state) => state.searchBarValue,
+        excludeAllergensSelector: (state) => state.excludeAllergens,
     },
 });
 
-export const isOpenFilterDrawerSelector = (state: ApplicationState) =>
-    state.searchBar.isOpenFilterDrawer;
-export const searchBarValueSelector = (state: ApplicationState) => state.searchBar.searchBarValue;
-export const excludeAllergensSelector = (state: ApplicationState) =>
-    state.searchBar.excludeAllergens;
 export const searchSliceSelector = (state: ApplicationState) => state.searchBar;
+
 export const {
-    setFoundRecipes,
     setSearchBarValue,
     toggleIsOpenFilterDrawer,
     setExcludeAllergens,
@@ -100,7 +109,11 @@ export const {
     toggleMeatValue,
     toggleSideDishValue,
     toggleCategoryValue,
+    toggleOpenFilterDrawer,
+    setActiveRecipes,
+    setSearchLoading,
     resetFilters,
-    toggleStartFilter,
 } = searchBarSlice.actions;
+export const { isOpenFilterDrawerSelector, searchBarValueSelector, excludeAllergensSelector } =
+    searchBarSlice.selectors;
 export default searchBarSlice.reducer;

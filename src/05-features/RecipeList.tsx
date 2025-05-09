@@ -2,7 +2,7 @@ import { Grid, GridProps } from '@chakra-ui/react';
 import { memo } from 'react';
 
 import { HorizontalRecipeCard } from '~/06-entites';
-import { Recipe } from '~/07-shared/consts/mockRecipes';
+import { Recipe } from '~/07-shared/types/api';
 
 interface Props extends GridProps {
     activeRecipes: Recipe[];
@@ -18,7 +18,7 @@ export const RecipeList = memo(({ activeRecipes, ...props }: Props) => (
             <HorizontalRecipeCard
                 index={index}
                 data-test-id={`food-card-${index}`}
-                key={recipe.id}
+                key={index}
                 recipe={recipe}
             />
         ))}

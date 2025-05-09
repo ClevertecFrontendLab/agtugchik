@@ -4,12 +4,12 @@ import { ValueBox } from './ValueBox';
 
 interface Props {
     calories: number;
-    proteins: number;
+    protein: number;
     fats: number;
     carbohydrates: number;
 }
 
-export const NutritionValues = ({ calories, proteins, fats, carbohydrates }: Props) => (
+export const NutritionValues = ({ calories, protein, fats, carbohydrates }: Partial<Props>) => (
     <VStack alignItems='start' w={{ md: 'max-content', base: '100%' }}>
         <Text
             fontFamily='var(--font-family)'
@@ -22,10 +22,10 @@ export const NutritionValues = ({ calories, proteins, fats, carbohydrates }: Pro
             * Калорийность на 1 порцию
         </Text>
         <Stack spacing='24px' flexDirection={{ md: 'row', base: 'column' }} width='100%'>
-            <ValueBox title='калорийность' value={calories} unit='ККАЛ' />
-            <ValueBox title='белки' value={proteins} unit='ГРАММ' />
-            <ValueBox title='жиры' value={fats} unit='ГРАММ' />
-            <ValueBox title='углеводы' value={carbohydrates} unit='ГРАММ' />
+            <ValueBox title='калорийность' value={calories || 0} unit='ККАЛ' />
+            <ValueBox title='белки' value={protein || 0} unit='ГРАММ' />
+            <ValueBox title='жиры' value={fats || 0} unit='ГРАММ' />
+            <ValueBox title='углеводы' value={carbohydrates || 0} unit='ГРАММ' />
         </Stack>
     </VStack>
 );

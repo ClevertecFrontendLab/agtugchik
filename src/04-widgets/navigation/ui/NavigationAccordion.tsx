@@ -2,15 +2,17 @@ import { Accordion } from '@chakra-ui/react';
 import { memo, useEffect, useRef, useState } from 'react';
 import { useLocation } from 'react-router';
 
+import { appCategoriesSelector } from '~/01-app/store/app-slice';
+import { useAppSelector } from '~/01-app/store/hooks';
 import { AppAccordionItem } from '~/04-widgets/navigation/ui';
 
-import accordionItemProps from '../consts/accordion-item-props';
-
 export const NavigationAccordion = memo(() => {
+    const cat = useAppSelector(appCategoriesSelector);
     const accordionRef = useRef<HTMLDivElement | null>(null);
     const [hasScrollbar, setHasScrollbar] = useState(false);
     const [activeIndex, setActiveIndex] = useState(-1);
     const location = useLocation();
+    const categories = (cat || []).filter((c) => c.icon);
 
     useEffect(() => {
         const checkScrollbar = () => {
@@ -31,11 +33,9 @@ export const NavigationAccordion = memo(() => {
 
     useEffect(() => {
         const activePath = location.pathname.split('/')[1];
-        const newActiveIndex = accordionItemProps.findIndex(
-            (item) => item.path === `/${activePath}`,
-        );
+        const newActiveIndex = categories.findIndex((category) => category.category === activePath);
         setActiveIndex(newActiveIndex);
-    }, [location]);
+    }, [location, categories]);
 
     return (
         <Accordion
@@ -60,8 +60,8 @@ export const NavigationAccordion = memo(() => {
                 },
             }}
         >
-            {accordionItemProps.map((itemProps, index) => (
-                <AppAccordionItem key={index} {...itemProps} />
+            {categories.map((category) => (
+                <AppAccordionItem key={category._id} {...category} />
             ))}
         </Accordion>
     );

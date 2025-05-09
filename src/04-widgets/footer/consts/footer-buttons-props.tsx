@@ -2,7 +2,7 @@ import { EditIcon, SearchIcon } from '@chakra-ui/icons';
 import { Image, Stack } from '@chakra-ui/react';
 import { ReactElement } from 'react';
 
-import { AppPaths } from '~/01-app';
+import { AppPaths } from '~/01-app/router/consts/app-paths';
 import avatar from '~/07-shared/assets/png/avatar.png';
 import home from '~/07-shared/assets/svg/home-button.svg';
 

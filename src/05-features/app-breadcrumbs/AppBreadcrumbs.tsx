@@ -1,25 +1,19 @@
 import { ChevronRightIcon } from '@chakra-ui/icons';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbProps } from '@chakra-ui/react';
+import { memo, useMemo } from 'react';
 import { Link, useLocation } from 'react-router';
 
-import { AppPaths } from '~/01-app';
+import { useGetRecipeByIdQuery } from '~/01-app/query/services/recipes';
+import { appCategoriesSelector } from '~/01-app/store/app-slice';
 import { burgerActiveSelector, toggleBurger } from '~/01-app/store/burger-slice';
 import { useAppDispatch, useAppSelector } from '~/01-app/store/hooks';
-import accordionItemProps from '~/04-widgets/navigation/consts/accordion-item-props';
-import recipes from '~/07-shared/consts/mockRecipes';
+import { useAppStatus } from '~/07-shared/hooks';
+import { parseError } from '~/07-shared/lib';
 
-const additionalRoute = [
-    {
-        path: AppPaths.JUICY,
-        label: 'Самое сочное',
-        icon: '',
-        subroutes: [],
-    },
-];
+import { getBreadcrumbs } from './lib/get-breadcrumbs';
 
-const itemProps = [...accordionItemProps, ...additionalRoute];
-
-export const AppBreadcrumbs = (props: BreadcrumbProps) => {
+export const AppBreadcrumbs = memo((props: BreadcrumbProps) => {
+    const categories = useAppSelector(appCategoriesSelector);
     const dispatch = useAppDispatch();
     const location = useLocation();
     const segments = location.pathname.split('/').filter(Boolean);
@@ -27,30 +21,26 @@ export const AppBreadcrumbs = (props: BreadcrumbProps) => {
 
     const [category, subcategory, id] = segments;
 
-    const categoryItem = itemProps.find((item) => item.path.split('/')[1] === category);
-    const subcategoryItem = categoryItem?.subroutes?.find(
-        (sub) => sub.path.split('/')[2] === subcategory,
-    );
-    const idItem = recipes.find((recipe) => recipe.id === id);
+    const {
+        data: recipeItem,
+        isLoading: isLoadingRecipeById,
+        isError: isErrorRecipeById,
+        error: errorRecipeById,
+    } = useGetRecipeByIdQuery({ id }, { skip: !id });
 
-    const crumbs = [
-        {
-            label: 'Главная',
-            to: '/',
-        },
-        categoryItem && {
-            label: categoryItem.label,
-            to: categoryItem.path,
-        },
-        subcategoryItem && {
-            label: subcategoryItem.label,
-            to: subcategoryItem.path,
-        },
-        idItem && {
-            label: idItem.title,
-            to: idItem.id,
-        },
-    ].filter(Boolean);
+    const crumbs = useMemo(
+        () =>
+            getBreadcrumbs({
+                category,
+                subcategory,
+                id,
+                categories,
+                recipeItem,
+            }),
+        [categories, category, subcategory, recipeItem, id],
+    );
+
+    useAppStatus(isLoadingRecipeById, isErrorRecipeById, parseError(errorRecipeById));
 
     return (
         <Breadcrumb
@@ -72,7 +62,7 @@ export const AppBreadcrumbs = (props: BreadcrumbProps) => {
                 const isLast = index === crumbs.length - 1;
 
                 return (
-                    <BreadcrumbItem key={crumb!.to} isCurrentPage={isLast} whiteSpace='nowrap'>
+                    <BreadcrumbItem key={crumb.to} isCurrentPage={isLast} whiteSpace='nowrap'>
                         {isLast ? (
                             <span
                                 style={{
@@ -84,12 +74,12 @@ export const AppBreadcrumbs = (props: BreadcrumbProps) => {
                                     color: '#000',
                                 }}
                             >
-                                {crumb!.label}
+                                {crumb.label}
                             </span>
                         ) : (
                             <BreadcrumbLink
                                 as={Link}
-                                to={crumb!.to}
+                                to={crumb.to}
                                 fontFamily='var(--font-family)'
                                 fontWeight={400}
                                 fontSize='16px'
@@ -101,7 +91,7 @@ export const AppBreadcrumbs = (props: BreadcrumbProps) => {
                                     if (isOpenBurger) dispatch(toggleBurger());
                                 }}
                             >
-                                {crumb!.label}
+                                {crumb.label}
                             </BreadcrumbLink>
                         )}
                     </BreadcrumbItem>
@@ -109,4 +99,4 @@ export const AppBreadcrumbs = (props: BreadcrumbProps) => {
             })}
         </Breadcrumb>
     );
-};
+});

@@ -1,3 +1,5 @@
+export { CategoryPage } from './CategoryPage';
 export { HomePage } from './HomePage';
 export { JuicyPage } from './JuicyPage';
-export { VeganPage } from './VeganPage';
+export { NotFoundPage } from './NotFoundPage';
+export { RecipePage } from './recipe-page/RecipePage';

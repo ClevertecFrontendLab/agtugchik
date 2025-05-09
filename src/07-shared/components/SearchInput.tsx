@@ -1,19 +1,38 @@
 import { SearchIcon } from '@chakra-ui/icons';
 import { IconButton, Input, InputGroup, InputProps, InputRightElement } from '@chakra-ui/react';
-import { memo, useState } from 'react';
+import { memo, useEffect } from 'react';
 
-import { useAppDispatch } from '~/01-app/store/hooks';
-import { setSearchBarValue } from '~/01-app/store/search-slice';
+import { useLazyGetRecipesQuery } from '~/01-app/query/services/recipes';
+import { useAppDispatch, useAppSelector } from '~/01-app/store/hooks';
+import {
+    searchSliceSelector,
+    setActiveRecipes,
+    setSearchBarValue,
+    setSearchLoading,
+} from '~/01-app/store/search-slice';
 
 export const SearchInput = memo((props: InputProps) => {
     const dispatch = useAppDispatch();
-    const [inputValue, setInputValue] = useState('');
+    const [fetchRecipes, { data: recipes, isLoading: isLoadingRecipes }] = useLazyGetRecipesQuery();
+    const { isActiveSearch, searchBarValue, alergenFilter, activeRecipes } =
+        useAppSelector(searchSliceSelector);
+
+    useEffect(() => {
+        if (recipes?.data.length) dispatch(setActiveRecipes(recipes.data));
+        else dispatch(setActiveRecipes([]));
+    }, [dispatch, recipes]);
+
+    useEffect(() => {
+        dispatch(setSearchLoading(isLoadingRecipes));
+    }, [dispatch, isLoadingRecipes]);
 
     return (
         <InputGroup maxWidth='458px' width='100%' height='100%'>
             <Input
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
+                value={searchBarValue}
+                onChange={(e) => {
+                    dispatch(setSearchBarValue(e.target.value));
+                }}
                 data-test-id='search-input'
                 placeholder='Название или ингредиент...'
                 border='1px solid rgba(0, 0, 0, 0.48)'
@@ -27,10 +46,17 @@ export const SearchInput = memo((props: InputProps) => {
                 fontSize={{ lg: '18px', base: '14px' }}
                 color='black'
                 _placeholder={{ color: 'var(--lime800)' }}
+                borderColor={
+                    (searchBarValue || alergenFilter.length) && !activeRecipes.length
+                        ? 'var(--red500)'
+                        : (searchBarValue || alergenFilter.length) && activeRecipes.length
+                          ? 'var(--lime600)'
+                          : 'rgba(0, 0, 0, 0.48)'
+                }
                 {...props}
             />
             <InputRightElement
-                pointerEvents={inputValue.length >= 3 ? 'all' : 'none'}
+                pointerEvents={isActiveSearch ? 'all' : 'none'}
                 height='100%'
                 minW={0}
                 w={{ lg: '48px', base: '32px' }}
@@ -39,13 +65,16 @@ export const SearchInput = memo((props: InputProps) => {
                 justifyContent='center'
             >
                 <IconButton
+                    disabled={!isActiveSearch}
                     onClick={() => {
-                        dispatch(setSearchBarValue(inputValue));
+                        fetchRecipes({
+                            searchString: searchBarValue ? searchBarValue : undefined,
+                            allergens: alergenFilter.length ? alergenFilter.join(',') : undefined,
+                        });
                     }}
                     data-test-id='search-button'
                     aria-label='Поиск'
                     icon={<SearchIcon color='black' boxSize={{ lg: '24px', base: '20px' }} />}
-                    variant='unstyled'
                     size='sm'
                     minW='auto'
                     height='auto'

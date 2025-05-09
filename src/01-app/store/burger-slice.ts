@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-import { ApplicationState } from './configure-store';
 export type BurgerMenuState = typeof initialState;
 
 const initialState = {
@@ -15,8 +14,9 @@ export const burgerMenuSlice = createSlice({
             state.isOpen = !state.isOpen;
         },
     },
+    selectors: { burgerActiveSelector: (state) => state.isOpen },
 });
 
-export const burgerActiveSelector = (state: ApplicationState) => state.burgerMenu.isOpen;
 export const { toggleBurger } = burgerMenuSlice.actions;
+export const { burgerActiveSelector } = burgerMenuSlice.selectors;
 export default burgerMenuSlice.reducer;

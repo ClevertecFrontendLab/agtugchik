@@ -1,31 +1,5 @@
 export const AppPaths = {
     HOME: '/',
-
-    SALADS: '/salads',
-    SNACKS: '/snacks',
-    FIRST_COURSES: '/first-courses',
-    MAIN_COURSES: '/second-dish',
-    DESSERTS: '/desserts',
-    GRILL: '/grill',
-    VEGAN: '/vegan',
-    KIDS: '/kids',
-    MEDICAL: '/medical',
-    NATIONAL: '/national',
-    SAUCES: '/sauces',
-    DRINKS: '/drinks',
-    PRESERVES: '/preserves',
     JUICY: '/the-juiciest',
-
-    VEGAN_SNACKS: '/vegan/snacks',
-    VEGAN_FIRST_COURSES: '/vegan/first-courses',
-    VEGAN_SIDE: '/vegan/second-dish',
-    VEGAN_SIDES: '/vegan/sides',
-    VEGAN_DESSERTS: '/vegan/desserts',
-    VEGAN_BAKING: '/vegan/baking',
-    VEGAN_RAW: '/vegan/raw',
-    VEGAN_DRINKS: '/vegan/drinks',
-
-    MAIN_COURSES_SIDE: '/second-dish/side-dish',
-    MAIN_COURSE_VEGETABLES: '/second-dish/vegetables',
-    MAIN_COURSES_SNACKS: '/second-dish/snacks',
+    NOT_FOUND: '/not-found',
 } as const;
