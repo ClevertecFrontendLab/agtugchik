@@ -2,9 +2,9 @@ import { Box, CardBody, CardFooter, CardProps, Image } from '@chakra-ui/react';
 import { memo } from 'react';
 import { useNavigate } from 'react-router';
 
-import { AppBadge, AppCard, AppCardText, AppCardTitle } from '~/07-shared/components';
 import { useGetCardValues } from '~/07-shared/hooks';
 import { Recipe } from '~/07-shared/types/api';
+import { AppBadge, AppCard, AppCardText, AppCardTitle } from '~/07-shared/ui';
 
 import { RecipeStatIcons } from './ui/RecipeStatIcons';
 

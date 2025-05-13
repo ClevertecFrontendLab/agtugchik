@@ -1,8 +1,8 @@
 import { Image, Text } from '@chakra-ui/react';
 
-import { AppButton, AppCard } from '~/07-shared/components';
 import { useGetCardValues } from '~/07-shared/hooks';
 import { Recipe } from '~/07-shared/types/api';
+import { AppButton, AppCard } from '~/07-shared/ui';
 
 interface Props {
     recipe: Recipe;

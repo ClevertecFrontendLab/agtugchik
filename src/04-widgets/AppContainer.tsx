@@ -2,8 +2,8 @@ import { Box } from '@chakra-ui/react';
 import { ReactNode, useEffect } from 'react';
 
 import { useGetCategoriesQuery } from '~/01-app/query/services/categories';
-import { setAppCategories } from '~/01-app/store/app-slice';
-import { useAppDispatch } from '~/01-app/store/hooks';
+import { isAuthSelector, setAppCategories } from '~/01-app/store/app-slice';
+import { useAppDispatch, useAppSelector } from '~/01-app/store/hooks';
 import layoutConfig from '~/07-shared/consts/app-layout-config';
 import { useAppStatus } from '~/07-shared/hooks';
 import { parseError } from '~/07-shared/lib';
@@ -13,6 +13,7 @@ interface Props {
 }
 
 export const AppContainer = ({ children }: Props) => {
+    const isAuth = useAppSelector(isAuthSelector);
     const dispatch = useAppDispatch();
     const {
         data: categories,
@@ -32,10 +33,14 @@ export const AppContainer = ({ children }: Props) => {
     }, [dispatch, categories]);
     return (
         <Box
-            p={{
-                lg: `${layoutConfig.header.height.xl} ${layoutConfig.sider.width} 0 ${layoutConfig.nav.width}`,
-                base: `${layoutConfig.header.height.base} 0 ${layoutConfig.footer.height.base} 0`,
-            }}
+            p={
+                isAuth
+                    ? {
+                          lg: `${layoutConfig.header.height.xl} ${layoutConfig.sider.width} 0 ${layoutConfig.nav.width}`,
+                          base: `${layoutConfig.header.height.base} 0 ${layoutConfig.footer.height.base} 0`,
+                      }
+                    : 0
+            }
             w='full'
             background='#fff'
         >

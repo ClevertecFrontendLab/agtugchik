@@ -9,10 +9,8 @@ import {
     toggleIsOpenFilterDrawer,
 } from '~/01-app/store/search-slice';
 import sbi from '~/07-shared/assets/svg/search-button-icon.svg';
-import { AppButton, AppSelector } from '~/07-shared/components';
-import { AppSwitch } from '~/07-shared/components';
-import { SearchInput } from '~/07-shared/components';
 import allergens from '~/07-shared/consts/alergens';
+import { AppButton, AppSelector, AppSwitch, SearchInput } from '~/07-shared/ui';
 
 export const SearchBar = (props: StackProps) => {
     const isDesktop = useBreakpointValue({ base: false, lg: true });

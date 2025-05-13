@@ -1,6 +1,6 @@
 import { Box, CheckboxGroup, Stack } from '@chakra-ui/react';
 
-import { AppCheckbox } from '~/07-shared/components';
+import { AppCheckbox } from '~/07-shared/ui';
 
 interface Props {
     options: { name: string; dataTestId: string }[];

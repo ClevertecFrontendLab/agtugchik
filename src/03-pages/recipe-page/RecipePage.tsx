@@ -11,6 +11,8 @@ import bookmark from '~/07-shared/assets/svg/bookmark.svg';
 import like from '~/07-shared/assets/svg/heart-eyes.svg';
 import subscribe from '~/07-shared/assets/svg/subscribe.svg';
 import subscribers from '~/07-shared/assets/svg/subscribers.svg';
+import { useAppStatus, useGetCardValues } from '~/07-shared/hooks';
+import { parseError } from '~/07-shared/lib';
 import {
     AppBadge,
     AppButton,
@@ -19,9 +21,7 @@ import {
     PageTitle,
     SectionTitle,
     StatIcon,
-} from '~/07-shared/components';
-import { useAppStatus, useGetCardValues } from '~/07-shared/hooks';
-import { parseError } from '~/07-shared/lib';
+} from '~/07-shared/ui';
 
 import { PageLayout } from '../ui/PageLayout';
 import Ingridients from './components/Ingridients';

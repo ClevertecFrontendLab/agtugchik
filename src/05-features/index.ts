@@ -4,5 +4,7 @@ export { Carousel } from './Carousel/Carousel';
 export { CategoryRedirect } from './CategoyRedirect';
 export { CreateRecipeButton } from './CreateRecipeButton';
 export { ErrorNotification } from './ErrorNotification';
+export { LoginForm } from './LoginForm';
 export { RecipeList } from './RecipeList';
+export { RegisterForm } from './registration-form/RegisterForm';
 export { SearchBar } from './search-bar/SearchBar';

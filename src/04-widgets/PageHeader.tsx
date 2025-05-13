@@ -4,7 +4,7 @@ import { memo } from 'react';
 import { useAppSelector } from '~/01-app/store/hooks';
 import { searchSliceSelector } from '~/01-app/store/search-slice';
 import { SearchBar } from '~/05-features';
-import { AppSpinner, PageSubtitle, PageTitle } from '~/07-shared/components';
+import { AppSpinner, PageSubtitle, PageTitle } from '~/07-shared/ui';
 
 interface Props {
     title: string;

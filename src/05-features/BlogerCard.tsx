@@ -1,6 +1,6 @@
 import { CardBody, CardHeader } from '@chakra-ui/react';
 
-import { AppCard, AppCardText } from '~/07-shared/components';
+import { AppCard, AppCardText } from '~/07-shared/ui';
 
 import { User } from '../06-entites/User';
 

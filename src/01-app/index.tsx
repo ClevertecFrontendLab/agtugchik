@@ -2,6 +2,7 @@ import './styles/index.scss';
 
 import {
     AppContainer,
+    AuthGuard,
     BurgerMenu,
     FilterDrawer,
     Footer,
@@ -17,13 +18,15 @@ const App = () => (
     <AppContainer>
         <AppLoader />
         <ErrorNotification />
-        <BurgerMenu />
-        <FilterDrawer />
-        <Header />
-        <Navigation />
+        <AuthGuard>
+            <BurgerMenu />
+            <FilterDrawer />
+            <Header />
+            <Navigation />
+            <Sider />
+            <Footer />
+        </AuthGuard>
         <Router />
-        <Sider />
-        <Footer />
     </AppContainer>
 );
 

@@ -28,7 +28,7 @@ import {
     toggleOpenFilterDrawer,
     toggleSideDishValue,
 } from '~/01-app/store/search-slice';
-import { AppSelector, AppSwitch } from '~/07-shared/components';
+import { AppSelector, AppSwitch } from '~/07-shared/ui';
 
 import allergens from '../../07-shared/consts/alergens';
 import { CheckboxStack } from './components/CheckBoxStack';

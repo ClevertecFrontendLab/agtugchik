@@ -17,6 +17,7 @@ const initialState = {
     isLoading: false,
     error: '' as string | null,
     categories: getInitialCategories(),
+    isAuth: false,
 };
 export const appSlice = createSlice({
     name: 'app',
@@ -37,9 +38,11 @@ export const appSlice = createSlice({
         userLoadingSelector: (state) => state.isLoading,
         userErrorSelector: (state) => state.error,
         appCategoriesSelector: (state) => state.categories,
+        isAuthSelector: (state) => state.isAuth,
     },
 });
 
 export const { setAppError, setAppLoader, setAppCategories } = appSlice.actions;
-export const { userLoadingSelector, userErrorSelector, appCategoriesSelector } = appSlice.selectors;
+export const { userLoadingSelector, userErrorSelector, appCategoriesSelector, isAuthSelector } =
+    appSlice.selectors;
 export default appSlice.reducer;

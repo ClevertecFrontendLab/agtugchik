@@ -9,9 +9,9 @@ import { RelevantKitchen } from '~/04-widgets';
 import Blogers from '~/04-widgets/blogers/Blogers';
 import { NewRecipiesSection } from '~/04-widgets/NewRecipiesSection';
 import { RecipeList } from '~/05-features';
-import { SectionTitle } from '~/07-shared/components';
 import { useAppStatus } from '~/07-shared/hooks';
 import { parseError } from '~/07-shared/lib';
+import { SectionTitle } from '~/07-shared/ui';
 
 import { PageLayout } from './ui/PageLayout';
 import SectionNavigationButton from './ui/SectionNavigationButton';

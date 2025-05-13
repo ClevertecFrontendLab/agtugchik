@@ -1,4 +1,6 @@
 export { AppContainer } from './AppContainer';
+export { AuthGuard } from './AuthGuard';
+export { AuthLayout } from './AuthLayout';
 export { BurgerMenu } from './BurgerMenu';
 export { FilterDrawer } from './filter-drawer/FilterDrawer';
 export { FilteredRecipeList } from './FilteredRecipeList';

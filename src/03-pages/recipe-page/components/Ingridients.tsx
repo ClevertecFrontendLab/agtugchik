@@ -1,7 +1,7 @@
 import { HStack, Text, VStack } from '@chakra-ui/react';
 import { ReactNode, useEffect, useState } from 'react';
 
-import { NumberStepper } from '~/07-shared/components/NumberStepper';
+import { NumberStepper } from '~/07-shared/ui';
 
 export const TableTitle = ({ text }: { text: string }) => (
     <Text

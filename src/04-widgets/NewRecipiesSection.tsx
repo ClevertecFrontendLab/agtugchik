@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import { PageSection } from '~/04-widgets';
 import { Carousel } from '~/05-features';
-import { SectionTitle } from '~/07-shared/components';
+import { SectionTitle } from '~/07-shared/ui';
 
 export const NewRecipiesSection = memo(() => (
     <PageSection

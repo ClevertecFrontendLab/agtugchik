@@ -14,9 +14,9 @@ import { useNavigate } from 'react-router';
 import { useAppSelector } from '~/01-app/store/hooks';
 import { searchBarValueSelector } from '~/01-app/store/search-slice';
 import bookmark from '~/07-shared/assets/svg/bookmark.svg';
-import { AppBadge, AppButton, AppCard, AppCardText, AppCardTitle } from '~/07-shared/components';
 import { useGetCardValues } from '~/07-shared/hooks';
 import { Recipe } from '~/07-shared/types/api';
+import { AppBadge, AppButton, AppCard, AppCardText, AppCardTitle } from '~/07-shared/ui';
 
 import { RecipeStatIcons } from './new-recipe-card/ui/RecipeStatIcons';
 

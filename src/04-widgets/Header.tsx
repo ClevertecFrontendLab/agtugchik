@@ -6,8 +6,8 @@ import { isOpenFilterDrawerSelector } from '~/01-app/store/search-slice';
 import { AppBreadcrumbs } from '~/05-features';
 import { StatsIcons } from '~/05-features/StatsIcons';
 import { User } from '~/06-entites';
-import { BurgerButton, Logo } from '~/07-shared/components';
 import layoutConfig from '~/07-shared/consts/app-layout-config';
+import { BurgerButton, Logo } from '~/07-shared/ui';
 
 export const Header = () => {
     const dispatch = useAppDispatch();

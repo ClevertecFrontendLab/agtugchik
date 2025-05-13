@@ -1,7 +1,7 @@
 import { ButtonProps } from '@chakra-ui/react';
 import { memo } from 'react';
 
-import { AppButton } from '~/07-shared/components';
+import { AppButton } from '~/07-shared/ui';
 
 export const MoreButton = memo((props: ButtonProps) => (
     <AppButton

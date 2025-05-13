@@ -5,11 +5,11 @@ import { useParams } from 'react-router';
 import { useGetRecipesByCategoryQuery } from '~/01-app/query/services/recipes';
 import { appCategoriesSelector } from '~/01-app/store/app-slice';
 import { useAppSelector } from '~/01-app/store/hooks';
-import { PageSubtitle, SectionTitle } from '~/07-shared/components';
 import { useAppStatus } from '~/07-shared/hooks';
 import { parseError } from '~/07-shared/lib';
 import getRandomItemFromArray from '~/07-shared/lib/get-random-item-from-array';
 import { Category } from '~/07-shared/types/api';
+import { PageSubtitle, SectionTitle } from '~/07-shared/ui';
 
 import { mapValidRecipes } from './lib/map-valid-recipes';
 import { FastRecipe } from './ui/FastRecipe';

@@ -4,7 +4,7 @@ import { useLocation } from 'react-router';
 import { AppPaths } from '~/01-app/router/consts/app-paths';
 import { userLoadingSelector } from '~/01-app/store/app-slice';
 import { useAppSelector } from '~/01-app/store/hooks';
-import { AppSpinner } from '~/07-shared/components';
+import { AppSpinner } from '~/07-shared/ui';
 
 export const AppLoader = () => {
     const isLoading = useAppSelector(userLoadingSelector);

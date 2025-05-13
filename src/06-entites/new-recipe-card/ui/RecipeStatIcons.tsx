@@ -3,7 +3,7 @@ import { memo } from 'react';
 
 import bookmark from '~/07-shared/assets/svg/bookmark.svg';
 import heartEyes from '~/07-shared/assets/svg/heart-eyes.svg';
-import { StatIcon } from '~/07-shared/components';
+import { StatIcon } from '~/07-shared/ui';
 
 interface Props extends StackProps {
     bookmarks: number;

@@ -3,7 +3,7 @@ import { memo } from 'react';
 import { useNavigate } from 'react-router';
 
 import toRightArrow from '~/07-shared/assets/svg/to-right-arrow.svg';
-import { AppButton } from '~/07-shared/components';
+import { AppButton } from '~/07-shared/ui';
 
 interface Props extends ButtonProps {
     navigateTo: string;
