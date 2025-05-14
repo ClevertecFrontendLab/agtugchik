@@ -3,10 +3,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { useValidationProgress } from '~/07-shared/hooks';
+import { RegisterFormValues } from '~/07-shared/types/auth-form-values';
 import { AuthFormButton, FormInput } from '~/07-shared/ui';
 
 import { stepOneSchema } from '../model/schemas';
-import { RegisterFormValues } from '../types/form-values';
 
 interface Props {
     form: RegisterFormValues;

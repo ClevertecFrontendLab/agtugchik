@@ -1,7 +1,8 @@
 import { VStack } from '@chakra-ui/react';
 import { useState } from 'react';
 
-import { RegisterFormValues } from './types/form-values';
+import { RegisterFormValues } from '~/07-shared/types/auth-form-values';
+
 import { StepOne } from './ui/StepOne';
 import { StepTwo } from './ui/StepTwo';
 

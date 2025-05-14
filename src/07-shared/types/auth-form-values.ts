@@ -1,3 +1,8 @@
+export interface LoginFormValues {
+    login: string;
+    password: string;
+}
+
 export interface RegisterFormValues {
     firstName: string;
     lastName: string;

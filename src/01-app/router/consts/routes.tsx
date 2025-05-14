@@ -6,6 +6,7 @@ import {
     NotFoundPage,
     RecipePage,
     RegisterPage,
+    VerificationPage,
 } from '~/03-pages';
 import { CategoryRedirect } from '~/05-features';
 
@@ -16,6 +17,7 @@ export const routes = [
     { path: AppPaths.JUICY, element: <JuicyPage /> },
     { path: AppPaths.LOGIN, element: <LoginPage /> },
     { path: AppPaths.REGISTER, element: <RegisterPage /> },
+    { path: AppPaths.VERIFICATION, element: <VerificationPage /> },
     { path: AppPaths.NOT_FOUND, element: <NotFoundPage /> },
     { path: ':category/', element: <CategoryRedirect /> },
     { path: ':category/:subcategory', element: <CategoryPage /> },

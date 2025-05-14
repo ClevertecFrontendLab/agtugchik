@@ -1,12 +1,8 @@
 import { Box, Button } from '@chakra-ui/react';
 import { FormProvider, useForm } from 'react-hook-form';
 
+import { LoginFormValues } from '~/07-shared/types/auth-form-values';
 import { AuthFormButton, FormInput } from '~/07-shared/ui';
-
-interface LoginFormValues {
-    login: string;
-    password: string;
-}
 
 export const LoginForm = () => {
     const methods = useForm<LoginFormValues>({
